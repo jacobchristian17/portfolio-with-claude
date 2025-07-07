@@ -18,7 +18,7 @@ export async function POST(request: NextRequest) {
       baseUrl: process.env.LLM_BASE_URL,
       temperature: parseFloat(process.env.LLM_TEMPERATURE || '0.7'),
       maxTokens: parseInt(process.env.LLM_MAX_TOKENS || '1000'),
-    };
+    } as any;
 
     // Initialize LLM service
     const llmService = new LLMService(llmConfig);

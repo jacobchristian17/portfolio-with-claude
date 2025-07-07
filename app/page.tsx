@@ -56,7 +56,7 @@ export default function Home() {
         <div className="text-center mb-12">
           <div className="floating">
             <h1 className="text-6xl font-bold text-royal-gradient mb-6">
-              Welcome to Jacob's Space 🥷🏻
+              Welcome to Jacob&rsquo;s Space 🥷🏻
             </h1>
           </div>
           <p className="text-2xl mb-6 font-medium" style={{ color: 'var(--text-primary)' }}>
@@ -96,7 +96,7 @@ export default function Home() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="glass-card-royal p-6 rounded-xl text-center font-medium hover-lift cursor-pointer transition-all duration-300">
                 <div className="text-3xl mb-3">💼</div>
-                <div className="font-semibold" style={{ color: 'var(--text-primary)' }}>"What's Jacob's React experience?"</div>
+                <div className="font-semibold" style={{ color: 'var(--text-primary)' }}>"What&rsquo;s Jacob&rsquo;s React experience?"</div>
               </div>
               <div className="glass-card-gold p-6 rounded-xl text-center font-medium hover-lift cursor-pointer transition-all duration-300">
                 <div className="text-3xl mb-3">🎓</div>

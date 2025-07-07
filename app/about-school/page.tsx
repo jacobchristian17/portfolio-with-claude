@@ -28,7 +28,7 @@ export default function AboutSchool() {
             <h2 className="text-2xl font-semibold text-gray-800 mb-4">Senior Thesis Project</h2>
             <div className="bg-blue-50 rounded-lg p-6">
               <h3 className="text-xl font-medium text-gray-800 mb-3">
-                "Determination of Driver's Alertness Based on Eye State with Edge Computing"
+                &lsdquo;Determination of Driver&rsquo;s Alertness Based on Eye State with Edge Computing&rsdquo;
               </h3>
               
               <div className="space-y-4">
@@ -36,7 +36,7 @@ export default function AboutSchool() {
                   <h4 className="font-semibold text-gray-800 mb-2">Project Overview</h4>
                   <p className="text-gray-700 leading-relaxed">
                     Applied AI-powered Face and Motion detection to an ARM64 device as an edge computing agent. 
-                    The system analyzes real-time camera feed input to detect and conclude the state of a person's eyes. 
+                    The system analyzes real-time camera feed input to detect and conclude the state of a person&rsquo;s eyes. 
                     The practical application focuses on drowsiness detection using eye state analysis.
                   </p>
                 </div>
@@ -116,10 +116,9 @@ export default function AboutSchool() {
                 .NET5 Fullstack Technology Focus
               </h3>
               <p className="text-gray-700 leading-relaxed mb-4">
-                Specialized in Microsoft's .NET5 ecosystem for full-stack development, gaining comprehensive 
+                Specialized in Microsoft&rsquo;s .NET5 ecosystem for full-stack development, gaining comprehensive 
                 knowledge in both frontend and backend technologies within the Microsoft technology stack.
               </p>
-              
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div className="bg-white p-4 rounded border">
                   <h4 className="font-medium text-orange-600 mb-2">Frontend</h4>

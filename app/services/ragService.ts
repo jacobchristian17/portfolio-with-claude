@@ -184,7 +184,7 @@ class RAGService {
     const allDocText = `${document.content} ${document.metadata.tags.join(' ')} ${document.metadata.title}`.toLowerCase();
     
     let score = 0;
-    let maxScore = queryWords.length;
+    const maxScore = queryWords.length;
     
     for (const queryWord of queryWords) {
       // Exact word match in content (highest weight)

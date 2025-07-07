@@ -12,12 +12,12 @@ export default function AboutMe() {
             </h2>
             <div className="bg-blue-50 rounded-lg p-6">
               <p className="text-gray-700 leading-relaxed mb-4">
-                I'm Jacob, the developer and publisher of this website/web application. I'm currently 27 years old 
+                I&rsquo;m Jacob, the developer and publisher of this website/web application. I&rsquo;m currently 27 years old 
                 and passionate about creating innovative solutions that make a positive impact through code.
               </p>
               <p className="text-gray-700 leading-relaxed">
-                I'm always eager to learn new technologies and enjoy solving complex problems. 
-                I treat code examples like puzzles - there's something deeply satisfying about finding 
+                I&rsquo;m always eager to learn new technologies and enjoy solving complex problems. 
+                I treat code examples like puzzles - there&rsquo;s something deeply satisfying about finding 
                 elegant solutions to challenging problems.
               </p>
             </div>
@@ -86,7 +86,7 @@ export default function AboutMe() {
                 <h3 className="font-semibold text-blue-800 mb-3">🏖️ Travel & Photography</h3>
                 <p className="text-gray-700 leading-relaxed mb-3">
                   Outside of work, I love going to beaches and exploring different places with my significant other. 
-                  There's something refreshing about discovering new locations and cultures.
+                  There&rsquo;s something refreshing about discovering new locations and cultures.
                 </p>
                 <p className="text-gray-700 leading-relaxed">
                   Photography allows me to capture these moments and see the world from different perspectives, 
@@ -112,8 +112,8 @@ export default function AboutMe() {
                 <div className="border-l-4 border-orange-400 pl-4">
                   <h4 className="font-semibold text-gray-800 mb-2">🚀 Innovation & Impact</h4>
                   <p className="text-gray-700 leading-relaxed">
-                    I'm passionate about creating innovative solutions that make a positive impact. 
-                    Whether it's improving user experience or solving complex technical challenges, 
+                    I&rsquo;m passionate about creating innovative solutions that make a positive impact. 
+                    Whether it&rsquo;s improving user experience or solving complex technical challenges, 
                     I aim to contribute meaningfully to every project.
                   </p>
                 </div>
@@ -121,7 +121,7 @@ export default function AboutMe() {
                 <div className="border-l-4 border-orange-400 pl-4">
                   <h4 className="font-semibold text-gray-800 mb-2">📚 Continuous Learning</h4>
                   <p className="text-gray-700 leading-relaxed">
-                    I'm always eager to learn new technologies and stay current with industry trends. 
+                    I&rsquo;m always eager to learn new technologies and stay current with industry trends. 
                     The field of technology evolves rapidly, and I embrace this constant evolution as 
                     an opportunity for growth.
                   </p>
@@ -171,7 +171,7 @@ export default function AboutMe() {
           <div className="bg-gray-50 rounded-lg p-6">
             <h2 className="text-2xl font-semibold text-gray-800 mb-4">Other notes</h2>
             <p className="text-gray-700 leading-relaxed mb-4">
-              I'm always open to discussing new opportunities, collaborating on interesting projects, 
+              I&rsquo;m always open to discussing new opportunities, collaborating on interesting projects, 
               or simply connecting with fellow developers and tech enthusiasts.
             </p>
             <p className="text-gray-700 leading-relaxed">

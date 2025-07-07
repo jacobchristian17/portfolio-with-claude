@@ -1,6 +1,6 @@
 "use client";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
-import { toggleRAGIndex, updateRAGSettings } from "../store/messageSlice";
+import { toggleRAGIndex } from "../store/messageSlice";
 import { ragService } from "../services/ragService";
 
 export default function RAGControls() {

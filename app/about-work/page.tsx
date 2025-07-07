@@ -53,7 +53,7 @@ export default function AboutWork() {
                   Full stack developer with Megawide Construction Corp., a client of Vertere Global Solutions Inc. 
                   Worked with legacy React class-component applications, delivered optimizations and new features, 
                   improved backend performance and data consistency with MongoDB. Spearheaded publishing the web app 
-                  from client's local servers to cloud with Linux, Docker, Nginx, and Microsoft Azure. Maintained 
+                  from client&rsquo;s local servers to cloud with Linux, Docker, Nginx, and Microsoft Azure. Maintained 
                   legacy databases, developed manual pipelines, updated features for Annual Stock Holder Meetings, 
                   maintained Profit & Loss Dashboard, and developed a 360-degree Survey System from conception to publishing.
                 </p>
@@ -156,12 +156,12 @@ export default function AboutWork() {
             <h2 className="text-2xl font-semibold mb-4" style={{ color: 'var(--text-card-primary)' }}>Professional Journey</h2>
             <p className="leading-relaxed mb-4" style={{ color: 'var(--text-card-primary)' }}>
               From freelance beginnings to Fortune 500 companies, my career has been driven by continuous learning 
-              and innovation. I've evolved from traditional full-stack development to AI-first approaches, 
+              and innovation. I&rsquo;ve evolved from traditional full-stack development to AI-first approaches, 
               always focusing on delivering scalable solutions and maintainable code.
             </p>
             <p className="leading-relaxed" style={{ color: 'var(--text-card-secondary)' }}>
               My experience spans various industries and team sizes, giving me adaptability and a comprehensive 
-              understanding of software development lifecycle. I'm passionate about staying at the forefront of 
+              understanding of software development lifecycle. I&rsquo;m passionate about staying at the forefront of 
               technology while maintaining strong collaborative relationships with colleagues and stakeholders.
             </p>
           </div>

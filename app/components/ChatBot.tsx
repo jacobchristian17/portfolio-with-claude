@@ -1,7 +1,7 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
-import { addMessage, setLoading, clearMessages, toggleRAGIndex } from "../store/messageSlice";
+import { addMessage, setLoading, clearMessages } from "../store/messageSlice";
 import type { Message } from "../store/messageSlice";
 import { ragService } from "../services/ragService";
 
@@ -13,8 +13,6 @@ interface ChatBotProps {
 
 export default function ChatBot({ 
   onMessage, 
-  ragEnabled = false, 
-  documents = [] 
 }: ChatBotProps) {
   const dispatch = useAppDispatch();
   const { messages, isLoading, ragSettings } = useAppSelector((state) => state.messages);
@@ -113,6 +111,7 @@ Please provide a helpful response based on the context above.`;
 
       dispatch(addMessage(assistantMessage));
     } catch (error) {
+      console.error(error)
       const errorMessage: Message = {
         id: (Date.now() + 1).toString(),
         content: "Sorry, I encountered an error. Please try again.",

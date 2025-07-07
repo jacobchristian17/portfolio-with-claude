@@ -43,7 +43,7 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto">
         <div className="flex items-center justify-between">
           <div className="text-2xl font-bold text-royal-gradient">
-            Jacob's Space
+            Jacob&rsquo;s Space
           </div>
           
           <ul className="flex space-x-8">
