@@ -20,14 +20,24 @@ export default function ChatBot({
   const { messages, isLoading, ragSettings } = useAppSelector((state) => state.messages);
   const [input, setInput] = useState("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const messagesContainerRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    if (messagesContainerRef.current) {
+      const container = messagesContainerRef.current;
+      // Use requestAnimationFrame to ensure the DOM has updated
+      requestAnimationFrame(() => {
+        container.scrollTop = container.scrollHeight;
+      });
+    }
   };
 
   useEffect(() => {
-    scrollToBottom();
-  }, [messages]);
+    // Only scroll when messages array length changes (new message added)
+    if (messages.length > 0) {
+      scrollToBottom();
+    }
+  }, [messages.length]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -119,11 +129,11 @@ Please provide a helpful response based on the context above.`;
   };
 
   return (
-    <div className="flex flex-col h-96 bg-white border border-gray-300 rounded-lg shadow-lg">
+    <div className="flex flex-col h-96 glass-card rounded-2xl overflow-hidden shadow-royal">
       {/* Header */}
-      <div className="bg-blue-600 text-white p-4 rounded-t-lg flex justify-between items-center">
+      <div className="bg-royal-gradient text-white p-4 rounded-t-2xl flex justify-between items-center">
         <div>
-          <h3 className="text-lg font-semibold">AI Assistant</h3>
+          <h3 className="text-lg font-semibold">🤖 AI Assistant</h3>
           {ragSettings.enabled && (
             <p className="text-sm text-blue-100">
               RAG enabled • {ragSettings.selectedIndexes.join(', ')} indexes active
@@ -132,14 +142,17 @@ Please provide a helpful response based on the context above.`;
         </div>
         <button
           onClick={handleClearMessages}
-          className="text-sm px-2 py-1 bg-blue-700 hover:bg-blue-800 rounded"
+          className="btn-gold text-sm px-3 py-1"
         >
           Clear
         </button>
       </div>
 
       {/* Messages */}
-      <div className="flex-1 overflow-y-auto p-4 space-y-4">
+      <div 
+        ref={messagesContainerRef}
+        className="flex-1 overflow-y-auto p-4 space-y-4 scroll-smooth"
+      >
         {messages.length === 0 && (
           <div className="text-center text-gray-500 text-sm">
             Start a conversation by typing a message below
@@ -154,8 +167,8 @@ Please provide a helpful response based on the context above.`;
             <div
               className={`max-w-xs lg:max-w-md px-4 py-2 rounded-lg ${
                 message.role === "user"
-                  ? "bg-blue-600 text-white"
-                  : "bg-gray-200 text-gray-800"
+                  ? "bg-royal-gradient text-white shadow-royal"
+                  : "glass-card text-gray-800 shadow-soft"
               }`}
             >
               <p className="text-sm">{message.content}</p>
@@ -191,11 +204,11 @@ Please provide a helpful response based on the context above.`;
         
         {isLoading && (
           <div className="flex justify-start">
-            <div className="bg-gray-200 text-gray-800 px-4 py-2 rounded-lg">
+            <div className="glass-card text-gray-800 px-4 py-2 rounded-lg shadow-soft">
               <div className="flex space-x-1">
-                <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce"></div>
-                <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce" style={{ animationDelay: "0.1s" }}></div>
-                <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce" style={{ animationDelay: "0.2s" }}></div>
+                <div className="w-2 h-2 bg-royal-gradient rounded-full animate-bounce"></div>
+                <div className="w-2 h-2 bg-gold-gradient rounded-full animate-bounce" style={{ animationDelay: "0.1s" }}></div>
+                <div className="w-2 h-2 bg-royal-gradient rounded-full animate-bounce" style={{ animationDelay: "0.2s" }}></div>
               </div>
             </div>
           </div>
@@ -218,7 +231,7 @@ Please provide a helpful response based on the context above.`;
           <button
             type="submit"
             disabled={isLoading || !input.trim()}
-            className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="btn-royal disabled:opacity-50 disabled:cursor-not-allowed"
           >
             Send
           </button>
