@@ -3,8 +3,21 @@ import ChatBot from "./components/ChatBot";
 import RAGControls from "./components/RAGControls";
 import TechCarousel from "./components/TechCarousel";
 import { techStack } from "./assets/tech-logos";
+import { useDispatch } from "react-redux";
+import { addMessage, setLoading } from "./store/messageSlice";
+import type { Message } from "./store/messageSlice";
+import { useAppSelector } from "./store/hooks";
+import { ragService } from "./services/ragService";
 
 export default function Home() {
+  const dispatch = useDispatch();
+  const { ragSettings } = useAppSelector((state) => state.messages);
+  const sampleQuestions = [
+    "What's Jacob's React experience?",
+    "Tell me about his education",
+    "What are his hobbies?"
+  ]
+
   const handleMessage = async (message: string) => {
     try {
       console.log('Sending message:', message);
@@ -46,6 +59,91 @@ export default function Home() {
       ];
 
       return fallbackResponses[Math.floor(Math.random() * fallbackResponses.length)];
+    }
+  };
+
+  const handleSubmit = async (index: any) => {
+    console.log("handleSubmit shit")
+    const input = sampleQuestions[index]
+    const userMessage: Message = {
+      id: Date.now().toString(),
+      content: input,
+      role: "user",
+      timestamp: new Date(),
+    };
+
+    dispatch(addMessage(userMessage));
+    dispatch(setLoading(true));
+
+    try {
+      let response;
+      let ragContext = undefined;
+
+      // RAG is always enabled, check if any indexes are selected
+      if (ragSettings.selectedIndexes.length > 0) {
+        // Get RAG context
+        const ragData = await ragService.generateRAGContext(input, ragSettings.selectedIndexes);
+
+        if (ragData.relevantDocuments.length > 0) {
+          ragContext = {
+            query: ragData.query,
+            relevantDocuments: ragData.relevantDocuments.map(result => ({
+              title: result.document.metadata.title,
+              content: result.document.content,
+              similarity: result.similarity,
+              category: result.document.metadata.category
+            })),
+            selectedIndexes: ragData.selectedIndexes
+          };
+
+          // Generate response with RAG context
+          const contextPrompt = `Context from relevant documents:
+  ${ragData.relevantDocuments.map(result =>
+            `[${result.document.metadata.category.toUpperCase()}] ${result.document.metadata.title}: ${result.document.content}`
+          ).join('\n\n')}
+  
+  User question: ${input}
+  
+  Please provide a helpful response based on the context above.`;
+
+          response = handleMessage
+            ? await handleMessage(contextPrompt)
+            : {
+              content: `Based on the relevant information I found, here's what I can tell you: ${ragData.relevantDocuments[0]?.document.content.substring(0, 200)}...`,
+              sources: ragData.relevantDocuments.map(result => result.document.metadata.title)
+            };
+        } else {
+          response = handleMessage
+            ? await handleMessage(input)
+            : { content: "I don't have specific information about that topic in my knowledge base. Could you try rephrasing your question?" };
+        }
+      } else {
+        response = handleMessage
+          ? await handleMessage(input)
+          : { content: "Please select at least one knowledge area to get personalized responses about Jacob!" };
+      }
+
+      const assistantMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        content: response.content,
+        role: "assistant",
+        timestamp: new Date(),
+        sources: response.sources,
+        ragContext,
+      };
+
+      dispatch(addMessage(assistantMessage));
+    } catch (error) {
+      console.error(error)
+      const errorMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        content: "Sorry, I encountered an error. Please try again.",
+        role: "assistant",
+        timestamp: new Date(),
+      };
+      dispatch(addMessage(errorMessage));
+    } finally {
+      dispatch(setLoading(false));
     }
   };
 
@@ -94,15 +192,15 @@ export default function Home() {
           <div className="glass-card rounded-2xl p-8 hover-glow">
             <h3 className="font-bold mb-8 text-royal-gradient text-2xl text-center">✨ Try These Questions</h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="glass-card-royal p-6 rounded-xl text-center font-medium hover-lift cursor-pointer transition-all duration-300">
+              <div className="glass-card-royal p-6 rounded-xl text-center font-medium hover-lift cursor-pointer transition-all duration-300" onClick={() => handleSubmit(0)}>
                 <div className="text-3xl mb-3">💼</div>
                 <div className="font-semibold" style={{ color: 'var(--text-primary)' }}>"What&rsquo;s Jacob&rsquo;s React experience?"</div>
               </div>
-              <div className="glass-card-gold p-6 rounded-xl text-center font-medium hover-lift cursor-pointer transition-all duration-300">
+              <div className="glass-card-royal p-6 rounded-xl text-center font-medium hover-lift cursor-pointer transition-all duration-300" onClick={() => handleSubmit(1)}>
                 <div className="text-3xl mb-3">🎓</div>
-                <div className="font-semibold" style={{ color: 'var(--text-primary)' }}>"Tell me about his education"</div>
+                <div className="font-semibold" style={{ color: 'var(--text-primary)' }}>"Tells me about his education"</div>
               </div>
-              <div className="glass-card-royal p-6 rounded-xl text-center font-medium hover-lift cursor-pointer transition-all duration-300">
+              <div className="glass-card-royal p-6 rounded-xl text-center font-medium hover-lift cursor-pointer transition-all duration-300" onClick={() => handleSubmit(2)}>
                 <div className="text-3xl mb-3">🥷🏻</div>
                 <div className="font-semibold" style={{ color: 'var(--text-primary)' }}>"What are his hobbies?"</div>
               </div>
@@ -111,12 +209,12 @@ export default function Home() {
         </div>
 
         <div className="section-divider"></div>
-        
+
         {/* Technology Carousel Section */}
       </div>
-      
-      <TechCarousel title="⚙️ Tech Stack" techItems={techStack}  subtitle="Professional experience with the following tools and frameworks:"/>
-      
+
+      <TechCarousel title="⚙️ Tech Stack" techItems={techStack} subtitle="Professional experience with the following tools and frameworks:" />
+
       <div className="max-w-7xl mx-auto px-6">
 
         {/* Quick Navigation */}
@@ -126,9 +224,8 @@ export default function Home() {
               <div className="text-4xl mb-4">💼</div>
               <h3 className="text-2xl font-bold text-royal-gradient mb-4">Work Experience</h3>
             </div>
-            <p className="mb-6 leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-              Explore my professional journey from Fortune 500 companies to innovative startups,
-              featuring cutting-edge technologies and AI-first development.
+            <p className="mb-6 leading-relaxed italic" style={{ color: 'var(--text-card-secondary)' }}>
+              Explore my professional journey from small business clients to Fortune 500 companies featuring cutting-edge technologies and AI-first development.
             </p>
             <a
               href="/about-work"
@@ -143,13 +240,13 @@ export default function Home() {
               <div className="text-4xl mb-4">🎓</div>
               <h3 className="text-2xl font-bold text-royal-gradient mb-4">Education</h3>
             </div>
-            <p className="mb-6 leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+            <p className="mb-6 leading-relaxed italic" style={{ color: 'var(--text-card-secondary)' }}>
               Discover my Computer Engineering degree and AI research projects, including
               edge computing and neural network implementations.
             </p>
             <a
               href="/about-school"
-              className="btn-gold w-full text-center block"
+              className="btn-royal w-full text-center block"
             >
               View Studies →
             </a>
@@ -160,9 +257,10 @@ export default function Home() {
               <div className="text-4xl mb-4">🥷🏻</div>
               <h3 className="text-2xl font-bold text-royal-gradient mb-4">About Me</h3>
             </div>
-            <p className="mb-6 leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+            <p className="mb-6 leading-relaxed italic" style={{ color: 'var(--text-card-secondary)' }}>
               Get to know the person behind the code - my interests, philosophy,
               and what drives my passion for creating innovative solutions.
+
             </p>
             <a
               href="/about-me"

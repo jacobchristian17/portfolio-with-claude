@@ -140,9 +140,9 @@ class RAGService {
       // About Me Index
       {
         id: 'about-1',
-        content: 'I enjoy playing video games that involve planning and team coordination like Dota2 and Valorant. I also enjoy single player games like tetris and puzzles. I treat code examples like puzzles. I am always eager to learn new technologies. Outside of work, I love going to beaches, photography, and exploring different places with my significant other.',
+        content: 'My hobbies are playing video games that involve planning and team coordination like Dota2 and Valorant. I also enjoy single player games like tetris and puzzles. I treat code examples like puzzles. I am always eager to learn new technologies. Outside of work, I love going to beaches, photography, and exploring different places with my significant other.',
         metadata: {
-          title: 'Personal Interests and Values',
+          title: 'Hobbies, Interests, and Values',
           category: 'about_me',
           tags: ['hobbies',],
           source: 'Personal Statement'

@@ -182,12 +182,13 @@ Please provide a helpful response based on the context above.`;
               )}
               {message.ragContext && message.ragContext.relevantDocuments.length > 0 && (
                 <div className="mt-2 text-xs opacity-75">
-                  <p className="font-medium"  style={{ color: 'var(--gold-dark)' }}>RAG Context:</p>
+                  <p className="font-medium"  style={{ color: 'var(--gold-dark)' }}>Context relevance:</p>
                   <ul className="list-disc list-inside">
                     {message.ragContext.relevantDocuments.map((doc, index) => (
                       <li key={index}>
-                        <span className="font-medium"  style={{ color: 'var(--gold-light)' }}>[{doc.category}]</span> {doc.title} 
-                        <span style={{ color: 'var(--gold-light)' }}> ({Math.round(doc.similarity * 100)}% match)</span>
+                        <span className="font-normal" style={{ color: 'var(--gold-light)' }}>[{doc.category}] </span>
+                        <span className="font-bold" style={{ color: 'var(--gold-light)' }}>{doc.title} </span>
+                        <span style={{ color: 'var(--gold-light)' }}> - {Math.round(doc.similarity * 100)}% match</span>
                       </li>
                     ))}
                   </ul>
