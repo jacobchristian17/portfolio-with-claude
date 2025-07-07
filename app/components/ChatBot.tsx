@@ -58,7 +58,8 @@ export default function ChatBot({
       let response;
       let ragContext = undefined;
 
-      if (ragSettings.enabled && ragSettings.selectedIndexes.length > 0) {
+      // RAG is always enabled, check if any indexes are selected
+      if (ragSettings.selectedIndexes.length > 0) {
         // Get RAG context
         const ragData = await ragService.generateRAGContext(input, ragSettings.selectedIndexes);
         
@@ -98,7 +99,7 @@ Please provide a helpful response based on the context above.`;
       } else {
         response = onMessage 
           ? await onMessage(input)
-          : { content: "This is a demo response. Connect to an LLM API to enable real chat functionality." };
+          : { content: "Please select at least one knowledge area to get personalized responses about Jacob!" };
       }
 
       const assistantMessage: Message = {
@@ -133,12 +134,10 @@ Please provide a helpful response based on the context above.`;
       {/* Header */}
       <div className="bg-royal-gradient text-white p-4 rounded-t-2xl flex justify-between items-center">
         <div>
-          <h3 className="text-lg font-semibold">🤖 AI Assistant</h3>
-          {ragSettings.enabled && (
-            <p className="text-sm text-blue-100">
-              RAG enabled • {ragSettings.selectedIndexes.join(', ')} indexes active
-            </p>
-          )}
+          <h3 className="text-lg font-semibold">🤖 Francesca</h3>
+          <p className="text-sm text-blue-100">
+            She knows a thing or two about Jacob!
+          </p>
         </div>
         <button
           onClick={handleClearMessages}

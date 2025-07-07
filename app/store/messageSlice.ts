@@ -31,7 +31,7 @@ const initialState: MessageState = {
   messages: [],
   isLoading: false,
   ragSettings: {
-    enabled: true,
+    enabled: true, // Always enabled
     selectedIndexes: ['work', 'school', 'about_me'],
   },
 };

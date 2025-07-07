@@ -121,15 +121,24 @@ body {
 
 /* Logo Carousel Animation */
 .logo-carousel {
-  animation: scroll-left 30s linear infinite;
+  animation: scroll-left 40s linear infinite;
+  display: flex;
+  align-items: center;
+}
+
+.logo-carousel-track {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  min-width: 200%;
 }
 
 @keyframes scroll-left {
   0% {
-    transform: translateX(100%);
+    transform: translateX(0);
   }
   100% {
-    transform: translateX(-100%);
+    transform: translateX(-50%);
   }
 }
 

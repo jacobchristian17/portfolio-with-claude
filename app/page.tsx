@@ -30,7 +30,7 @@ export default function Home() {
       };
     } catch (error) {
       console.error('Chat error:', error);
-      
+
       // Fallback to mock response if API fails
       const fallbackResponses = [
         {
@@ -42,7 +42,7 @@ export default function Home() {
           sources: ["System Message"]
         }
       ];
-      
+
       return fallbackResponses[Math.floor(Math.random() * fallbackResponses.length)];
     }
   };
@@ -61,71 +61,98 @@ export default function Home() {
             Full-Stack Developer & AI Enthusiast
           </p>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Discover my professional journey through an AI-powered experience. Ask me anything about my work, 
+            Discover my professional journey through an AI-powered experience. Ask me anything about my work,
             education, or personal interests using the intelligent chatbot below.
           </p>
         </div>
 
-        {/* Logo Carousel Section */}
-        <div className="mb-12 overflow-hidden glass-card rounded-2xl p-6">
-          <h3 className="text-center text-xl font-semibold text-gray-700 mb-6">Technologies & Tools I Love</h3>
-          <div className="relative h-16">
-            <div className="logo-carousel flex items-center space-x-8 whitespace-nowrap">
-              <div className="flex items-center space-x-8">
-                <span className="px-6 py-2 bg-royal-gradient text-white rounded-full text-sm font-semibold">React</span>
-                <span className="px-6 py-2 bg-gold-gradient text-white rounded-full text-sm font-semibold">Next.js</span>
-                <span className="px-6 py-2 bg-royal-gradient text-white rounded-full text-sm font-semibold">TypeScript</span>
-                <span className="px-6 py-2 bg-gold-gradient text-white rounded-full text-sm font-semibold">Node.js</span>
-                <span className="px-6 py-2 bg-royal-gradient text-white rounded-full text-sm font-semibold">Docker</span>
-                <span className="px-6 py-2 bg-gold-gradient text-white rounded-full text-sm font-semibold">AWS</span>
-                <span className="px-6 py-2 bg-royal-gradient text-white rounded-full text-sm font-semibold">Redux</span>
-                <span className="px-6 py-2 bg-gold-gradient text-white rounded-full text-sm font-semibold">MongoDB</span>
-                <span className="px-6 py-2 bg-royal-gradient text-white rounded-full text-sm font-semibold">Angular</span>
-                <span className="px-6 py-2 bg-gold-gradient text-white rounded-full text-sm font-semibold">Jenkins</span>
-                <span className="px-6 py-2 bg-royal-gradient text-white rounded-full text-sm font-semibold">AI/ML</span>
-                <span className="px-6 py-2 bg-gold-gradient text-white rounded-full text-sm font-semibold">Claude Code</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
         {/* Chatbot Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 mb-12">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
           {/* Main Chatbot */}
-          <div className="lg:col-span-3">
+          <div className="lg:col-span-2">
             <div className="glass-card rounded-2xl p-2 hover-lift">
-              <ChatBot 
+              <ChatBot
                 onMessage={handleMessage}
                 ragEnabled={true}
                 documents={["work experience", "education", "personal info"]}
               />
             </div>
           </div>
-          
+
           {/* Controls */}
           <div className="space-y-6">
-            <div className="glass-card-royal rounded-2xl p-1 hover-glow">
+            <div className="glass-card rounded-2xl p-1 hover-glow">
               <RAGControls />
             </div>
-            
-            <div className="glass-card-gold rounded-2xl p-6 hover-glow">
-              <h3 className="font-bold mb-4 text-gray-800 text-lg">✨ Try These Questions</h3>
-              <div className="space-y-3 text-sm">
-                <div className="glass-card p-3 rounded-lg text-blue-800 font-medium hover-lift cursor-pointer">
-                  "What's Jacob's React experience?"
-                </div>
-                <div className="glass-card p-3 rounded-lg text-green-800 font-medium hover-lift cursor-pointer">
-                  "Tell me about his education"
-                </div>
-                <div className="glass-card p-3 rounded-lg text-purple-800 font-medium hover-lift cursor-pointer">
-                  "What are his hobbies?"
-                </div>
+          </div>
+        </div>
+
+        {/* Try These Questions - Full Width */}
+        <div className="mb-12">
+          <div className="glass-card rounded-2xl p-8 hover-glow">
+            <h3 className="font-bold mb-8 text-royal-gradient text-2xl text-center">✨ Try These Questions</h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="glass-card-royal p-6 rounded-xl text-center font-medium hover-lift cursor-pointer transition-all duration-300">
+                <div className="text-3xl mb-3">💼</div>
+                <div className="text-gray-800 font-semibold">"What's Jacob's React experience?"</div>
+              </div>
+              <div className="glass-card-gold p-6 rounded-xl text-center font-medium hover-lift cursor-pointer transition-all duration-300">
+                <div className="text-3xl mb-3">🎓</div>
+                <div className="text-gray-800 font-semibold">"Tell me about his education"</div>
+              </div>
+              <div className="glass-card-royal p-6 rounded-xl text-center font-medium hover-lift cursor-pointer transition-all duration-300">
+                <div className="text-3xl mb-3">🥷🏻</div>
+                <div className="text-gray-800 font-semibold">"What are his hobbies?"</div>
               </div>
             </div>
           </div>
         </div>
 
         <div className="section-divider"></div>
+        
+        {/* Logo Carousel Section - Full Width */}
+      </div>
+      
+      <div className="w-full overflow-hidden bg-white bg-opacity-30 backdrop-blur-sm py-12 mb-12">
+        <div className="text-center mb-8">
+          <h3 className="text-2xl font-bold text-royal-gradient">🛠️ Technologies & Tools I Love</h3>
+        </div>
+        <div className="relative h-16 overflow-hidden">
+          <div className="logo-carousel">
+            <div className="logo-carousel-track">
+              {/* First set of items */}
+              <span className="px-6 py-3 bg-royal-gradient text-white rounded-full text-sm font-semibold shadow-royal whitespace-nowrap">React</span>
+              <span className="px-6 py-3 bg-gold-gradient text-white rounded-full text-sm font-semibold shadow-gold whitespace-nowrap">Next.js</span>
+              <span className="px-6 py-3 bg-royal-gradient text-white rounded-full text-sm font-semibold shadow-royal whitespace-nowrap">TypeScript</span>
+              <span className="px-6 py-3 bg-gold-gradient text-white rounded-full text-sm font-semibold shadow-gold whitespace-nowrap">Node.js</span>
+              <span className="px-6 py-3 bg-royal-gradient text-white rounded-full text-sm font-semibold shadow-royal whitespace-nowrap">Docker</span>
+              <span className="px-6 py-3 bg-gold-gradient text-white rounded-full text-sm font-semibold shadow-gold whitespace-nowrap">AWS</span>
+              <span className="px-6 py-3 bg-royal-gradient text-white rounded-full text-sm font-semibold shadow-royal whitespace-nowrap">Redux</span>
+              <span className="px-6 py-3 bg-gold-gradient text-white rounded-full text-sm font-semibold shadow-gold whitespace-nowrap">MongoDB</span>
+              <span className="px-6 py-3 bg-royal-gradient text-white rounded-full text-sm font-semibold shadow-royal whitespace-nowrap">Angular</span>
+              <span className="px-6 py-3 bg-gold-gradient text-white rounded-full text-sm font-semibold shadow-gold whitespace-nowrap">Jenkins</span>
+              <span className="px-6 py-3 bg-royal-gradient text-white rounded-full text-sm font-semibold shadow-royal whitespace-nowrap">AI/ML</span>
+              <span className="px-6 py-3 bg-gold-gradient text-white rounded-full text-sm font-semibold shadow-gold whitespace-nowrap">Claude Code</span>
+              
+              {/* Duplicate set for seamless loop */}
+              <span className="px-6 py-3 bg-royal-gradient text-white rounded-full text-sm font-semibold shadow-royal whitespace-nowrap">React</span>
+              <span className="px-6 py-3 bg-gold-gradient text-white rounded-full text-sm font-semibold shadow-gold whitespace-nowrap">Next.js</span>
+              <span className="px-6 py-3 bg-royal-gradient text-white rounded-full text-sm font-semibold shadow-royal whitespace-nowrap">TypeScript</span>
+              <span className="px-6 py-3 bg-gold-gradient text-white rounded-full text-sm font-semibold shadow-gold whitespace-nowrap">Node.js</span>
+              <span className="px-6 py-3 bg-royal-gradient text-white rounded-full text-sm font-semibold shadow-royal whitespace-nowrap">Docker</span>
+              <span className="px-6 py-3 bg-gold-gradient text-white rounded-full text-sm font-semibold shadow-gold whitespace-nowrap">AWS</span>
+              <span className="px-6 py-3 bg-royal-gradient text-white rounded-full text-sm font-semibold shadow-royal whitespace-nowrap">Redux</span>
+              <span className="px-6 py-3 bg-gold-gradient text-white rounded-full text-sm font-semibold shadow-gold whitespace-nowrap">MongoDB</span>
+              <span className="px-6 py-3 bg-royal-gradient text-white rounded-full text-sm font-semibold shadow-royal whitespace-nowrap">Angular</span>
+              <span className="px-6 py-3 bg-gold-gradient text-white rounded-full text-sm font-semibold shadow-gold whitespace-nowrap">Jenkins</span>
+              <span className="px-6 py-3 bg-royal-gradient text-white rounded-full text-sm font-semibold shadow-royal whitespace-nowrap">AI/ML</span>
+              <span className="px-6 py-3 bg-gold-gradient text-white rounded-full text-sm font-semibold shadow-gold whitespace-nowrap">Claude Code</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div className="max-w-7xl mx-auto px-6">
 
         {/* Quick Navigation */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -135,11 +162,11 @@ export default function Home() {
               <h3 className="text-2xl font-bold text-royal-gradient mb-4">Work Experience</h3>
             </div>
             <p className="text-gray-700 mb-6 leading-relaxed">
-              Explore my professional journey from Fortune 500 companies to innovative startups, 
+              Explore my professional journey from Fortune 500 companies to innovative startups,
               featuring cutting-edge technologies and AI-first development.
             </p>
-            <a 
-              href="/about-work" 
+            <a
+              href="/about-work"
               className="btn-royal w-full text-center block"
             >
               Explore Journey →
@@ -152,11 +179,11 @@ export default function Home() {
               <h3 className="text-2xl font-bold text-royal-gradient mb-4">Education</h3>
             </div>
             <p className="text-gray-700 mb-6 leading-relaxed">
-              Discover my Computer Engineering degree and AI research projects, including 
+              Discover my Computer Engineering degree and AI research projects, including
               edge computing and neural network implementations.
             </p>
-            <a 
-              href="/about-school" 
+            <a
+              href="/about-school"
               className="btn-gold w-full text-center block"
             >
               View Studies →
@@ -169,11 +196,11 @@ export default function Home() {
               <h3 className="text-2xl font-bold text-royal-gradient mb-4">About Me</h3>
             </div>
             <p className="text-gray-700 mb-6 leading-relaxed">
-              Get to know the person behind the code - my interests, philosophy, 
+              Get to know the person behind the code - my interests, philosophy,
               and what drives my passion for creating innovative solutions.
             </p>
-            <a 
-              href="/about-me" 
+            <a
+              href="/about-me"
               className="btn-royal w-full text-center block"
             >
               Meet Jacob →
