@@ -96,6 +96,11 @@ Please provide a helpful response. If you don't have specific information about 
           error: 'LLM API key not configured. Please check your environment variables.' 
         }, { status: 500 });
       }
+      if (error.message.includes('429') || error.message.includes('Too Many Requests')) {
+        return NextResponse.json({ 
+          error: 'Rate limit exceeded. Please wait a moment and try again, or switch to a different LLM provider.' 
+        }, { status: 429 });
+      }
       if (error.message.includes('API error')) {
         return NextResponse.json({ 
           error: 'LLM API is currently unavailable. Please try again later.' 
