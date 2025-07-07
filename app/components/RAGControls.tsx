@@ -23,7 +23,7 @@ export default function RAGControls() {
     <div className="glass-card p-6 rounded-2xl shadow-royal">
       <div className="text-center mb-6">
         <h3 className="text-xl font-bold text-royal-gradient mb-2">🧠 Knowledge Areas</h3>
-        <p className="text-sm text-gray-600">Select topics to ask about</p>
+        <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>Select topics to ask about</p>
       </div>
 
       <div className="space-y-4">
@@ -37,7 +37,7 @@ export default function RAGControls() {
             />
             <div className="flex-1">
               <div className="flex items-center justify-between">
-                <span className="font-semibold text-gray-800">💼 Work Experience</span>
+                <span className="font-semibold" style={{ color: 'var(--text-primary)' }}>💼 Work Experience</span>
                 <span className="text-xs bg-royal-gradient text-white px-2 py-1 rounded-full">
                   {indexStats.work} docs
                 </span>
@@ -54,7 +54,7 @@ export default function RAGControls() {
             />
             <div className="flex-1">
               <div className="flex items-center justify-between">
-                <span className="font-semibold text-gray-800">🎓 Education</span>
+                <span className="font-semibold" style={{ color: 'var(--text-primary)' }}>🎓 Education</span>
                 <span className="text-xs bg-gold-gradient text-white px-2 py-1 rounded-full">
                   {indexStats.school} docs
                 </span>
@@ -71,7 +71,7 @@ export default function RAGControls() {
             />
             <div className="flex-1">
               <div className="flex items-center justify-between">
-                <span className="font-semibold text-gray-800">🥷🏻 Personal Info</span>
+                <span className="font-semibold" style={{ color: 'var(--text-primary)' }}>🥷🏻 Personal Info</span>
                 <span className="text-xs bg-royal-gradient text-white px-2 py-1 rounded-full">
                   {indexStats.about_me} docs
                 </span>
@@ -84,7 +84,7 @@ export default function RAGControls() {
           <div className="text-center">
             <div className="inline-flex items-center glass-card px-4 py-2 rounded-full">
               <div className="w-2 h-2 bg-royal-gradient rounded-full mr-2"></div>
-              <span className="text-sm font-medium text-gray-700">
+              <span className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>
                 {ragSettings.selectedIndexes.length} of 3 areas active
               </span>
             </div>

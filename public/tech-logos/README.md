@@ -15,12 +15,12 @@ This folder contains PNG logo files for the technology carousel.
 <!-- - typescript.png -->
 <!-- - nodejs.png -->
 <!-- - docker.png -->
-- aws.png
+<!-- - aws.png -->
 <!-- - redux.png -->
-- mongodb.png
-- angular.png
-- jenkins.png
-- python.png
+<!-- - mongodb.png -->
+<!-- - angular.png -->
+<!-- - jenkins.png -->
+<!-- - python.png -->
 - claude.png
 
 ## Recommended Size

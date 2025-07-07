@@ -15,46 +15,51 @@ interface TechCarouselProps {
 }
 
 export default function TechCarousel({ 
-  title = "🛠️ Technologies & Tools I Love",
+  title,
   subtitle,
   techItems,
   className = ""
 }: TechCarouselProps) {
   return (
-    <div className={`w-full overflow-hidden bg-white bg-opacity-30 backdrop-blur-sm py-12 mb-12 ${className}`}>
+    <div className={`w-full overflow-hidden backdrop-blur-sm py-6 mb-12 ${className}`} style={{ backgroundColor: 'var(--carousel-bg)' }}>
       <div className="text-center mb-8">
         <h3 className="text-2xl font-bold text-royal-gradient">{title}</h3>
         {subtitle && (
-          <p className="text-gray-600 mt-2">{subtitle}</p>
+          <p className="mt-2" style={{ color: 'var(--text-secondary)' }}>{subtitle}</p>
         )}
       </div>
       
-      <div className="relative h-20 overflow-hidden">
+      <div className="relative h-40 overflow-hidden">
         <div className="logo-carousel">
           <div className="logo-carousel-track">
             {/* First set of items */}
             {techItems.map((tech, index) => (
               <div
                 key={`first-${index}`}
-                className="flex items-center justify-center w-20 h-20 bg-white bg-opacity-20 backdrop-blur-sm rounded-xl hover-lift transition-all duration-300 shadow-soft"
-                title={tech.name}
+                className="group flex flex-col items-center justify-center w-28 h-36 cursor-pointer"
               >
-                <Image
-                  src={tech.logo}
-                  alt={tech.alt}
-                  width={48}
-                  height={48}
-                  className="object-contain"
-                  onError={(e) => {
-                    // Fallback to text if image fails to load
-                    const target = e.target as HTMLImageElement;
-                    target.style.display = 'none';
-                    const parent = target.parentElement;
-                    if (parent) {
-                      parent.innerHTML = `<span class="text-xs font-semibold text-gray-700 text-center px-2">${tech.name}</span>`;
-                    }
-                  }}
-                />
+                <div className="w-20 h-20 backdrop-blur-sm rounded-xl hover-lift transition-all duration-300 shadow-soft flex items-center justify-center mb-3" style={{ backgroundColor: 'var(--tech-item-bg)' }}>
+                  <Image
+                    src={tech.logo}
+                    alt={tech.alt}
+                    width={64}
+                    height={64}
+                    className="object-contain w-full h-full grayscale group-hover:grayscale-0 transition-all duration-300"
+                    onError={(e) => {
+                      // Fallback to text if image fails to load
+                      const target = e.target as HTMLImageElement;
+                      target.style.display = 'none';
+                      const parent = target.parentElement;
+                      if (parent) {
+                        parent.innerHTML = `<span class="text-sm font-semibold text-gray-700 text-center px-2">${tech.name}</span>`;
+                      }
+                    }}
+                  />
+                </div>
+                {/* Name below logo */}
+                <span className="text-xs font-semibold text-center px-1 leading-tight" style={{ color: 'var(--text-primary)' }}>
+                  {tech.name}
+                </span>
               </div>
             ))}
             
@@ -62,25 +67,30 @@ export default function TechCarousel({
             {techItems.map((tech, index) => (
               <div
                 key={`duplicate-${index}`}
-                className="flex items-center justify-center w-20 h-20 bg-white bg-opacity-20 backdrop-blur-sm rounded-xl hover-lift transition-all duration-300 shadow-soft"
-                title={tech.name}
+                className="group flex flex-col items-center justify-center w-28 h-36 cursor-pointer"
               >
-                <Image
-                  src={tech.logo}
-                  alt={tech.alt}
-                  width={48}
-                  height={48}
-                  className="object-contain"
-                  onError={(e) => {
-                    // Fallback to text if image fails to load
-                    const target = e.target as HTMLImageElement;
-                    target.style.display = 'none';
-                    const parent = target.parentElement;
-                    if (parent) {
-                      parent.innerHTML = `<span class="text-xs font-semibold text-gray-700 text-center px-2">${tech.name}</span>`;
-                    }
-                  }}
-                />
+                <div className="w-20 h-20 backdrop-blur-sm rounded-xl hover-lift transition-all duration-300 shadow-soft flex items-center justify-center mb-3" style={{ backgroundColor: 'var(--tech-item-bg)' }}>
+                  <Image
+                    src={tech.logo}
+                    alt={tech.alt}
+                    width={64}
+                    height={64}
+                    className="object-contain w-full h-full grayscale group-hover:grayscale-0 transition-all duration-300"
+                    onError={(e) => {
+                      // Fallback to text if image fails to load
+                      const target = e.target as HTMLImageElement;
+                      target.style.display = 'none';
+                      const parent = target.parentElement;
+                      if (parent) {
+                        parent.innerHTML = `<span class="text-sm font-semibold text-gray-700 text-center px-2">${tech.name}</span>`;
+                      }
+                    }}
+                  />
+                </div>
+                {/* Name below logo */}
+                <span className="text-xs font-semibold text-center px-1 leading-tight" style={{ color: 'var(--text-primary)' }}>
+                  {tech.name}
+                </span>
               </div>
             ))}
           </div>

@@ -59,10 +59,10 @@ export default function Home() {
               Welcome to Jacob's Space 🥷🏻
             </h1>
           </div>
-          <p className="text-2xl text-gray-700 mb-6 font-medium">
+          <p className="text-2xl mb-6 font-medium" style={{ color: 'var(--text-primary)' }}>
             Full-Stack Developer & AI Enthusiast
           </p>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-lg max-w-3xl mx-auto leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
             Discover my professional journey through an AI-powered experience. Ask me anything about my work,
             education, or personal interests using the intelligent chatbot below.
           </p>
@@ -96,15 +96,15 @@ export default function Home() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="glass-card-royal p-6 rounded-xl text-center font-medium hover-lift cursor-pointer transition-all duration-300">
                 <div className="text-3xl mb-3">💼</div>
-                <div className="text-gray-800 font-semibold">"What's Jacob's React experience?"</div>
+                <div className="font-semibold" style={{ color: 'var(--text-primary)' }}>"What's Jacob's React experience?"</div>
               </div>
               <div className="glass-card-gold p-6 rounded-xl text-center font-medium hover-lift cursor-pointer transition-all duration-300">
                 <div className="text-3xl mb-3">🎓</div>
-                <div className="text-gray-800 font-semibold">"Tell me about his education"</div>
+                <div className="font-semibold" style={{ color: 'var(--text-primary)' }}>"Tell me about his education"</div>
               </div>
               <div className="glass-card-royal p-6 rounded-xl text-center font-medium hover-lift cursor-pointer transition-all duration-300">
                 <div className="text-3xl mb-3">🥷🏻</div>
-                <div className="text-gray-800 font-semibold">"What are his hobbies?"</div>
+                <div className="font-semibold" style={{ color: 'var(--text-primary)' }}>"What are his hobbies?"</div>
               </div>
             </div>
           </div>
@@ -115,7 +115,7 @@ export default function Home() {
         {/* Technology Carousel Section */}
       </div>
       
-      <TechCarousel techItems={techStack} />
+      <TechCarousel title="⚙️ Tech Stack" techItems={techStack}  subtitle="Professional experience with the following tools and frameworks:"/>
       
       <div className="max-w-7xl mx-auto px-6">
 
@@ -126,7 +126,7 @@ export default function Home() {
               <div className="text-4xl mb-4">💼</div>
               <h3 className="text-2xl font-bold text-royal-gradient mb-4">Work Experience</h3>
             </div>
-            <p className="text-gray-700 mb-6 leading-relaxed">
+            <p className="mb-6 leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
               Explore my professional journey from Fortune 500 companies to innovative startups,
               featuring cutting-edge technologies and AI-first development.
             </p>
@@ -143,7 +143,7 @@ export default function Home() {
               <div className="text-4xl mb-4">🎓</div>
               <h3 className="text-2xl font-bold text-royal-gradient mb-4">Education</h3>
             </div>
-            <p className="text-gray-700 mb-6 leading-relaxed">
+            <p className="mb-6 leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
               Discover my Computer Engineering degree and AI research projects, including
               edge computing and neural network implementations.
             </p>
@@ -160,7 +160,7 @@ export default function Home() {
               <div className="text-4xl mb-4">🥷🏻</div>
               <h3 className="text-2xl font-bold text-royal-gradient mb-4">About Me</h3>
             </div>
-            <p className="text-gray-700 mb-6 leading-relaxed">
+            <p className="mb-6 leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
               Get to know the person behind the code - my interests, philosophy,
               and what drives my passion for creating innovative solutions.
             </p>
