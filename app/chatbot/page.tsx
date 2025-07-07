@@ -1,5 +1,6 @@
 "use client";
 import ChatBot from "../components/ChatBot";
+import RAGControls from "../components/RAGControls";
 
 export default function ChatBotPage() {
   const handleMessage = async (message: string) => {
@@ -40,23 +41,29 @@ export default function ChatBotPage() {
             />
           </div>
           
-          {/* Info Panel */}
-          <div className="bg-white p-6 rounded-lg shadow-lg">
-            <h2 className="text-xl font-semibold mb-4">RAG Features</h2>
-            <ul className="space-y-2 text-sm text-gray-600">
-              <li>• Document ingestion ready</li>
-              <li>• Source attribution</li>
-              <li>• Context-aware responses</li>
-              <li>• Real-time chat interface</li>
-            </ul>
+          {/* Controls and Info Panel */}
+          <div className="space-y-6">
+            <RAGControls />
             
-            <h3 className="text-lg font-semibold mt-6 mb-2">Next Steps</h3>
-            <ul className="space-y-1 text-sm text-gray-600">
-              <li>• Connect to LLM API</li>
-              <li>• Implement vector database</li>
-              <li>• Add document upload</li>
-              <li>• Enable semantic search</li>
-            </ul>
+            <div className="bg-white p-6 rounded-lg shadow-lg">
+              <h2 className="text-xl font-semibold mb-4">RAG Demo</h2>
+              <p className="text-sm text-gray-600 mb-4">
+                Try asking questions about:
+              </p>
+              <ul className="space-y-2 text-sm text-gray-600">
+                <li>• <strong>Work:</strong> "What's my experience with React?"</li>
+                <li>• <strong>School:</strong> "Tell me about my education"</li>
+                <li>• <strong>Personal:</strong> "What are my hobbies?"</li>
+              </ul>
+              
+              <h3 className="text-lg font-semibold mt-6 mb-2">Features</h3>
+              <ul className="space-y-1 text-sm text-gray-600">
+                <li>• 3 specialized knowledge indexes</li>
+                <li>• Similarity-based document retrieval</li>
+                <li>• Context-aware responses</li>
+                <li>• Source attribution & relevance scoring</li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>

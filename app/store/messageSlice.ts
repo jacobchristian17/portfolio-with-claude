@@ -6,16 +6,34 @@ export interface Message {
   role: "user" | "assistant";
   timestamp: Date;
   sources?: string[];
+  ragContext?: {
+    query: string;
+    relevantDocuments: Array<{
+      title: string;
+      content: string;
+      similarity: number;
+      category: string;
+    }>;
+    selectedIndexes: string[];
+  };
 }
 
 interface MessageState {
   messages: Message[];
   isLoading: boolean;
+  ragSettings: {
+    enabled: boolean;
+    selectedIndexes: ('work' | 'school' | 'about_me')[];
+  };
 }
 
 const initialState: MessageState = {
   messages: [],
   isLoading: false,
+  ragSettings: {
+    enabled: true,
+    selectedIndexes: ['work', 'school', 'about_me'],
+  },
 };
 
 const messageSlice = createSlice({
@@ -40,8 +58,20 @@ const messageSlice = createSlice({
         }
       }
     },
+    updateRAGSettings: (state, action: PayloadAction<{ enabled: boolean; selectedIndexes: ('work' | 'school' | 'about_me')[] }>) => {
+      state.ragSettings = action.payload;
+    },
+    toggleRAGIndex: (state, action: PayloadAction<'work' | 'school' | 'about_me'>) => {
+      const index = action.payload;
+      const currentIndexes = state.ragSettings.selectedIndexes;
+      if (currentIndexes.includes(index)) {
+        state.ragSettings.selectedIndexes = currentIndexes.filter(i => i !== index);
+      } else {
+        state.ragSettings.selectedIndexes.push(index);
+      }
+    },
   },
 });
 
-export const { addMessage, setLoading, clearMessages, updateMessage } = messageSlice.actions;
+export const { addMessage, setLoading, clearMessages, updateMessage, updateRAGSettings, toggleRAGIndex } = messageSlice.actions;
 export default messageSlice.reducer;

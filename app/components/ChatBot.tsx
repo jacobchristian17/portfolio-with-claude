@@ -1,8 +1,9 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
-import { addMessage, setLoading, clearMessages } from "../store/messageSlice";
+import { addMessage, setLoading, clearMessages, toggleRAGIndex } from "../store/messageSlice";
 import type { Message } from "../store/messageSlice";
+import { ragService } from "../services/ragService";
 
 interface ChatBotProps {
   onMessage?: (message: string) => Promise<{ content: string; sources?: string[] }>;
@@ -16,7 +17,7 @@ export default function ChatBot({
   documents = [] 
 }: ChatBotProps) {
   const dispatch = useAppDispatch();
-  const { messages, isLoading } = useAppSelector((state) => state.messages);
+  const { messages, isLoading, ragSettings } = useAppSelector((state) => state.messages);
   const [input, setInput] = useState("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -44,9 +45,51 @@ export default function ChatBot({
     dispatch(setLoading(true));
 
     try {
-      const response = onMessage 
-        ? await onMessage(input)
-        : { content: "This is a demo response. Connect to an LLM API to enable real chat functionality." };
+      let response;
+      let ragContext = undefined;
+
+      if (ragSettings.enabled && ragSettings.selectedIndexes.length > 0) {
+        // Get RAG context
+        const ragData = await ragService.generateRAGContext(input, ragSettings.selectedIndexes);
+        
+        if (ragData.relevantDocuments.length > 0) {
+          ragContext = {
+            query: ragData.query,
+            relevantDocuments: ragData.relevantDocuments.map(result => ({
+              title: result.document.metadata.title,
+              content: result.document.content,
+              similarity: result.similarity,
+              category: result.document.metadata.category
+            })),
+            selectedIndexes: ragData.selectedIndexes
+          };
+
+          // Generate response with RAG context
+          const contextPrompt = `Context from relevant documents:
+${ragData.relevantDocuments.map(result => 
+  `[${result.document.metadata.category.toUpperCase()}] ${result.document.metadata.title}: ${result.document.content}`
+).join('\n\n')}
+
+User question: ${input}
+
+Please provide a helpful response based on the context above.`;
+
+          response = onMessage 
+            ? await onMessage(contextPrompt)
+            : { 
+                content: `Based on the relevant information I found, here's what I can tell you: ${ragData.relevantDocuments[0]?.document.content.substring(0, 200)}...`,
+                sources: ragData.relevantDocuments.map(result => result.document.metadata.title)
+              };
+        } else {
+          response = onMessage 
+            ? await onMessage(input)
+            : { content: "I don't have specific information about that topic in my knowledge base. Could you try rephrasing your question?" };
+        }
+      } else {
+        response = onMessage 
+          ? await onMessage(input)
+          : { content: "This is a demo response. Connect to an LLM API to enable real chat functionality." };
+      }
 
       const assistantMessage: Message = {
         id: (Date.now() + 1).toString(),
@@ -54,6 +97,7 @@ export default function ChatBot({
         role: "assistant",
         timestamp: new Date(),
         sources: response.sources,
+        ragContext,
       };
 
       dispatch(addMessage(assistantMessage));
@@ -80,9 +124,9 @@ export default function ChatBot({
       <div className="bg-blue-600 text-white p-4 rounded-t-lg flex justify-between items-center">
         <div>
           <h3 className="text-lg font-semibold">AI Assistant</h3>
-          {ragEnabled && (
+          {ragSettings.enabled && (
             <p className="text-sm text-blue-100">
-              RAG enabled • {documents.length} documents indexed
+              RAG enabled • {ragSettings.selectedIndexes.join(', ')} indexes active
             </p>
           )}
         </div>
@@ -121,6 +165,19 @@ export default function ChatBot({
                   <ul className="list-disc list-inside">
                     {message.sources.map((source, index) => (
                       <li key={index}>{source}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+              {message.ragContext && message.ragContext.relevantDocuments.length > 0 && (
+                <div className="mt-2 text-xs opacity-75">
+                  <p className="font-medium">RAG Context:</p>
+                  <ul className="list-disc list-inside">
+                    {message.ragContext.relevantDocuments.map((doc, index) => (
+                      <li key={index}>
+                        <span className="font-medium">[{doc.category}]</span> {doc.title} 
+                        <span className="text-gray-500"> ({Math.round(doc.similarity * 100)}% match)</span>
+                      </li>
                     ))}
                   </ul>
                 </div>
