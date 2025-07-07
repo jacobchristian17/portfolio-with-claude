@@ -3,14 +3,14 @@ export default function AboutSchool() {
     <div className="min-h-screen bg-gray-100 p-6">
       <div className="max-w-4xl mx-auto">
         <div className="bg-white rounded-lg shadow-lg p-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-6">Education</h1>
+          <h1 className="text-3xl font-bold text-orange-600 mb-6">Education</h1>
           
           {/* Education Overview */}
-          <div className="mb-8 border-l-4 border-green-500 pl-6">
-            <h2 className="text-2xl font-semibold text-green-600 mb-4">
+          <div className="mb-8 border-l-4 border-orange-600 pl-6">
+            <h2 className="text-2xl font-semibold text-gray-800 mb-4">
               Bachelor of Science in Computer Engineering
             </h2>
-            <div className="bg-green-50 rounded-lg p-6">
+            <div className="bg-blue-50 rounded-lg p-6">
               <h3 className="text-xl font-medium text-gray-800 mb-2">
                 Mapua University, Manila, Philippines
               </h3>
@@ -25,7 +25,7 @@ export default function AboutSchool() {
 
           {/* Thesis Project */}
           <div className="mb-8">
-            <h2 className="text-2xl font-semibold text-blue-600 mb-4">Senior Thesis Project</h2>
+            <h2 className="text-2xl font-semibold text-gray-800 mb-4">Senior Thesis Project</h2>
             <div className="bg-blue-50 rounded-lg p-6">
               <h3 className="text-xl font-medium text-gray-800 mb-3">
                 "Determination of Driver's Alertness Based on Eye State with Edge Computing"
@@ -45,7 +45,7 @@ export default function AboutSchool() {
                   <h4 className="font-semibold text-gray-800 mb-2">Technical Implementation</h4>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="bg-white p-4 rounded border">
-                      <h5 className="font-medium text-blue-600 mb-2">Algorithms Used</h5>
+                      <h5 className="font-medium text-gray-800 mb-2">Algorithms Used</h5>
                       <ul className="text-sm text-gray-700 space-y-1">
                         <li>• Convolutional Neural Networks (CNN)</li>
                         <li>• Deep Learning techniques</li>
@@ -54,7 +54,7 @@ export default function AboutSchool() {
                       </ul>
                     </div>
                     <div className="bg-white p-4 rounded border">
-                      <h5 className="font-medium text-blue-600 mb-2">Technologies</h5>
+                      <h5 className="font-medium text-gray-800 mb-2">Technologies</h5>
                       <ul className="text-sm text-gray-700 space-y-1">
                         <li>• ARM64 edge computing device</li>
                         <li>• Computer vision libraries</li>
@@ -80,10 +80,10 @@ export default function AboutSchool() {
 
           {/* Key Coursework */}
           <div className="mb-8">
-            <h2 className="text-2xl font-semibold text-purple-600 mb-4">Key Coursework</h2>
+            <h2 className="text-2xl font-semibold text-orange-600 mb-4">Key Coursework</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="bg-purple-50 rounded-lg p-6">
-                <h3 className="font-semibold text-purple-800 mb-3">Core Computer Engineering</h3>
+              <div className="bg-orange-50 rounded-lg p-6">
+                <h3 className="font-semibold text-orange-800 mb-3">Core Computer Engineering</h3>
                 <ul className="space-y-2 text-gray-700">
                   <li>• Data Structures & Algorithms</li>
                   <li>• Database Systems Design</li>
@@ -94,8 +94,8 @@ export default function AboutSchool() {
                 </ul>
               </div>
               
-              <div className="bg-purple-50 rounded-lg p-6">
-                <h3 className="font-semibold text-purple-800 mb-3">AI & Machine Learning</h3>
+              <div className="bg-orange-50 rounded-lg p-6">
+                <h3 className="font-semibold text-orange-800 mb-3">AI & Machine Learning</h3>
                 <ul className="space-y-2 text-gray-700">
                   <li>• Machine Learning Fundamentals</li>
                   <li>• Artificial Intelligence</li>
