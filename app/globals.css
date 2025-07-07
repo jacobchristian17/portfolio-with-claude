@@ -15,6 +15,9 @@
   --warm-gray: #f8fafc;
   --text-primary: #1f2937;
   --text-secondary: #6b7280;
+  --text-card-primary: #000000;
+  --text-card-secondary: #121213;
+  --text-card-tertiary: #8a8a8a;
   --glass-bg: rgba(255, 255, 255, 0.85);
   --glass-bg-royal: rgba(30, 64, 175, 0.1);
   --glass-bg-gold: rgba(245, 158, 11, 0.1);
@@ -48,6 +51,9 @@
     --warm-gray: #1f2937;
     --text-primary: #f9fafb;
     --text-secondary: #d1d5db;
+    --text-card-primary: #000000;
+    --text-card-secondary: #121213;
+    --text-card-tertiary: #8a8a8a;
     --glass-bg: rgba(31, 41, 55, 0.8);
     --glass-bg-royal: rgba(59, 130, 246, 0.15);
     --glass-bg-gold: rgba(251, 191, 36, 0.15);
@@ -148,7 +154,7 @@ body {
 .border-royal-gradient {
   border: 2px solid transparent;
   background: linear-gradient(white, white) padding-box,
-              linear-gradient(135deg, var(--royal-blue), var(--gold)) border-box;
+    linear-gradient(135deg, var(--royal-blue), var(--gold)) border-box;
 }
 
 /* Logo Carousel Animation */
@@ -169,6 +175,7 @@ body {
   0% {
     transform: translateX(0);
   }
+
   100% {
     transform: translateX(-50%);
   }
@@ -240,9 +247,12 @@ body {
 }
 
 @keyframes float {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0px);
   }
+
   50% {
     transform: translateY(-10px);
   }
