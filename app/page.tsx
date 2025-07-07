@@ -1,6 +1,8 @@
 "use client";
 import ChatBot from "./components/ChatBot";
 import RAGControls from "./components/RAGControls";
+import TechCarousel from "./components/TechCarousel";
+import { techStack } from "./assets/tech-logos";
 
 export default function Home() {
   const handleMessage = async (message: string) => {
@@ -110,47 +112,10 @@ export default function Home() {
 
         <div className="section-divider"></div>
         
-        {/* Logo Carousel Section - Full Width */}
+        {/* Technology Carousel Section */}
       </div>
       
-      <div className="w-full overflow-hidden bg-white bg-opacity-30 backdrop-blur-sm py-12 mb-12">
-        <div className="text-center mb-8">
-          <h3 className="text-2xl font-bold text-royal-gradient">🛠️ Technologies & Tools I Love</h3>
-        </div>
-        <div className="relative h-16 overflow-hidden">
-          <div className="logo-carousel">
-            <div className="logo-carousel-track">
-              {/* First set of items */}
-              <span className="px-6 py-3 bg-royal-gradient text-white rounded-full text-sm font-semibold shadow-royal whitespace-nowrap">React</span>
-              <span className="px-6 py-3 bg-gold-gradient text-white rounded-full text-sm font-semibold shadow-gold whitespace-nowrap">Next.js</span>
-              <span className="px-6 py-3 bg-royal-gradient text-white rounded-full text-sm font-semibold shadow-royal whitespace-nowrap">TypeScript</span>
-              <span className="px-6 py-3 bg-gold-gradient text-white rounded-full text-sm font-semibold shadow-gold whitespace-nowrap">Node.js</span>
-              <span className="px-6 py-3 bg-royal-gradient text-white rounded-full text-sm font-semibold shadow-royal whitespace-nowrap">Docker</span>
-              <span className="px-6 py-3 bg-gold-gradient text-white rounded-full text-sm font-semibold shadow-gold whitespace-nowrap">AWS</span>
-              <span className="px-6 py-3 bg-royal-gradient text-white rounded-full text-sm font-semibold shadow-royal whitespace-nowrap">Redux</span>
-              <span className="px-6 py-3 bg-gold-gradient text-white rounded-full text-sm font-semibold shadow-gold whitespace-nowrap">MongoDB</span>
-              <span className="px-6 py-3 bg-royal-gradient text-white rounded-full text-sm font-semibold shadow-royal whitespace-nowrap">Angular</span>
-              <span className="px-6 py-3 bg-gold-gradient text-white rounded-full text-sm font-semibold shadow-gold whitespace-nowrap">Jenkins</span>
-              <span className="px-6 py-3 bg-royal-gradient text-white rounded-full text-sm font-semibold shadow-royal whitespace-nowrap">AI/ML</span>
-              <span className="px-6 py-3 bg-gold-gradient text-white rounded-full text-sm font-semibold shadow-gold whitespace-nowrap">Claude Code</span>
-              
-              {/* Duplicate set for seamless loop */}
-              <span className="px-6 py-3 bg-royal-gradient text-white rounded-full text-sm font-semibold shadow-royal whitespace-nowrap">React</span>
-              <span className="px-6 py-3 bg-gold-gradient text-white rounded-full text-sm font-semibold shadow-gold whitespace-nowrap">Next.js</span>
-              <span className="px-6 py-3 bg-royal-gradient text-white rounded-full text-sm font-semibold shadow-royal whitespace-nowrap">TypeScript</span>
-              <span className="px-6 py-3 bg-gold-gradient text-white rounded-full text-sm font-semibold shadow-gold whitespace-nowrap">Node.js</span>
-              <span className="px-6 py-3 bg-royal-gradient text-white rounded-full text-sm font-semibold shadow-royal whitespace-nowrap">Docker</span>
-              <span className="px-6 py-3 bg-gold-gradient text-white rounded-full text-sm font-semibold shadow-gold whitespace-nowrap">AWS</span>
-              <span className="px-6 py-3 bg-royal-gradient text-white rounded-full text-sm font-semibold shadow-royal whitespace-nowrap">Redux</span>
-              <span className="px-6 py-3 bg-gold-gradient text-white rounded-full text-sm font-semibold shadow-gold whitespace-nowrap">MongoDB</span>
-              <span className="px-6 py-3 bg-royal-gradient text-white rounded-full text-sm font-semibold shadow-royal whitespace-nowrap">Angular</span>
-              <span className="px-6 py-3 bg-gold-gradient text-white rounded-full text-sm font-semibold shadow-gold whitespace-nowrap">Jenkins</span>
-              <span className="px-6 py-3 bg-royal-gradient text-white rounded-full text-sm font-semibold shadow-royal whitespace-nowrap">AI/ML</span>
-              <span className="px-6 py-3 bg-gold-gradient text-white rounded-full text-sm font-semibold shadow-gold whitespace-nowrap">Claude Code</span>
-            </div>
-          </div>
-        </div>
-      </div>
+      <TechCarousel techItems={techStack} />
       
       <div className="max-w-7xl mx-auto px-6">
 

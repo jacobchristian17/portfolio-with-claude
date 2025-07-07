@@ -25,7 +25,7 @@ export default function AboutWork() {
 
           {/* Previous Roles */}
           <div className="space-y-8">
-            <div className="border-l-4 border-green-500 pl-6">
+            <div className="border-l-4 border-yellow-500 pl-6">
               <h3 className="text-xl font-medium text-gray-800 mb-2">
                 Frontend Developer
               </h3>
@@ -40,7 +40,7 @@ export default function AboutWork() {
               </p>
             </div>
 
-            <div className="border-l-4 border-purple-500 pl-6">
+            <div className="border-l-4 border-yellow-500 pl-6">
               <h3 className="text-xl font-medium text-gray-800 mb-2">
                 MERN Stack Developer (Fullstack)
               </h3>
@@ -55,7 +55,7 @@ export default function AboutWork() {
               </p>
             </div>
 
-            <div className="border-l-4 border-orange-500 pl-6">
+            <div className="border-l-4 border-yellow-500 pl-6">
               <h3 className="text-xl font-medium text-gray-800 mb-2">
                 Full Stack Developer (Freelance)
               </h3>

@@ -134,9 +134,9 @@ Please provide a helpful response based on the context above.`;
       {/* Header */}
       <div className="bg-royal-gradient text-white p-4 rounded-t-2xl flex justify-between items-center">
         <div>
-          <h3 className="text-lg font-semibold">🤖 Francesca</h3>
+          <h3 className="text-lg font-semibold">🤖 Ask Francesca!</h3>
           <p className="text-sm text-blue-100">
-            She knows a thing or two about Jacob!
+            She knows a thing or two about Jacob
           </p>
         </div>
         <button
