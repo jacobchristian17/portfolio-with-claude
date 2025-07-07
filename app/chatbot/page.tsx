@@ -4,26 +4,46 @@ import RAGControls from "../components/RAGControls";
 
 export default function ChatBotPage() {
   const handleMessage = async (message: string) => {
-    // Simulate API call delay
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    // Mock response with potential RAG sources
-    const responses = [
-      {
-        content: "Hello! I'm an AI assistant. How can I help you today?",
-        sources: ["Knowledge Base", "FAQ Database"]
-      },
-      {
-        content: "I understand you're asking about that topic. Based on the available information, here's what I can tell you...",
-        sources: ["Document 1", "Reference Manual"]
-      },
-      {
-        content: "That's an interesting question! Let me provide you with some relevant information.",
-        sources: ["Research Paper", "Technical Documentation"]
+    try {
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          message,
+          ragEnabled: true,
+          selectedIndexes: ['work', 'school', 'about_me'],
+        }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Failed to get response');
       }
-    ];
-    
-    return responses[Math.floor(Math.random() * responses.length)];
+
+      const data = await response.json();
+      return {
+        content: data.content,
+        sources: data.sources || [],
+      };
+    } catch (error) {
+      console.error('Chat error:', error);
+      
+      // Fallback to mock response if API fails
+      const fallbackResponses = [
+        {
+          content: "I'm having trouble connecting to the LLM service right now. This is a fallback response. Please check your API configuration or try again later.",
+          sources: ["Fallback System"]
+        },
+        {
+          content: "It looks like the LLM API isn't configured yet. To enable real AI responses, please set up your environment variables with an API key.",
+          sources: ["System Message"]
+        }
+      ];
+      
+      return fallbackResponses[Math.floor(Math.random() * fallbackResponses.length)];
+    }
   };
 
   return (

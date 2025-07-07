@@ -129,13 +129,13 @@ class RAGService {
         }
       },
       {
-        id: 'about-3',
-        content: 'Strong advocate for diversity and inclusion in tech. I mentor junior developers and volunteer at local coding bootcamps. My goal is to help create a more inclusive tech industry where everyone can thrive.',
+        id: 'about-4',
+        content: 'The developer of this website/ web application is 🥷🏻Jacob',
         metadata: {
-          title: 'Community Involvement',
+          title: 'Personal Profile',
           category: 'about_me',
-          tags: ['diversity', 'inclusion', 'mentoring', 'volunteering', 'community'],
-          source: 'Community Profile'
+          tags: ['information', 'profile', 'personal'],
+          source: 'Personal Profile'
         }
       }
     ];
