@@ -169,25 +169,25 @@ Please provide a helpful response based on the context above.`;
                   : "glass-card text-gray-800 shadow-soft"
               }`}
             >
-              <p className="text-sm">{message.content}</p>
+              <p className="text-sm" style={{ color: 'var(--text-primary)' }}>{message.content}</p>
               {message.sources && message.sources.length > 0 && (
                 <div className="mt-2 text-xs opacity-75">
-                  <p className="font-medium">Sources:</p>
+                  <p className="font-medium"  style={{ color: 'var(--gold-dark)' }}>Sources:</p>
                   <ul className="list-disc list-inside">
                     {message.sources.map((source, index) => (
-                      <li key={index}>{source}</li>
+                      <li key={index}  style={{ color: 'var(--text-secondary)' }}>{source}</li>
                     ))}
                   </ul>
                 </div>
               )}
               {message.ragContext && message.ragContext.relevantDocuments.length > 0 && (
                 <div className="mt-2 text-xs opacity-75">
-                  <p className="font-medium">RAG Context:</p>
+                  <p className="font-medium"  style={{ color: 'var(--gold-dark)' }}>RAG Context:</p>
                   <ul className="list-disc list-inside">
                     {message.ragContext.relevantDocuments.map((doc, index) => (
                       <li key={index}>
-                        <span className="font-medium">[{doc.category}]</span> {doc.title} 
-                        <span className="text-gray-500"> ({Math.round(doc.similarity * 100)}% match)</span>
+                        <span className="font-medium"  style={{ color: 'var(--gold-light)' }}>[{doc.category}]</span> {doc.title} 
+                        <span style={{ color: 'var(--gold-light)' }}> ({Math.round(doc.similarity * 100)}% match)</span>
                       </li>
                     ))}
                   </ul>
