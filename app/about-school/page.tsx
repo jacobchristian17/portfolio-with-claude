@@ -11,15 +11,17 @@ export default function AboutSchool() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100">
-      <Image
-        src={school.img}
-        alt={school.alt}
-        width={1920}
-        height={1920}
-        className="fixed top-0 right-0"
-      />
-      <div className="max-w-4xl mx-auto">
+    <div className="min-h-screen bg-gray-100 relative">
+      <div className="fixed top-0 h-screen w-full">
+        <Image
+          src={school.img}
+          alt={school.alt}
+          fill
+          className="object-cover object-center"
+          priority
+        />
+      </div>
+      <div className="max-w-4xl mx-auto relative z-10 pt-6">
         <div className={themePrefix.bgPrimary + " backdrop-blur-sm rounded-lg shadow-lg p-8"}>
           <h1 className={"text-3xl font-bold mb-6"} style={{ color: 'var(--text-primary)' }}>Education</h1>
 
