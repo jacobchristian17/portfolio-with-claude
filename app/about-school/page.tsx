@@ -11,7 +11,7 @@ export default function AboutSchool() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 relative">
+    <div className="min-h-screen bg-gray-100 relative z-3">
       <div className="fixed top-0 h-screen w-full">
         <Image
           src={school.img}

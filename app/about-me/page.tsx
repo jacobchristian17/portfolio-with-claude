@@ -11,7 +11,7 @@ export default function AboutMe() {
   return (
     <div className="min-h-screen p-6" >
       <HeroImage />
-      <div className="max-w-4xl mx-auto backdrop-blur-[1px] ">
+      <div className="max-w-4xl mx-auto backdrop-blur-[1px] relative z-3">
         <div className={"glass-card rounded-lg shadow-lg p-8"}>
           <h1 className="text-3xl font-bold mb-6" style={{color: 'var(--text-primary)'}}>About Me</h1>
 

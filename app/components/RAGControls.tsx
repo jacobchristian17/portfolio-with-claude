@@ -20,7 +20,7 @@ export default function RAGControls() {
   };
 
   return (
-    <div className="glass-card p-6 rounded-2xl shadow-royal">
+    <div className="glass-card p-6 rounded-2xl shadow-royal relative z-3">
       <div className="text-center mb-6">
         <h3 className="text-xl font-bold text-royal-gradient mb-2">🧠 Knowledge Areas</h3>
         <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>Select topics to ask about</p>

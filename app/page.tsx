@@ -9,10 +9,12 @@ import type { Message } from "./store/messageSlice";
 import { useAppSelector } from "./store/hooks";
 import { ragService } from "./services/ragService";
 import HeroImage from "./components/HeroImage";
+import { useRef } from "react";
 
 export default function Home() {
   const dispatch = useDispatch();
   const { ragSettings } = useAppSelector((state) => state.messages);
+  const chatBotRef = useRef<HTMLDivElement>(null);
   const sampleQuestions = [
     "What's Jacob's React experience?",
     "Tell me about his education",
@@ -63,9 +65,21 @@ export default function Home() {
     }
   };
 
+  const scrollToChatBot = () => {
+    if (chatBotRef.current) {
+      chatBotRef.current.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  };
+
   const handleSubmit = async (index: any) => {
     console.log("handleSubmit shit")
     const input = sampleQuestions[index]
+
+    // Scroll to chatbot smoothly
+    scrollToChatBot();
     const userMessage: Message = {
       id: Date.now().toString(),
       content: input,
@@ -150,8 +164,13 @@ export default function Home() {
 
   return (
     <div className="min-h-screen">
-      <HeroImage />
-      <div className="max-w-7xl mx-auto px-6 py-8">
+      <div className="hidden lg:block">
+        <HeroImage />
+      </div>
+      <div className="max-w-7xl mx-auto px-6 py-8 relative z-1">
+        <div className="lg:hidden">
+          <HeroImage />
+        </div>
         {/* Hero Section */}
         <div className="text-center mb-12">
           <div className="floating">
@@ -168,8 +187,29 @@ export default function Home() {
           </p>
         </div>
 
+        {/* Mobile: Try These Questions First */}
+        <div className="mb-12 lg:hidden relative z-3">
+          <div className="glass-card rounded-2xl p-8 hover-glow">
+            <h3 className="font-bold mb-8 text-royal-gradient text-2xl text-center">✨ Try These Questions</h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="glass-card-royal p-6 rounded-xl text-center font-medium hover-lift cursor-pointer transition-all duration-300" onClick={() => handleSubmit(0)}>
+                <div className="text-3xl mb-3">💼</div>
+                <div className="font-semibold" style={{ color: 'var(--text-primary)' }}>"What&rsquo;s Jacob&rsquo;s React experience?"</div>
+              </div>
+              <div className="glass-card-royal p-6 rounded-xl text-center font-medium hover-lift cursor-pointer transition-all duration-300" onClick={() => handleSubmit(1)}>
+                <div className="text-3xl mb-3">🎓</div>
+                <div className="font-semibold" style={{ color: 'var(--text-primary)' }}>"Tells me about his education"</div>
+              </div>
+              <div className="glass-card-royal p-6 rounded-xl text-center font-medium hover-lift cursor-pointer transition-all duration-300" onClick={() => handleSubmit(2)}>
+                <div className="text-3xl mb-3">🥷🏻</div>
+                <div className="font-semibold" style={{ color: 'var(--text-primary)' }}>"What are his hobbies?"</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* Chatbot Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8" ref={chatBotRef}>
           {/* Main Chatbot */}
           <div className="lg:col-span-2">
             <div className="glass-card rounded-2xl p-2 hover-lift">
@@ -189,8 +229,8 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Try These Questions - Full Width */}
-        <div className="mb-12">
+        {/* Desktop: Try These Questions */}
+        <div className="mb-12 hidden lg:block relative z-3">
           <div className="glass-card rounded-2xl p-8 hover-glow">
             <h3 className="font-bold mb-8 text-royal-gradient text-2xl text-center">✨ Try These Questions</h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -214,12 +254,12 @@ export default function Home() {
         {/* Technology Carousel Section */}
       </div>
 
-      <div className="section-divider relative z-1"></div>
+      <div className="section-divider relative z-3"></div>
 
       <TechCarousel title="⚙️ Tech Stack" techItems={techStack} subtitle="Professional experience with the following tools and frameworks:" />
 
 
-      <div className="section-divider relative z-1 mb-24"></div>
+      <div className="section-divider relative z-3 mb-24"></div>
 
       <div className="max-w-7xl mx-auto px-6">
 
