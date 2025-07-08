@@ -10,7 +10,14 @@ interface HeroImageProps {
     shadow?: boolean;
 }
 export default function HeroImage({ shadow }: HeroImageProps) {
-    const image = window.matchMedia("(prefers-color-scheme: dark)").matches ? hero1Shadow : hero1
+    let isDarkMode = false
+    if (typeof window !== "undefined") {
+        isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches
+    }
+    const image = isDarkMode ? hero1Shadow : hero1
+
+
+
     const [scrollY, setScrollY] = useState(0);
     useEffect(() => {
         const handleScroll = () => setScrollY(window.scrollY);
