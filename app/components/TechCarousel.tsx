@@ -21,7 +21,7 @@ export default function TechCarousel({
   className = ""
 }: TechCarouselProps) {
   return (
-    <div className={`w-full overflow-hidden backdrop-blur-sm py-6 mb-12 ${className}`} style={{ backgroundColor: 'var(--carousel-bg)' }}>
+    <div className={`w-full overflow-hidden backdrop-blur-sm py-6 ${className}`} style={{ backgroundColor: 'var(--carousel-bg)' }}>
       <div className="text-center mb-8">
         <h3 className="text-2xl font-bold text-royal-gradient">{title}</h3>
         {subtitle && (
@@ -38,7 +38,7 @@ export default function TechCarousel({
                 key={`first-${index}`}
                 className="group flex flex-col items-center justify-center w-28 h-36 cursor-pointer"
               >
-                <div className="w-20 h-20 backdrop-blur-sm rounded-xl hover-lift transition-all duration-300 shadow-soft flex items-center justify-center mb-3" style={{ backgroundColor: 'var(--tech-item-bg)' }}>
+                <div className="w-20 h-20 rounded-xl hover-lift transition-all duration-300 shadow-soft flex items-center justify-center mb-3">
                   <Image
                     src={tech.logo}
                     alt={tech.alt}
@@ -69,7 +69,7 @@ export default function TechCarousel({
                 key={`duplicate-${index}`}
                 className="group flex flex-col items-center justify-center w-28 h-36 cursor-pointer"
               >
-                <div className="w-20 h-20 backdrop-blur-sm rounded-xl hover-lift transition-all duration-300 shadow-soft flex items-center justify-center mb-3" style={{ backgroundColor: 'var(--tech-item-bg)' }}>
+                <div className="w-20 h-20 rounded-xl hover-lift transition-all duration-300 shadow-soft flex items-center justify-center mb-3">
                   <Image
                     src={tech.logo}
                     alt={tech.alt}

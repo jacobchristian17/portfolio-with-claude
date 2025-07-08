@@ -297,7 +297,6 @@ body {
 .section-divider {
   background: linear-gradient(90deg, transparent, var(--royal-blue), var(--gold), transparent);
   height: 2px;
-  margin: 2rem 0;
 }
 
 /* Button Styles */

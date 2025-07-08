@@ -219,7 +219,7 @@ export default function Home() {
       <TechCarousel title="⚙️ Tech Stack" techItems={techStack} subtitle="Professional experience with the following tools and frameworks:" />
 
 
-      <div className="section-divider relative z-1"></div>
+      <div className="section-divider relative z-1 mb-24"></div>
 
       <div className="max-w-7xl mx-auto px-6">
 
