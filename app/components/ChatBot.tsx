@@ -11,10 +11,11 @@ interface ChatBotProps {
   documents?: string[];
 }
 
-export default function ChatBot({ 
-  onMessage, 
+export default function ChatBot({
+  onMessage,
 }: ChatBotProps) {
   const dispatch = useAppDispatch();
+  const { isDarkMode } = useAppSelector((state) => state.theme);
   const { messages, isLoading, ragSettings } = useAppSelector((state) => state.messages);
   const [input, setInput] = useState("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -60,7 +61,7 @@ export default function ChatBot({
       if (ragSettings.selectedIndexes.length > 0) {
         // Get RAG context
         const ragData = await ragService.generateRAGContext(input, ragSettings.selectedIndexes);
-        
+
         if (ragData.relevantDocuments.length > 0) {
           ragContext = {
             query: ragData.query,
@@ -75,27 +76,27 @@ export default function ChatBot({
 
           // Generate response with RAG context
           const contextPrompt = `Context from relevant documents:
-${ragData.relevantDocuments.map(result => 
-  `[${result.document.metadata.category.toUpperCase()}] ${result.document.metadata.title}: ${result.document.content}`
-).join('\n\n')}
+${ragData.relevantDocuments.map(result =>
+            `[${result.document.metadata.category.toUpperCase()}] ${result.document.metadata.title}: ${result.document.content}`
+          ).join('\n\n')}
 
 User question: ${input}
 
 Please provide a helpful response based on the context above.`;
 
-          response = onMessage 
+          response = onMessage
             ? await onMessage(contextPrompt)
-            : { 
-                content: `Based on the relevant information I found, here's what I can tell you: ${ragData.relevantDocuments[0]?.document.content.substring(0, 200)}...`,
-                sources: ragData.relevantDocuments.map(result => result.document.metadata.title)
-              };
+            : {
+              content: `Based on the relevant information I found, here's what I can tell you: ${ragData.relevantDocuments[0]?.document.content.substring(0, 200)}...`,
+              sources: ragData.relevantDocuments.map(result => result.document.metadata.title)
+            };
         } else {
-          response = onMessage 
+          response = onMessage
             ? await onMessage(input)
             : { content: "I don't have specific information about that topic in my knowledge base. Could you try rephrasing your question?" };
         }
       } else {
-        response = onMessage 
+        response = onMessage
           ? await onMessage(input)
           : { content: "Please select at least one knowledge area to get personalized responses about Jacob!" };
       }
@@ -140,14 +141,18 @@ Please provide a helpful response based on the context above.`;
         </div>
         <button
           onClick={handleClearMessages}
-          className="btn-gold text-sm px-3 py-1"
+          className="btn-gold text-sm px-3 py-1 cursor-pointer rounded-full flex items-center justify-center w-12 h-12 hover:text-red-500"
         >
-          Clear
+          <svg xmlns="http://www.w3.org/2000/svg" height="1.5em" fill="currentColor" viewBox="0 0 512 512">
+            <path
+              d="M 167 18 L 160 32 L 167 18 L 160 32 L 64 32 L 64 32 Q 50 32 41 41 Q 32 50 32 64 Q 32 78 41 87 Q 50 96 64 96 L 448 96 L 448 96 Q 462 96 471 87 Q 480 78 480 64 Q 480 50 471 41 Q 462 32 448 32 L 352 32 L 352 32 L 345 18 L 345 18 Q 336 1 316 0 L 196 0 L 196 0 Q 176 1 167 18 L 167 18 Z M 448 128 L 64 128 L 448 128 L 64 128 L 85 467 L 85 467 Q 87 486 100 499 Q 114 512 133 512 L 379 512 L 379 512 Q 398 512 412 499 Q 425 486 427 467 L 448 128 L 448 128 Z"
+            />
+          </svg>
         </button>
       </div>
 
       {/* Messages */}
-      <div 
+      <div
         ref={messagesContainerRef}
         className="flex-1 overflow-y-auto p-4 space-y-4 scroll-smooth"
       >
@@ -156,39 +161,38 @@ Please provide a helpful response based on the context above.`;
             Start a conversation by typing a message below
           </div>
         )}
-        
+
         {messages.map((message) => (
           <div
             key={message.id}
             className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}
           >
             <div
-              className={`max-w-xs lg:max-w-md px-4 py-2 rounded-lg ${
-                message.role === "user"
-                  ? "bg-royal-gradient text-white shadow-royal"
-                  : "glass-card text-gray-800 shadow-soft"
-              }`}
+              className={`max-w-xs lg:max-w-md px-4 py-2 rounded-lg ${message.role === "user"
+                ? "bg-royal-gradient text-white shadow-royal"
+                : "glass-card text-gray-800 shadow-soft"
+                }`}
             >
-              <p className="text-sm" style={{ color: 'var(--text-primary)' }}>{message.content}</p>
+              <p className="text-sm" style={{ color: message.role === "user" ? 'var(--text-usr-primary)' : 'var(--text-primary)' }}>{message.content}</p>
               {message.sources && message.sources.length > 0 && (
                 <div className="mt-2 text-xs opacity-75">
-                  <p className="font-medium"  style={{ color: 'var(--gold-dark)' }}>Sources:</p>
+                  <p className="font-medium" style={{ color: isDarkMode ? 'var(--gold-dark)' :  'var(--text-primary)'}}>Sources:</p>
                   <ul className="list-disc list-inside">
                     {message.sources.map((source, index) => (
-                      <li key={index}  style={{ color: 'var(--text-secondary)' }}>{source}</li>
+                      <li key={index} style={{ color: 'var(--text-secondary)' }}>{source}</li>
                     ))}
                   </ul>
                 </div>
               )}
               {message.ragContext && message.ragContext.relevantDocuments.length > 0 && (
                 <div className="mt-2 text-xs opacity-75">
-                  <p className="font-medium"  style={{ color: 'var(--gold-dark)' }}>Context relevance:</p>
+                  <p className="font-medium" style={{ color: isDarkMode ? 'var(--gold-dark)' : 'var(--text-primary)' }}>Context relevance:</p>
                   <ul className="list-disc list-inside">
                     {message.ragContext.relevantDocuments.map((doc, index) => (
                       <li key={index}>
-                        <span className="font-normal" style={{ color: 'var(--gold-light)' }}>[{doc.category}] </span>
-                        <span className="font-bold" style={{ color: 'var(--gold-light)' }}>{doc.title} </span>
-                        <span style={{ color: 'var(--gold-light)' }}> - {Math.round(doc.similarity * 100)}% match</span>
+                        <span className="font-normal" style={{ color: isDarkMode? 'var(--gold-light)': 'var(--text-secondary)' }}>[{doc.category}] </span>
+                        <span className="font-bold" style={{ color: isDarkMode? 'var(--gold-light)': 'var(--text-secondary)' }}>{doc.title} </span>
+                        <span style={{ color: isDarkMode? 'var(--gold-light)': 'var(--text-secondary)' }}> - {Math.round(doc.similarity * 100)}% match</span>
                       </li>
                     ))}
                   </ul>
@@ -200,7 +204,7 @@ Please provide a helpful response based on the context above.`;
             </div>
           </div>
         ))}
-        
+
         {isLoading && (
           <div className="flex justify-start">
             <div className="glass-card text-gray-800 px-4 py-2 rounded-lg shadow-soft">
@@ -212,7 +216,7 @@ Please provide a helpful response based on the context above.`;
             </div>
           </div>
         )}
-        
+
         <div ref={messagesEndRef} />
       </div>
 

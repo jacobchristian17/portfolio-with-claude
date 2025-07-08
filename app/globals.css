@@ -14,6 +14,7 @@
   --soft-white: #fefefe;
   --warm-gray: #f8fafc;
   --text-primary: #1f2937;
+  --text-usr-primary: #f9fafb;
   --text-secondary: #6b7280;
   --text-card-primary: #000000;
   --text-card-secondary: #121213;
@@ -317,17 +318,11 @@ body {
 }
 
 .btn-gold {
-  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
-  color: white;
   border: none;
-  padding: 0.75rem 1.5rem;
-  border-radius: 0.5rem;
   font-weight: 600;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
 }
 
-.btn-gold:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(245, 158, 11, 0.4);
+.hero-img {
+  transition: all 0.3s ease;
 }

@@ -1,8 +1,13 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
+import { toggleTheme } from "../store/themeSlice";
 
 
 export default function FloatingThemeToggle() {
+    const dispatch = useAppDispatch();
+    const { isDarkMode } = useAppSelector((state) => state.theme);
+
     const lightModeLogo = <div className="fixed z-99 bottom-5 right-10 flex items-center justify-center w-12 h-12 rounded-full bg-[#1e40af] shadow cursor-pointer text-[#fbbf24] hover:text-white hover-glow">
         <svg xmlns="http://www.w3.org/2000/svg" height="1.7em" fill="currentColor" viewBox="0 0 512 512">
             <path
@@ -19,22 +24,16 @@ export default function FloatingThemeToggle() {
     </div>
 
 
-    const [darkMode, setDarkMode] = useState(false);
-
-    useEffect(() => {
-
-
-    }, [darkMode])
 
     function handleToggleDarkMode() {
-        if (darkMode)
+        if (isDarkMode)
             document.documentElement.classList.remove('dark'); // disable dark mode
         else
             document.documentElement.classList.add('dark');  // enable dark mode
-        setDarkMode(prev => !prev)
+        dispatch(toggleTheme())
     }
 
     return <div onClick={handleToggleDarkMode}>
-        {darkMode ? lightModeLogo : darkModeLogo}
+        {isDarkMode ? lightModeLogo : darkModeLogo}
     </div>
 }

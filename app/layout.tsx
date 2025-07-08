@@ -3,7 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/Navbar";
 import StoreProvider from "./store/StoreProvider";
-import FloatingThemeToggle from "./assets/theme-logo";
+import FloatingThemeToggle from "./components/FloatingThemeToggle";
 
 export const metadata: Metadata = {
   title: "Jacob's Space",

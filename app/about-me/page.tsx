@@ -1,17 +1,23 @@
+"use client";
 import HeroImage from "../components/HeroImage"
+import { useAppSelector } from "../store/hooks";
 
 export default function AboutMe() {
-
+  const { isDarkMode } = useAppSelector((state) => state.theme);
+  const themePrefix = {
+    bgPrimary: isDarkMode ? "bg-black/50" : "bg-white/30",
+    borderColor: isDarkMode ? "border-blue-200" : "border-blue-900"
+  }
   return (
     <div className="min-h-screen bg-gray-100 p-6">
       <HeroImage />
       <div className="max-w-4xl mx-auto">
-        <div className="bg-white/30 backdrop-blur-sm rounded-lg shadow-lg p-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-6">About Me</h1>
+        <div className={themePrefix.bgPrimary + " backdrop-blur-sm rounded-lg shadow-lg p-8"}>
+          <h1 className="text-3xl font-bold mb-6" style={{color: 'var(--text-primary)'}}>About Me</h1>
 
           {/* Personal Introduction */}
-          <div className="mb-8 border-l-4 border-gray-500 pl-6">
-            <h2 className="text-2xl font-semibold text-gray-600 mb-4">
+          <div className="mb-8 border-l-4 pl-6" style={{borderColor: 'var(--text-secondary)'}}>
+            <h2 className="text-2xl font-semibold mb-4" style={{color: 'var(--text-secondary)'}}>
               Meet Jacob 🥷🏻
             </h2>
             <div className="bg-blue-50 rounded-lg p-6">
@@ -29,7 +35,7 @@ export default function AboutMe() {
 
           {/* Background & Origins */}
           <div className="mb-8">
-            <h2 className="text-2xl font-semibold text-gray-600 mb-4">Background & Journey</h2>
+            <h2 className="text-2xl font-semibold mb-4" style={{borderColor: 'var(--text-secondary)'}}>Background & Journey</h2>
             <div className="bg-gray-50 rounded-lg p-6">
               <div className="space-y-4">
                 <div>
@@ -72,7 +78,7 @@ export default function AboutMe() {
 
           {/* Hobbies & Interests */}
           <div className="mb-8">
-            <h2 className="text-2xl font-semibold text-blue-900 mb-4">Hobbies & Interests</h2>
+            <h2 className="text-2xl font-semibold mb-4" style={{borderColor: 'var(--text-secondary)'}}>Hobbies & Interests</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="bg-blue-50 rounded-lg p-6">
                 <h3 className="font-semibold text-blue-800 mb-3">🎮 Gaming</h3>
@@ -102,7 +108,7 @@ export default function AboutMe() {
 
           {/* Personal Philosophy */}
           <div className="mb-8">
-            <h2 className="text-2xl font-semibold text-yellow-600 mb-4">Personal Philosophy</h2>
+            <h2 className="text-2xl font-semibold text mb-4" style={{borderColor: 'var(--text-secondary)'}}>Personal Philosophy</h2>
             <div className="bg-yellow-50 rounded-lg p-6">
               <div className="space-y-4">
                 <div className="border-l-4 border-yellow-400 pl-4">
@@ -136,7 +142,7 @@ export default function AboutMe() {
 
           {/* Fun Facts */}
           <div className="mb-8">
-            <h2 className="text-2xl font-semibold text-blue-900 mb-4">Fun Facts</h2>
+            <h2 className="text-2xl font-semibold mb-4" style={{borderColor: 'var(--text-secondary)'}}>Fun Facts</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               <div className="bg-blue-50 p-4 rounded-lg text-center">
                 <div className="text-2xl mb-2">🎯</div>

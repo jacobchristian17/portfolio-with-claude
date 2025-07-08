@@ -1,8 +1,14 @@
+"use client";
 import Image from "next/image";
 import { school } from "../assets/bg-images";
+import { useAppSelector } from "../store/hooks";
 
 export default function AboutSchool() {
-
+  const { isDarkMode } = useAppSelector((state) => state.theme);
+  const themePrefix = {
+    bgPrimary: isDarkMode ? "bg-black/50" : "bg-white/30",
+    borderColor: isDarkMode ? "border-blue-200" : "border-blue-900"
+  }
 
   return (
     <div className="min-h-screen bg-gray-100">
@@ -14,12 +20,12 @@ export default function AboutSchool() {
         className="fixed top-0 right-0"
       />
       <div className="max-w-4xl mx-auto">
-        <div className="bg-white/30 backdrop-blur-sm rounded-lg shadow-lg p-8">
-          <h1 className="text-3xl font-bold text-blue-900 mb-6">Education</h1>
+        <div className={themePrefix.bgPrimary + " backdrop-blur-sm rounded-lg shadow-lg p-8"}>
+          <h1 className={"text-3xl font-bold mb-6"} style={{ color: 'var(--text-primary)' }}>Education</h1>
 
           {/* Education Overview */}
-          <div className="mb-8 border-l-4 border-blue-900 pl-6">
-            <h2 className="text-2xl font-semibold text-gray-800 mb-4">
+          <div className={"mb-8 border-l-4 pl-6"} style={{ color: 'var(--text-primary)' }}>
+            <h2 className="text-2xl font-semibold mb-4" style={{ color: 'var(--text-primary)' }}>
               Bachelor of Science in Computer Engineering
             </h2>
             <div className="bg-blue-50 rounded-lg p-6">
@@ -37,7 +43,7 @@ export default function AboutSchool() {
 
           {/* Thesis Project */}
           <div className="mb-8">
-            <h2 className="text-2xl font-semibold text-gray-800 mb-4">Senior Thesis Project</h2>
+            <h2 className="text-2xl font-semibold mb-4" style={{ color: 'var(--text-primary)' }}>Senior Thesis Project</h2>
             <div className="bg-white rounded-lg p-6">
               <h3 className="text-xl font-medium text-gray-800 mb-3 ">
                 &ldquo;Determination of Driver&lsquo;s Alertness Based on Eye State with Edge Computing&rdquo;
@@ -94,7 +100,7 @@ export default function AboutSchool() {
 
           {/* Key Coursework */}
           <div className="mb-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4">Key Coursework</h2>
+            <h2 className="text-2xl font-semibold mb-4" style={{ color: 'var(--text-primary)' }}>Key Coursework</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="bg-white rounded-lg p-6">
                 <h3 className="font-semibold text-gray-900 mb-3">Core Computer Engineering</h3>
@@ -124,7 +130,7 @@ export default function AboutSchool() {
 
           {/* Academic Specialization */}
           <div className="mb-8">
-            <h2 className="text-2xl font-semibold text-blue-900 mb-4">Academic Specialization</h2>
+            <h2 className="text-2xl font-semibold mb-4" style={{ color: 'var(--text-primary)' }}>Academic Specialization</h2>
             <div className="bg-blue-50 rounded-lg p-6">
               <h3 className="text-xl font-medium text-gray-800 mb-3">
                 .NET5 Fullstack Technology Focus
@@ -135,7 +141,7 @@ export default function AboutSchool() {
               </p>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div className="bg-white p-4 rounded border">
-                  <h4 className="font-medium text-blue-600 mb-2">Frontend</h4>
+                  <h4 className="font-medium text-blue-900 mb-2">Frontend</h4>
                   <ul className="text-sm text-gray-700 space-y-1">
                     <li>• ASP.NET Core MVC</li>
                     <li>• Razor Pages</li>
@@ -144,7 +150,7 @@ export default function AboutSchool() {
                   </ul>
                 </div>
                 <div className="bg-white p-4 rounded border">
-                  <h4 className="font-medium text-blue-600 mb-2">Backend</h4>
+                  <h4 className="font-medium text-blue-900 mb-2">Backend</h4>
                   <ul className="text-sm text-gray-700 space-y-1">
                     <li>• C# Programming</li>
                     <li>• ASP.NET Core Web API</li>
@@ -153,7 +159,7 @@ export default function AboutSchool() {
                   </ul>
                 </div>
                 <div className="bg-white p-4 rounded border">
-                  <h4 className="font-medium text-blue-600 mb-2">Tools & Deployment</h4>
+                  <h4 className="font-medium text-blue-900 mb-2">Tools & Deployment</h4>
                   <ul className="text-sm text-gray-700 space-y-1">
                     <li>• Visual Studio</li>
                     <li>• Azure DevOps</li>
@@ -199,6 +205,6 @@ export default function AboutSchool() {
           </div>
         </div>
       </div>
-    </div>
+    </div >
   );
 }

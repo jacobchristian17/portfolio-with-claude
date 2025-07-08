@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import messageReducer from './messageSlice';
+import themeReducer from './themeSlice';
 
 export const store = configureStore({
   reducer: {
     messages: messageReducer,
+    theme: themeReducer
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
