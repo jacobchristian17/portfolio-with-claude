@@ -6,10 +6,8 @@ import { hero1, hero1Shadow } from "../assets/bg-images";
 const SPEED = 0.5;
 const DIRECTION = -1;
 const XOFFSET = 300;
-interface HeroImageProps {
-    shadow?: boolean;
-}
-export default function HeroImage({ shadow }: HeroImageProps) {
+
+export default function HeroImage() {
     let isDarkMode = false
     if (typeof window !== "undefined") {
         isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches

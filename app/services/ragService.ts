@@ -144,7 +144,7 @@ class RAGService {
         metadata: {
           title: 'Hobbies, Interests, and Values',
           category: 'about_me',
-          tags: ['hobbies',],
+          tags: ['hobbies','interests','values'],
           source: 'Personal Statement'
         }
       },
@@ -154,7 +154,7 @@ class RAGService {
         metadata: {
           title: 'Personal Background',
           category: 'about_me',
-          tags: ['location', 'home', ''],
+          tags: ['location', 'home', 'work location'],
           source: 'Personal Bio'
         }
       },
@@ -165,6 +165,16 @@ class RAGService {
           title: 'Personal Profile',
           category: 'about_me',
           tags: ['information', 'profile', 'personal', 'publisher'],
+          source: 'Personal Profile'
+        }
+      },
+      {
+        id: 'about-4',
+        content: "This AI Assistant is named after Jacob's partner of 9 years. They love to travel to different places",
+        metadata: {
+          title: 'AI Chatbot',
+          category: 'about_me',
+          tags: ['francesca','ai assistant','assistant name'],
           source: 'Personal Profile'
         }
       },
