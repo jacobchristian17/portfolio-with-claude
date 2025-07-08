@@ -7,7 +7,7 @@ const links = [
   { href: "/", label: "Home", icon: "🏠" },
   { href: "/about-work", label: "Work Experience", icon: "💼" },
   { href: "/about-school", label: "Education", icon: "🎓" },
-  { href: "/about-me", label: "About Me", icon: "🥷🏻" },
+  { href: "/about-me", label: "🥷🏻 About Me", icon: "🥷🏻" },
 ];
 
 export default function Navbar() {
@@ -58,7 +58,7 @@ export default function Navbar() {
                   }`}
                   style={pathname !== link.href ? { color: 'var(--text-primary)' } : {}}
                 >
-                  <span className="text-lg">{link.icon}</span>
+                  {/* <span className="text-lg">{link.icon}</span> */}
                   <span className="font-medium">{link.label}</span>
                 </Link>
               </li>

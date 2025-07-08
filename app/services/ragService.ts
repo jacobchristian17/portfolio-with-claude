@@ -86,7 +86,7 @@ class RAGService {
       },
       {
         id: 'work-6',
-        content: 'Currently using Generative and Agentic AI tools for augmented development, by using prompt engineering, to ship new features faster, to deliver maintainable and scalable code, and to improve overall software engineering and critical thinking skills. Generative AI tools include OpenAI, Groq. Agentic AI tools include Claude Code. Improving myself to be an AI-First Software Developer that can ship features faster, tackle more complex task, and solve better problems with accuracy without compromising scalability of the code and the products being delivered',
+        content: 'Currently using Generative and Agentic AI tools for augmented development. By making use of prompt engineering to get the most out of the LLM, his goal is to get more accurate and predictable responses to the model. This enables him to ship features more faster withought compromising the quality of the code, and to improve overall software engineering and critical thinking skills. Generative AI tools include OpenAI, Groq. Agentic AI tools include Claude Code. Improving myself to be an AI-First Software Developer that can ship features faster, tackle more complex task, and solve better problems with accuracy without compromising scalability of the code and the products being delivered',
         metadata: {
           title: 'Improved Skillset',
           category: 'work',

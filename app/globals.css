@@ -111,9 +111,10 @@ body {
   box-shadow: 0 8px 32px rgba(30, 64, 175, 0.15);
   transition: background 0.3s ease, border 0.3s ease;
 }
+
 .glass-card-royal:hover {
-   background: var(--gold-dark);
-   border: 1px solid var(--glass-border-royal);
+  background: var(--gold-dark);
+  border: 1px solid var(--glass-border-royal);
 }
 
 .glass-card-gold {
@@ -206,7 +207,7 @@ body {
 
 /* Gradient Text */
 .text-royal-gradient {
-  background: linear-gradient(135deg, var(--royal-blue), var(--gold));
+  background: linear-gradient(135deg, var(--royal-blue), var(--gold-light));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;

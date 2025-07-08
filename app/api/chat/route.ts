@@ -30,33 +30,58 @@ export async function POST(request: NextRequest) {
     if (ragEnabled && selectedIndexes.length > 0) {
       // Get RAG context
       const ragData = await ragService.generateRAGContext(message, selectedIndexes);
-      
+
       if (ragData.relevantDocuments.length > 0) {
         // Store RAG context for response
         ragContext = ragData;
         sources = ragData.relevantDocuments.map(result => result.document.metadata.title);
 
         // Create enhanced prompt with RAG context
-        const contextPrompt = `You are Jacob's AI assistant. Based on the following context from Jacob's portfolio, please provide a helpful and accurate response to the user's question.
+        const contextPrompt = `
+        ## ROLE
+        - You are Francesca, Jacob's AI assistant. You answer questions to users about Jacob, his work, school, and personal life
 
-Context Documents:
-${ragData.relevantDocuments.map(result => 
-  `[${result.document.metadata.category.toUpperCase()}] ${result.document.metadata.title}:
-${result.document.content}
-Relevance Score: ${(result.similarity * 100).toFixed(1)}%`
-).join('\n\n')}
+        ## CONTEXT
+        - Context Documents:
+        ${ragData.relevantDocuments.map(result =>
+          `[${result.document.metadata.category.toUpperCase()}] ${result.document.metadata.title}:
+        ${result.document.content}
+        Relevance Score: ${(result.similarity * 100).toFixed(1)}%`
+        ).join('\n\n')}
+        - User Question: ${message}
 
-User Question: ${message}
-
-Please provide a natural, conversational response based on the context above. If the context doesn't contain relevant information for the question, politely say so and offer to help with other topics from Jacob's portfolio.`;
+        ## ASK
+        - Based on the following context from Jacob's portfolio, provide a helpful and accurate response to the user's question.
+        
+        ## CONSTRAINTS
+        - Provide a natural, conversational response based on the context above.
+        - Be concise, give short, summarized answers only
+        - Only exceed 4 sentences when asked for more details
+        - Include a cheerful, yet witty personality on the first sentence
+        - Avoid creativity when going thru the details
+        - Do not include greetings
+        `;
 
         const llmResponse = await llmService.generateResponse(contextPrompt);
         responseContent = llmResponse.content;
       } else {
         // No relevant documents found
-        const noContextPrompt = `You are Jacob's AI assistant. The user asked: "${message}"
+        const noContextPrompt = `
+        ## ROLE
+        - You are Francesca, Jacob's AI assistant. You answer questions to users about Jacob, his work, school, and personal life
+        
+        ## CONTEXT
+        - The user asked: "${message}"
+        - You dont have specific documents to provide accurate answers to the user's question 
+        - Suggest asking about Jacob's work experience, education, or personal interests instead.
 
-I don't have specific information about that topic in Jacob's portfolio. Please politely explain that you don't have information about that specific topic, and suggest asking about Jacob's work experience, education, or personal interests instead.`;
+        ## CONSTRAINTS
+        - Provide a natural, conversational response based on the context above.
+        - Be concise, give short, summarized answers only
+        - Maximum of 3 sentences only
+        - Include a cheerful, yet witty personality
+        - Do not include greetings
+        `;
 
         const llmResponse = await llmService.generateResponse(noContextPrompt);
         responseContent = llmResponse.content;
@@ -88,28 +113,28 @@ Please provide a helpful response. If you don't have specific information about 
 
   } catch (error) {
     console.error('Chat API error:', error);
-    
+
     // Return different error messages based on error type
     if (error instanceof Error) {
       if (error.message.includes('API key')) {
-        return NextResponse.json({ 
-          error: 'LLM API key not configured. Please check your environment variables.' 
+        return NextResponse.json({
+          error: 'LLM API key not configured. Please check your environment variables.'
         }, { status: 500 });
       }
       if (error.message.includes('429') || error.message.includes('Too Many Requests')) {
-        return NextResponse.json({ 
-          error: 'Rate limit exceeded. Please wait a moment and try again, or switch to a different LLM provider.' 
+        return NextResponse.json({
+          error: 'Rate limit exceeded. Please wait a moment and try again, or switch to a different LLM provider.'
         }, { status: 429 });
       }
       if (error.message.includes('API error')) {
-        return NextResponse.json({ 
-          error: 'LLM API is currently unavailable. Please try again later.' 
+        return NextResponse.json({
+          error: 'LLM API is currently unavailable. Please try again later.'
         }, { status: 503 });
       }
     }
 
-    return NextResponse.json({ 
-      error: 'An unexpected error occurred. Please try again.' 
+    return NextResponse.json({
+      error: 'An unexpected error occurred. Please try again.'
     }, { status: 500 });
   }
 }

@@ -28,24 +28,24 @@ export default function RAGControls() {
 
       <div className="space-y-4">
         <div className="space-y-3">
-          <label className="glass-card-royal p-4 rounded-xl flex items-center hover-lift cursor-pointer transition-all duration-300">
+          <label className="glass-card-gold p-4 rounded-xl flex items-center cursor-pointer transition-all duration-300">
             <input
               type="checkbox"
               checked={ragSettings.selectedIndexes.includes('work')}
               onChange={() => handleToggleIndex('work')}
-              className="mr-4 accent-blue-600 w-4 h-4"
+              className="mr-4 accent-amber-600 w-4 h-4"
             />
             <div className="flex-1">
               <div className="flex items-center justify-between">
                 <span className="font-semibold" style={{ color: 'var(--text-primary)' }}>💼 Work Experience</span>
-                <span className="text-xs bg-royal-gradient text-white px-2 py-1 rounded-full">
+                <span className="text-xs bg-gold-gradient px-2 py-1 rounded-full" style={{color: "var(--text-card-primary)"}}>
                   {indexStats.work} docs
                 </span>
               </div>
             </div>
           </label>
 
-          <label className="glass-card-gold p-4 rounded-xl flex items-center hover-lift cursor-pointer transition-all duration-300">
+          <label className="glass-card-gold p-4 rounded-xl flex items-center cursor-pointer transition-all duration-300">
             <input
               type="checkbox"
               checked={ragSettings.selectedIndexes.includes('school')}
@@ -55,24 +55,24 @@ export default function RAGControls() {
             <div className="flex-1">
               <div className="flex items-center justify-between">
                 <span className="font-semibold" style={{ color: 'var(--text-primary)' }}>🎓 Education</span>
-                <span className="text-xs bg-gold-gradient text-white px-2 py-1 rounded-full">
+                <span className="text-xs bg-gold-gradient px-2 py-1 rounded-full" style={{color: "var(--text-card-primary)"}}>
                   {indexStats.school} docs
                 </span>
               </div>
             </div>
           </label>
 
-          <label className="glass-card-royal p-4 rounded-xl flex items-center hover-lift cursor-pointer transition-all duration-300">
+          <label className="glass-card-gold p-4 rounded-xl flex items-center cursor-pointer transition-all duration-300">
             <input
               type="checkbox"
               checked={ragSettings.selectedIndexes.includes('about_me')}
               onChange={() => handleToggleIndex('about_me')}
-              className="mr-4 accent-blue-600 w-4 h-4"
+              className="mr-4 accent-amber-600 w-4 h-4"
             />
             <div className="flex-1">
               <div className="flex items-center justify-between">
                 <span className="font-semibold" style={{ color: 'var(--text-primary)' }}>🥷🏻 Personal Info</span>
-                <span className="text-xs bg-royal-gradient text-white px-2 py-1 rounded-full">
+                <span className="text-xs bg-gold-gradient px-2 py-1 rounded-full" style={{color: "var(--text-card-primary)"}}>
                   {indexStats.about_me} docs
                 </span>
               </div>

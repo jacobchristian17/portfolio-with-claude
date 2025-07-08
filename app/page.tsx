@@ -8,6 +8,7 @@ import { addMessage, setLoading } from "./store/messageSlice";
 import type { Message } from "./store/messageSlice";
 import { useAppSelector } from "./store/hooks";
 import { ragService } from "./services/ragService";
+import HeroImage from "./components/HeroImage";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -149,6 +150,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen">
+      <HeroImage/>
       <div className="max-w-7xl mx-auto px-6 py-8">
         {/* Hero Section */}
         <div className="text-center mb-12">
@@ -161,8 +163,8 @@ export default function Home() {
             Full-Stack Developer & AI Enthusiast
           </p>
           <p className="text-lg max-w-3xl mx-auto leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-            Discover my professional journey through an AI-powered experience. Ask me anything about my work,
-            education, or personal interests using the intelligent chatbot below.
+            Discover my professional journey through an AI-powered experience. Explore my work,
+            education, or personal interests with <strong>Francesca</strong>, my lovely AI Assistant
           </p>
         </div>
 
@@ -215,6 +217,8 @@ export default function Home() {
 
       <TechCarousel title="⚙️ Tech Stack" techItems={techStack} subtitle="Professional experience with the following tools and frameworks:" />
 
+
+      <div className="section-divider"></div>
       <div className="max-w-7xl mx-auto px-6">
 
         {/* Quick Navigation */}
