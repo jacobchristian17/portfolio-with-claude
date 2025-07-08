@@ -150,7 +150,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen">
-      <HeroImage/>
+      <HeroImage />
       <div className="max-w-7xl mx-auto px-6 py-8">
         {/* Hero Section */}
         <div className="text-center mb-12">
@@ -210,15 +210,17 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="section-divider"></div>
 
         {/* Technology Carousel Section */}
       </div>
 
+      <div className="section-divider relative z-1"></div>
+
       <TechCarousel title="⚙️ Tech Stack" techItems={techStack} subtitle="Professional experience with the following tools and frameworks:" />
 
 
-      <div className="section-divider"></div>
+      <div className="section-divider relative z-1"></div>
+
       <div className="max-w-7xl mx-auto px-6">
 
         {/* Quick Navigation */}

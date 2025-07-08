@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/Navbar";
 import StoreProvider from "./store/StoreProvider";
+import FloatingThemeToggle from "./assets/theme-logo";
 
 export const metadata: Metadata = {
   title: "Jacob's Space",
@@ -20,6 +21,7 @@ export default function RootLayout({
         <StoreProvider>
           <Navbar />
           <main className="pt-24">{children}</main>
+          <FloatingThemeToggle />
         </StoreProvider>
       </body>
     </html>

@@ -27,7 +27,7 @@ export default function HeroImage() {
 
     return (
         <div
-            className="fixed right-0 bottom-0 w-full aspect-[16/9]">
+            className="fixed right-0 bottom-0 w-full aspect-[16/9] z-0">
             <Image
                 src={image.img}
                 alt={image.alt}
