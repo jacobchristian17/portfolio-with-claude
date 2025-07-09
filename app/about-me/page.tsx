@@ -13,19 +13,19 @@ export default function AboutMe() {
       <HeroImage />
       <div className="max-w-4xl mx-auto backdrop-blur-[1px] relative z-3">
         <div className={"glass-card rounded-lg shadow-lg p-8"}>
-          <h1 className="text-3xl font-bold mb-6" style={{color: 'var(--text-primary)'}}>About Me</h1>
+          <h1 className="text-3xl font-bold mb-6" style={{ color: 'var(--text-primary)' }}>About Me</h1>
 
           {/* Personal Introduction */}
-          <div className="mb-8 border-l-4 pl-6" style={{borderColor: 'var(--text-secondary)'}}>
-            <h2 className="text-2xl font-semibold mb-4" style={{color: 'var(--text-secondary)'}}>
+          <div className="mb-8 border-l-4 pl-6" style={{ borderColor: 'var(--text-secondary)' }}>
+            <h2 className="text-2xl font-semibold mb-4" style={{ color: 'var(--text-secondary)' }}>
               Meet Jacob 🥷🏻
             </h2>
             <div className="bg-blue-50 rounded-lg p-6">
-              <p className="text-gray-700 leading-relaxed mb-4">
+              <p className="leading-relaxed mb-4" style={{ color: 'var(--text-card-primary)' }}>
                 I&rsquo;m Jacob, the developer and publisher of this website/web application. I&rsquo;m currently 27 years old
                 and passionate about creating innovative solutions that make a positive impact through code.
               </p>
-              <p className="text-gray-700 leading-relaxed">
+              <p className="leading-relaxed" style={{ color: 'var(--text-card-primary)' }}>
                 I&rsquo;m always eager to learn new technologies and enjoy solving complex problems.
                 I treat code examples like puzzles - there&rsquo;s something deeply satisfying about finding
                 elegant solutions to challenging problems.
@@ -35,12 +35,12 @@ export default function AboutMe() {
 
           {/* Background & Origins */}
           <div className="mb-8">
-            <h2 className="text-2xl font-semibold mb-4" style={{borderColor: 'var(--text-secondary)'}}>Background & Journey</h2>
+            <h2 className="text-2xl font-semibold mb-4" style={{ borderColor: 'var(--text-secondary)' }}>Background & Journey</h2>
             <div className="bg-gray-50 rounded-lg p-6">
               <div className="space-y-4">
                 <div>
                   <h3 className="text-xl font-medium text-gray-800 mb-2">Origins</h3>
-                  <p className="text-gray-700 leading-relaxed">
+                  <p className="leading-relaxed" style={{ color: 'var(--text-card-primary)' }}>
                     Originally from the City of Cabanatuan, Nueva Ecija, Philippines. My journey took me across
                     different countries and cities, each contributing to my diverse perspective and adaptability.
                   </p>
@@ -78,15 +78,15 @@ export default function AboutMe() {
 
           {/* Hobbies & Interests */}
           <div className="mb-8">
-            <h2 className="text-2xl font-semibold mb-4" style={{borderColor: 'var(--text-secondary)'}}>Hobbies & Interests</h2>
+            <h2 className="text-2xl font-semibold mb-4" style={{ borderColor: 'var(--text-secondary)' }}>Hobbies & Interests</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="bg-blue-50 rounded-lg p-6">
                 <h3 className="font-semibold text-blue-800 mb-3">🎮 Gaming</h3>
-                <p className="text-gray-700 leading-relaxed mb-3">
+                <p className="leading-relaxed mb-3" style={{ color: 'var(--text-card-primary)' }}>
                   I enjoy playing video games that involve planning and team coordination like Dota2 and Valorant.
                   These games help me develop strategic thinking and collaboration skills.
                 </p>
-                <p className="text-gray-700 leading-relaxed">
+                <p className="leading-relaxed" style={{ color: 'var(--text-card-primary)' }}>
                   I also enjoy single-player games like Tetris and puzzles, which complement my love for
                   problem-solving in programming.
                 </p>
@@ -94,11 +94,11 @@ export default function AboutMe() {
 
               <div className="bg-blue-50 rounded-lg p-6">
                 <h3 className="font-semibold text-blue-800 mb-3">🏖️ Travel & Photography</h3>
-                <p className="text-gray-700 leading-relaxed mb-3">
+                <p className="leading-relaxed mb-3" style={{ color: 'var(--text-card-primary)' }}>
                   Outside of work, I love going to beaches and exploring different places with my significant other.
                   There&rsquo;s something refreshing about discovering new locations and cultures.
                 </p>
-                <p className="text-gray-700 leading-relaxed">
+                <p className="leading-relaxed" style={{ color: 'var(--text-card-primary)' }}>
                   Photography allows me to capture these moments and see the world from different perspectives,
                   much like how I approach coding challenges.
                 </p>
@@ -108,12 +108,12 @@ export default function AboutMe() {
 
           {/* Personal Philosophy */}
           <div className="mb-8">
-            <h2 className="text-2xl font-semibold text mb-4" style={{borderColor: 'var(--text-secondary)'}}>Personal Philosophy</h2>
+            <h2 className="text-2xl font-semibold text mb-4" style={{ borderColor: 'var(--text-secondary)' }}>Personal Philosophy</h2>
             <div className="bg-yellow-50 rounded-lg p-6">
               <div className="space-y-4">
                 <div className="border-l-4 border-yellow-400 pl-4">
                   <h4 className="font-semibold text-gray-800 mb-2">🧩 Problem-Solving Mindset</h4>
-                  <p className="text-gray-700 leading-relaxed">
+                  <p className="leading-relaxed" style={{ color: 'var(--text-card-primary)' }}>
                     I treat code examples like puzzles - each challenge is an opportunity to learn and grow.
                     This mindset drives my continuous pursuit of elegant and efficient solutions.
                   </p>
@@ -121,7 +121,7 @@ export default function AboutMe() {
 
                 <div className="border-l-4 border-yellow-400 pl-4">
                   <h4 className="font-semibold text-gray-800 mb-2">🚀 Innovation & Impact</h4>
-                  <p className="text-gray-700 leading-relaxed">
+                  <p className="leading-relaxed" style={{ color: 'var(--text-card-primary)' }}>
                     I&rsquo;m passionate about creating innovative solutions that make a positive impact.
                     Whether it&rsquo;s improving user experience or solving complex technical challenges,
                     I aim to contribute meaningfully to every project.
@@ -130,7 +130,7 @@ export default function AboutMe() {
 
                 <div className="border-l-4 border-yellow-400 pl-4">
                   <h4 className="font-semibold text-gray-800 mb-2">📚 Continuous Learning</h4>
-                  <p className="text-gray-700 leading-relaxed">
+                  <p className="leading-relaxed" style={{ color: 'var(--text-card-primary)' }}>
                     I&rsquo;m always eager to learn new technologies and stay current with industry trends.
                     The field of technology evolves rapidly, and I embrace this constant evolution as
                     an opportunity for growth.
@@ -142,37 +142,37 @@ export default function AboutMe() {
 
           {/* Fun Facts */}
           <div className="mb-8">
-            <h2 className="text-2xl font-semibold mb-4" style={{borderColor: 'var(--text-secondary)'}}>Fun Facts</h2>
+            <h2 className="text-2xl font-semibold mb-4" style={{ borderColor: 'var(--text-secondary)' }}>Fun Facts</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               <div className="bg-blue-50 p-4 rounded-lg text-center">
                 <div className="text-2xl mb-2">🎯</div>
                 <h4 className="font-semibold text-blue-800 mb-1">Strategic Gamer</h4>
-                <p className="text-sm text-gray-700">Dota2 & Valorant player</p>
+                <p className="text-sm" style={{ color: 'var(--text-card-primary)' }}>Dota2 & Valorant player</p>
               </div>
 
               <div className="bg-blue-50 p-4 rounded-lg text-center">
                 <div className="text-2xl mb-2">🧩</div>
                 <h4 className="font-semibold text-blue-800 mb-1">Puzzle Lover</h4>
-                <p className="text-sm text-gray-700">Tetris & logic puzzles</p>
+                <p className="text-sm" style={{ color: 'var(--text-card-primary)' }}>Tetris & logic puzzles</p>
               </div>
 
               <div className="bg-blue-50 p-4 rounded-lg text-center">
                 <div className="text-2xl mb-2">📸</div>
                 <h4 className="font-semibold text-blue-800 mb-1">Photography</h4>
-                <p className="text-sm text-gray-700">Capturing moments & places</p>
+                <p className="text-sm" style={{ color: 'var(--text-card-primary)' }}>Capturing moments & places</p>
               </div>
 
               <div className="bg-blue-50 p-4 rounded-lg text-center">
                 <div className="text-2xl mb-2">🌍</div>
                 <h4 className="font-semibold text-blue-800 mb-1">Traveler</h4>
-                <p className="text-sm text-gray-700">Beach lover & explorer</p>
+                <p className="text-sm" style={{ color: 'var(--text-card-primary)' }}>Beach lover & explorer</p>
               </div>
 
 
               <div className="bg-blue-50 p-4 rounded-lg text-center">
                 <div className="text-2xl mb-2">💻</div>
                 <h4 className="font-semibold text-blue-800 mb-1">Creator</h4>
-                <p className="text-sm text-gray-700">Built this portfolio!</p>
+                <p className="text-sm" style={{ color: 'var(--text-card-primary)' }}>Built this portfolio!</p>
               </div>
             </div>
           </div>
@@ -180,11 +180,11 @@ export default function AboutMe() {
           {/* Contact & Connect */}
           <div className="bg-gray-50 rounded-lg p-6">
             <h2 className="text-2xl font-semibold text-gray-800 mb-4">Other notes</h2>
-            <p className="text-gray-700 leading-relaxed mb-4">
+            <p className="leading-relaxed mb-4" style={{ color: 'var(--text-card-primary)' }}>
               I&rsquo;m always open to discussing new opportunities, collaborating on interesting projects,
               or simply connecting with fellow developers and tech enthusiasts.
             </p>
-            <p className="text-gray-700 leading-relaxed">
+            <p className="leading-relaxed" style={{ color: 'var(--text-card-primary)' }}>
               Feel free to explore my work, which will be published publicly on Github! You can know more about my experience and education through the menu or you can ask 🤖 Francesca yourself!
             </p>
           </div>
