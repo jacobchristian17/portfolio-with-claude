@@ -209,7 +209,7 @@ export default function Home() {
         </div>
 
         {/* Chatbot Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8" ref={chatBotRef}>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8  relative z-3" ref={chatBotRef}>
           {/* Main Chatbot */}
           <div className="lg:col-span-2">
             <div className="glass-card rounded-2xl p-2 hover-lift">
@@ -261,7 +261,7 @@ export default function Home() {
 
       <div className="section-divider relative z-3 mb-24"></div>
 
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-6 relative z-3">
 
         {/* Quick Navigation */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

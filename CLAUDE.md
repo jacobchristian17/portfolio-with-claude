@@ -36,3 +36,6 @@ The application uses a persistent navigation bar with route-based active states 
 - TypeScript path aliases configured with `@/*` pointing to root
 - Turbopack enabled for faster development builds
 - All pages currently have placeholder content and need implementation
+
+### Repository:
+- Format the commit with `[Feature] - Changelog`

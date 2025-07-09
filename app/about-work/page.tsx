@@ -1,9 +1,12 @@
+"use client";
 import HeroImage from "../components/HeroImage"
+import PDFViewer from "../components/PDFViewer"
+import FloatingPDFButton from "../components/FloatingPDFButton"
 
 export default function AboutWork() {
   return (
     <div className="min-h-screen p-6" style={{ background: 'linear-gradient(135deg, var(--warm-gray) 0%, var(--cream) 100%)' }}>
-      <HeroImage/>
+      <HeroImage />
       <div className="max-w-4xl mx-auto backdrop-blur-[1px] relative z-3">
         <div className="glass-card rounded-lg shadow-lg p-8">
           <h1 className="text-3xl font-bold mb-6" style={{ color: 'var(--text-primary)' }}>Work Experience</h1>
@@ -155,7 +158,7 @@ export default function AboutWork() {
           </div>
 
           {/* Professional Journey Summary */}
-          <div className="bg-gray-50 rounded-lg p-6">
+          <div className="bg-gray-50 rounded-lg p-6 mb-8">
             <h2 className="text-2xl font-semibold mb-4" style={{ color: 'var(--text-card-primary)' }}>Professional Journey</h2>
             <p className="leading-relaxed mb-4" style={{ color: 'var(--text-card-primary)' }}>
               From freelance beginnings to Fortune 500 companies, my career has been driven by continuous learning
@@ -168,8 +171,19 @@ export default function AboutWork() {
               technology while maintaining strong collaborative relationships with colleagues and stakeholders.
             </p>
           </div>
+
+          {/* Resume PDF Viewer */}
+          <div className="mb-8">
+            <PDFViewer
+              id="pdf-viewer"
+              pdfUrl="/resume.pdf"
+              title="Jacob's Resume"
+              className=""
+            />
+          </div>
         </div>
       </div>
+      <FloatingPDFButton targetId="pdf-viewer" />
     </div>
   );
 }

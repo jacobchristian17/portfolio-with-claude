@@ -5,7 +5,7 @@ import { hero1, hero1Shadow } from "../assets/bg-images";
 import { useAppSelector } from "../store/hooks";
 
 const SPEED = 0.05;
-const MOBILE_SPEED = 0.5;
+const MOBILE_SPEED = 0.01;
 const DIRECTION = 1;
 
 export default function HeroImage() {
@@ -42,7 +42,7 @@ export default function HeroImage() {
                 priority
                 className={`object-contain ${isMobile ? "object-bottom" : "translate-x-[40vw]"
                     }`}
-                style={!isMobile ? { transform: `translateY(${currentSpeed + 100}px)` } : { transform: `translateY(${currentSpeed + 150}px)` }}
+                style={!isMobile ? { transform: `translateY(${currentSpeed + 100}px)` } : { transform: `translateY(${currentSpeed + 10}vw)` }}
             />}
             {!isDarkMode && <Image
                 src={hero1Shadow.img}
@@ -51,7 +51,7 @@ export default function HeroImage() {
                 priority
                 className={`object-contain ${isMobile ? "object-bottom" : "translate-x-[40vw]"
                     }`}
-                style={!isMobile ? { transform: `translateY(${currentSpeed + 100}px)` } : { transform: `translateY(${currentSpeed + 150}px)` }}
+                style={!isMobile ? { transform: `translateY(${currentSpeed + 100}px)` } : { transform: `translateY(${currentSpeed + 10}vw)` }}
             />}
         </div>
     )

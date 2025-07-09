@@ -21,7 +21,7 @@ export default function TechCarousel({
   className = ""
 }: TechCarouselProps) {
   return (
-    <div className={`w-full overflow-hidden backdrop-blur-sm py-6 ${className}`} style={{ backgroundColor: 'var(--carousel-bg)' }}>
+    <div className={`w-full overflow-hidden backdrop-blur-sm py-6 relative z-3 ${className}`} style={{ backgroundColor: 'var(--carousel-bg)' }}>
       <div className="text-center mb-8">
         <h3 className="text-2xl font-bold text-royal-gradient">{title}</h3>
         {subtitle && (
