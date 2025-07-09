@@ -48,24 +48,24 @@ export default function AboutMe() {
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div className="bg-white p-4 rounded border">
-                    <h4 className="font-semibold text-gray-600 mb-2">🏠 Hometown</h4>
-                    <p className="text-sm text-gray-700">
+                    <h4 className="font-semibold mb-2"style={{ color: 'var(--text-card-primary)' }}>🏠 Hometown</h4>
+                    <p className="text-sm" style={{ color: 'var(--text-card-secondary)' }}>
                       Cabanatuan, Nueva Ecija
                       <br />
                       <span className="text-gray-500">Where it all began</span>
                     </p>
                   </div>
                   <div className="bg-white p-4 rounded border">
-                    <h4 className="font-semibold text-gray-600 mb-2">🎓 High School</h4>
-                    <p className="text-sm text-gray-700">
+                    <h4 className="font-semibold mb-2"style={{ color: 'var(--text-card-primary)' }}>🎓 High School</h4>
+                    <p className="text-sm" style={{ color: 'var(--text-card-secondary)' }}>
                       Kuwait
                       <br />
                       <span className="text-gray-500">Junior & Senior years</span>
                     </p>
                   </div>
                   <div className="bg-white p-4 rounded border">
-                    <h4 className="font-semibold text-gray-600 mb-2">🏛️ University</h4>
-                    <p className="text-sm text-gray-700">
+                    <h4 className="font-semibold mb-2"style={{ color: 'var(--text-card-primary)' }}>🏛️ University</h4>
+                    <p className="text-sm" style={{ color: 'var(--text-card-secondary)' }}>
                       Mandaluyong, Manila
                       <br />
                       <span className="text-gray-500">Mapua University</span>
