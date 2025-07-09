@@ -8,12 +8,12 @@ export default function AboutWork() {
     <div className="min-h-screen p-6" style={{ background: 'linear-gradient(135deg, var(--warm-gray) 0%, var(--cream) 100%)' }}>
       <HeroImage />
       <div className="max-w-4xl mx-auto backdrop-blur-[1px] relative z-3">
-        <div className="glass-card rounded-lg shadow-lg p-8">
+        <div className="glass-card rounded-lg shadow-lg md:p-8 max-sm:p-4">
           <h1 className="text-3xl font-bold mb-6" style={{ color: 'var(--text-primary)' }}>Work Experience</h1>
 
           {/* Current Position */}
-          <div className="mb-8 border-l-4 border-yellow-500 pl-6">
-            <h2 className="text-2xl font-semibold text-yellow-600 mb-4">
+          <div className="mb-8 border-l-4 border-yellow-500 pl-2 md:pl-6">
+            <h2 className="text-2xl font-semibold text-yellow-600 mb-1 md:mb-4">
               Current Position
             </h2>
             <div className="bg-blue-50 rounded-lg p-6">
