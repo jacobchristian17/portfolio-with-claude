@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { addMessage, setLoading, clearMessages } from "../store/messageSlice";
 import type { Message } from "../store/messageSlice";
 import { ragService } from "../services/ragService";
+import ArtSpaceship from "../assets/ascii/ArtSpaceship";
 
 interface ChatBotProps {
   onMessage?: (message: string) => Promise<{ content: string; sources?: string[] }>;
@@ -270,7 +271,7 @@ Please provide a helpful response based on the context above.`;
       <div className="bg-royal-gradient text-white p-4 rounded-t-2xl flex justify-between items-center">
         <div>
           <h3 className="text-lg font-semibold">🤖 Ask Francesca!</h3>
-          <p className="text-sm text-blue-100">
+          <p className="text-sm text-blue-100 max-sm:text-xs">
             She knows a thing or two about Jacob
           </p>
         </div>
@@ -291,16 +292,18 @@ Please provide a helpful response based on the context above.`;
         ref={messagesContainerRef}
         className="flex-1 overflow-y-auto p-4 space-y-4 scroll-smooth"
       >
-        {messages.length === 0 && (
+        {messages.length === 0 ? (
           <div className="text-center text-gray-500 text-sm">
-            Start a conversation by typing a message below
+            Reveal a secret ASCII art by starting the conversation!
           </div>
+        ) : (
+          <ArtSpaceship />
         )}
 
         {messages.map((message) => (
           <div
             key={message.id}
-            className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}
+            className={`flex sticky z-2 ${message.role === "user" ? "justify-end" : "justify-start"}`}
           >
             <div
               className={`max-w-xs lg:max-w-md px-4 py-2 rounded-lg ${message.role === "user"
@@ -356,9 +359,9 @@ Please provide a helpful response based on the context above.`;
                     <ul className="list-disc list-inside mt-1 pl-4">
                       {message.ragContext.relevantDocuments.map((doc, index) => (
                         <li key={index}>
-                          <span className="font-normal" style={{ color: isDarkMode? 'var(--gold-light)': 'var(--text-secondary)' }}>[{doc.category}] </span>
-                          <span className="font-bold" style={{ color: isDarkMode? 'var(--gold-light)': 'var(--text-secondary)' }}>{doc.title} </span>
-                          <span style={{ color: isDarkMode? 'var(--gold-light)': 'var(--text-secondary)' }}> - {Math.round(doc.similarity * 100)}% match</span>
+                          <span className="font-normal" style={{ color: isDarkMode ? 'var(--gold-light)' : 'var(--text-secondary)' }}>[{doc.category}] </span>
+                          <span className="font-bold" style={{ color: isDarkMode ? 'var(--gold-light)' : 'var(--text-secondary)' }}>{doc.title} </span>
+                          <span style={{ color: isDarkMode ? 'var(--gold-light)' : 'var(--text-secondary)' }}> - {Math.round(doc.similarity * 100)}% match</span>
                         </li>
                       ))}
                     </ul>
@@ -398,13 +401,22 @@ Please provide a helpful response based on the context above.`;
             className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             disabled={isLoading}
           />
+          {/* <button
+            type="submit"
+            disabled={isLoading || !input.trim()}
+            className="btn-royal disabled:opacity-50 disabled:cursor-not-allowed px-3 text-[2.5rem]"
+          >
+
+          </button> */}
           <button
             type="submit"
             disabled={isLoading || !input.trim()}
-            className="btn-royal disabled:opacity-50 disabled:cursor-not-allowed"
+            className="btn-royal disabled:opacity-50 disabled:cursor-not-allowed px-4 py-2 max-sm:px-2"
           >
-            Send
+            <span className="hidden md:inline">Send</span>
+            <span className="hidden max-sm:inline">➥</span>
           </button>
+
         </div>
       </form>
     </div>

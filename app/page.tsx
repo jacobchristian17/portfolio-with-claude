@@ -270,12 +270,12 @@ export default function Home() {
               <div className="text-4xl mb-4">💼</div>
               <h3 className="text-2xl font-bold text-royal-gradient mb-4">Work Experience</h3>
             </div>
-            <p className="mb-6 leading-relaxed italic" style={{ color: 'var(--text-card-secondary)' }}>
+            <p className="mb-6 leading-relaxed italic" style={{ color: 'var(--text-secondary)' }}>
               Explore my professional journey from small business clients to Fortune 500 companies featuring cutting-edge technologies and AI-first development.
             </p>
             <a
               href="/about-work"
-              className="btn-royal w-full text-center block"
+              className="btn-royal w-full text-center block py-3"
             >
               Explore Journey →
             </a>
@@ -286,13 +286,13 @@ export default function Home() {
               <div className="text-4xl mb-4">🎓</div>
               <h3 className="text-2xl font-bold text-royal-gradient mb-4">Education</h3>
             </div>
-            <p className="mb-6 leading-relaxed italic" style={{ color: 'var(--text-card-secondary)' }}>
+            <p className="mb-6 leading-relaxed italic" style={{ color: 'var(--text-secondary)' }}>
               Discover my Computer Engineering degree and AI research projects, including
               edge computing and neural network implementations.
             </p>
             <a
               href="/about-school"
-              className="btn-royal w-full text-center block"
+              className="btn-royal w-full text-center block py-3"
             >
               View Studies →
             </a>
@@ -303,14 +303,14 @@ export default function Home() {
               <div className="text-4xl mb-4">🥷🏻</div>
               <h3 className="text-2xl font-bold text-royal-gradient mb-4">About Me</h3>
             </div>
-            <p className="mb-6 leading-relaxed italic" style={{ color: 'var(--text-card-secondary)' }}>
+            <p className="mb-6 leading-relaxed italic" style={{ color: 'var(--text-secondary)' }}>
               Get to know the person behind the code - my interests, philosophy,
-              and what drives my passion for creating innovative solutions.
+              and what drives my passion for my career as a software engineer in general.
 
             </p>
             <a
               href="/about-me"
-              className="btn-royal w-full text-center block"
+              className="btn-royal w-full text-center block py-3"
             >
               Meet Jacob →
             </a>
