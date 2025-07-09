@@ -14,7 +14,7 @@ interface TechCarouselProps {
   className?: string;
 }
 
-export default function TechCarousel({ 
+export default function TechCarousel({
   title,
   subtitle,
   techItems,
@@ -28,8 +28,8 @@ export default function TechCarousel({
           <p className="mt-2" style={{ color: 'var(--text-secondary)' }}>{subtitle}</p>
         )}
       </div>
-      
-      <div className="relative h-40 overflow-hidden">
+
+      <div className="relative h-40 overflow-hidden w-[200vw] max-sm:w-[800vw]">
         <div className="logo-carousel">
           <div className="logo-carousel-track">
             {/* First set of items */}
@@ -38,13 +38,13 @@ export default function TechCarousel({
                 key={`first-${index}`}
                 className="group flex flex-col items-center justify-center w-28 h-36 cursor-pointer"
               >
-                <div className="w-20 h-20 rounded-xl hover-lift transition-all duration-300 shadow-soft flex items-center justify-center mb-3">
+                <div className="w-20 h-20 rounded-xl hover-lift transition-all duration-300 flex items-center justify-center mb-3">
                   <Image
                     src={tech.logo}
                     alt={tech.alt}
                     width={64}
                     height={64}
-                    className="object-contain w-full h-full grayscale group-hover:grayscale-0 transition-all duration-300"
+                    className="object-contain w-full h-full lg:grayscale group-hover:grayscale-0 transition-all duration-300"
                     onError={(e) => {
                       // Fallback to text if image fails to load
                       const target = e.target as HTMLImageElement;
@@ -62,20 +62,20 @@ export default function TechCarousel({
                 </span>
               </div>
             ))}
-            
+
             {/* Duplicate set for seamless loop */}
             {techItems.map((tech, index) => (
               <div
-                key={`duplicate-${index}`}
+                key={`second-${index}`}
                 className="group flex flex-col items-center justify-center w-28 h-36 cursor-pointer"
               >
-                <div className="w-20 h-20 rounded-xl hover-lift transition-all duration-300 shadow-soft flex items-center justify-center mb-3">
+                <div className="w-20 h-20 rounded-xl hover-lift transition-all duration-300 flex items-center justify-center mb-3">
                   <Image
                     src={tech.logo}
                     alt={tech.alt}
                     width={64}
                     height={64}
-                    className="object-contain w-full h-full grayscale group-hover:grayscale-0 transition-all duration-300"
+                    className="object-contain w-full h-full lg:grayscale group-hover:grayscale-0 transition-all duration-300"
                     onError={(e) => {
                       // Fallback to text if image fails to load
                       const target = e.target as HTMLImageElement;

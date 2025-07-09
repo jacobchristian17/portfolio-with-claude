@@ -316,7 +316,7 @@ Please provide a helpful response based on the context above.`;
                 <div className="mt-2 text-xs opacity-75">
                   <button
                     onClick={() => toggleSources(message.id)}
-                    className="flex items-center gap-1 font-medium hover:opacity-100 transition-opacity"
+                    className="flex items-center gap-1 font-medium hover:opacity-100 transition-opacity cursor-pointer"
                     style={{ color: isDarkMode ? 'var(--gold-dark)' : 'var(--text-primary)' }}
                   >
                     <svg
@@ -342,7 +342,7 @@ Please provide a helpful response based on the context above.`;
                 <div className="mt-2 text-xs opacity-75">
                   <button
                     onClick={() => toggleContext(message.id)}
-                    className="flex items-center gap-1 font-medium hover:opacity-100 transition-opacity"
+                    className="flex items-center gap-1 font-medium hover:opacity-100 transition-opacity cursor-pointer"
                     style={{ color: isDarkMode ? 'var(--gold-dark)' : 'var(--text-primary)' }}
                   >
                     <svg

@@ -200,7 +200,7 @@ body {
 
 /* Logo Carousel Animation */
 .logo-carousel {
-  animation: scroll-left 40s linear infinite;
+  animation: scroll-left 25s linear infinite;
   display: flex;
   align-items: center;
 }
@@ -208,7 +208,7 @@ body {
 .logo-carousel-track {
   display: flex;
   align-items: center;
-  gap: 4rem;
+  gap: 2rem;
   min-width: 200%;
 }
 
@@ -219,6 +219,15 @@ body {
 
   100% {
     transform: translateX(-50%);
+  }
+}
+
+@media (width < 640px) {
+  .logo-carousel {
+    animation: scroll-left 8s linear infinite;
+  }
+  .logo-carousel-track {
+    gap: 1rem;
   }
 }
 
@@ -332,9 +341,9 @@ body {
   background: var(--gold);
   /* color: var(--) */
 }
-.airplane{
-  color: lightgray
+.spaceship{
+  color: var(--glass-border-royal)
 }
-.dark .airplane {
+.dark .spaceship {
   color: var(--glass-border-gold)
 }
