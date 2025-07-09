@@ -104,6 +104,10 @@ body {
   transition: background 0.3s ease, color 0.3s ease;
 }
 
+button {
+  cursor: pointer;
+}
+
 /* Custom Background Gradients */
 .bg-royal-gradient {
   background: linear-gradient(135deg, var(--royal-blue) 0%, var(--royal-blue-light) 100%);
