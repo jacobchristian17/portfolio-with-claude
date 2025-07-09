@@ -191,16 +191,16 @@ export default function Home() {
         <div className="mb-12 lg:hidden relative z-3">
           <div className="glass-card rounded-2xl p-8 hover-glow">
             <h3 className="font-bold mb-8 text-royal-gradient text-2xl text-center">✨ Try These Questions</h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="glass-card-royal p-6 rounded-xl text-center font-medium hover-lift cursor-pointer transition-all duration-300" onClick={() => handleSubmit(0)}>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+              <div className="glass-card-royal px-6 py-3 rounded-xl text-center font-medium hover-lift cursor-pointer transition-all duration-300" onClick={() => handleSubmit(0)}>
                 <div className="text-3xl mb-3">💼</div>
                 <div className="font-semibold" style={{ color: 'var(--text-primary)' }}>"What&rsquo;s Jacob&rsquo;s React experience?"</div>
               </div>
-              <div className="glass-card-royal p-6 rounded-xl text-center font-medium hover-lift cursor-pointer transition-all duration-300" onClick={() => handleSubmit(1)}>
+              <div className="glass-card-royal px-6 py-3 rounded-xl text-center font-medium hover-lift cursor-pointer transition-all duration-300" onClick={() => handleSubmit(1)}>
                 <div className="text-3xl mb-3">🎓</div>
                 <div className="font-semibold" style={{ color: 'var(--text-primary)' }}>"Tells me about his education"</div>
               </div>
-              <div className="glass-card-royal p-6 rounded-xl text-center font-medium hover-lift cursor-pointer transition-all duration-300" onClick={() => handleSubmit(2)}>
+              <div className="glass-card-royal px-6 py-3 rounded-xl text-center font-medium hover-lift cursor-pointer transition-all duration-300" onClick={() => handleSubmit(2)}>
                 <div className="text-3xl mb-3">🥷🏻</div>
                 <div className="font-semibold" style={{ color: 'var(--text-primary)' }}>"What are his hobbies?"</div>
               </div>
@@ -264,8 +264,8 @@ export default function Home() {
       <div className="max-w-7xl mx-auto px-6 relative z-3">
 
         {/* Quick Navigation */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="glass-card rounded-2xl p-8 hover-lift border-royal-gradient">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pb-40">
+          <div className="glass-card rounded-2xl p-4 lg:p-8 hover-lift border-royal-gradient">
             <div className="text-center mb-6">
               <div className="text-4xl mb-4">💼</div>
               <h3 className="text-2xl font-bold text-royal-gradient mb-4">Work Experience</h3>
@@ -281,7 +281,7 @@ export default function Home() {
             </a>
           </div>
 
-          <div className="glass-card rounded-2xl p-8 hover-lift border-royal-gradient">
+          <div className="glass-card rounded-2xl p-4 lg:p-8 hover-lift border-royal-gradient">
             <div className="text-center mb-6">
               <div className="text-4xl mb-4">🎓</div>
               <h3 className="text-2xl font-bold text-royal-gradient mb-4">Education</h3>
@@ -298,7 +298,7 @@ export default function Home() {
             </a>
           </div>
 
-          <div className="glass-card rounded-2xl p-8 hover-lift border-royal-gradient">
+          <div className="glass-card rounded-2xl p-4 lg:p-8 hover-lift border-royal-gradient">
             <div className="text-center mb-6">
               <div className="text-4xl mb-4">🥷🏻</div>
               <h3 className="text-2xl font-bold text-royal-gradient mb-4">About Me</h3>

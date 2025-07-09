@@ -20,7 +20,7 @@ export default function RootLayout({
       <body>
         <StoreProvider>
           <Navbar />
-          <main className="pt-24">{children}</main>
+          <main className="pt-24 pb-24">{children}</main>
           <FloatingThemeToggle />
         </StoreProvider>
       </body>

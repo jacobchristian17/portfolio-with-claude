@@ -276,9 +276,9 @@ Please provide a helpful response based on the context above.`;
         </div>
         <button
           onClick={handleClearMessages}
-          className="btn-gold text-sm px-3 py-1 cursor-pointer rounded-full flex items-center justify-center w-12 h-12 hover:text-red-500"
+          className="btn-gold text-sm px-3 py-1 cursor-pointer rounded-full flex items-center justify-center w-12 h-12 max-md:w-10 max-md:h-10 hover:text-yellow-500"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" height="1.5em" fill="currentColor" viewBox="0 0 512 512">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 512 512">
             <path
               d="M 167 18 L 160 32 L 167 18 L 160 32 L 64 32 L 64 32 Q 50 32 41 41 Q 32 50 32 64 Q 32 78 41 87 Q 50 96 64 96 L 448 96 L 448 96 Q 462 96 471 87 Q 480 78 480 64 Q 480 50 471 41 Q 462 32 448 32 L 352 32 L 352 32 L 345 18 L 345 18 Q 336 1 316 0 L 196 0 L 196 0 Q 176 1 167 18 L 167 18 Z M 448 128 L 64 128 L 448 128 L 64 128 L 85 467 L 85 467 Q 87 486 100 499 Q 114 512 133 512 L 379 512 L 379 512 Q 398 512 412 499 Q 425 486 427 467 L 448 128 L 448 128 Z"
             />

@@ -9,6 +9,7 @@ interface FloatingPDFButtonProps {
 export default function FloatingPDFButton({ targetId, className = "" }: FloatingPDFButtonProps) {
   const [isVisible, setIsVisible] = useState(true);
   const [isScrollingToPDF, setIsScrollingToPDF] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
     const pdfElement = document.getElementById(targetId);
@@ -66,13 +67,18 @@ export default function FloatingPDFButton({ targetId, className = "" }: Floating
   return (
     <button
       onClick={scrollToPDF}
-      className={`fixed top-30 right-4 z-50 flex items-center gap-2 px-4 py-3 rounded-full shadow-lg transition-all duration-1000 hover:scale-110 active:scale-95 cursor-pointer ${isScrollingToPDF ? 'animate-pulse' : ''
-        } bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-medium ${className}`}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      className={`fixed top-30 right-4 z-50 flex items-center justify-center rounded-full shadow-lg transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer ${
+        isScrollingToPDF ? 'animate-pulse' : ''
+      } ${
+        isHovered ? 'pl-4 pr-4 py-3' : 'p-3'
+      } bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-medium ${className}`}
       aria-label="Scroll to PDF viewer"
       title="View Resume PDF"
     >
       <svg
-        className={`w-5 h-5 transition-transform duration-300 ${isScrollingToPDF ? 'animate-bounce' : ''}`}
+        className={`w-6 h-6 transition-transform duration-300 ${isScrollingToPDF ? 'animate-bounce' : ''}`}
         fill="none"
         stroke="currentColor"
         viewBox="0 0 24 24"
@@ -84,7 +90,13 @@ export default function FloatingPDFButton({ targetId, className = "" }: Floating
           d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
         />
       </svg>
-      <span className="hidden sm:inline">Resume</span>
+      <span 
+        className={`hidden sm:inline transition-all duration-300 ease-out overflow-hidden whitespace-nowrap ${
+          isHovered ? 'max-w-24 opacity-100 ml-2' : 'max-w-0 opacity-0 ml-0'
+        }`}
+      >
+        View Resume
+      </span>
     </button>
   );
 }

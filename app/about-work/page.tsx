@@ -131,27 +131,36 @@ export default function AboutWork() {
                 <div>
                   <h4 className="font-semibold" style={{ color: 'var(--text-card-primary)' }}>Certified Lean Six Sigma White Belt</h4>
                   <p style={{ color: 'var(--text-card-secondary)' }}>Six Sigma PH | February 2025</p>
-                  <p className="text-sm" style={{ color: 'var(--text-card-tertiary)' }}>Reference: https://sixsigma.freshlearn.com/certificate/1556969</p>
+                  <p className="text-sm break-words" style={{ color: 'var(--text-card-tertiary)' }}>
+                    <a className="hover:text-yellow-800" href="https://sixsigma.freshlearn.com/certificate/1556969" target="_blank">⇢ See reference</a>
+                  </p>
                 </div>
                 <div>
                   <h4 className="font-semibold" style={{ color: 'var(--text-card-primary)' }}>Basics of UI Design</h4>
                   <p style={{ color: 'var(--text-card-secondary)' }}>Cambridge International Qualifications, UK | February 2025</p>
-                  <p className="text-sm" style={{ color: 'var(--text-card-tertiary)' }}>Reference: https://uniathena.com/verify/certificate?certID=1370-7221-9127</p>
+                  <p className="text-sm break-words" style={{ color: 'var(--text-card-tertiary)' }}>
+                    <a className="hover:text-yellow-800" href="https://uniathena.com/verify/certificate?certID=1370-7221-9127" target="_blank">⇢ See reference</a>
+                  </p>
                 </div>
                 <div>
                   <h4 className="font-semibold" style={{ color: 'var(--text-card-primary)' }}>Odoo v14 Software Development Training & Ionic Mobile Application Development</h4>
                   <p style={{ color: 'var(--text-card-secondary)' }}>Megawide Construction Corp. | December 2023</p>
-                  <p className="text-sm" style={{ color: 'var(--text-card-tertiary)' }}>Conducted by Candidoskie P. Berdin II, Senior IT Manager</p>
+                  <p className="text-sm break-words" style={{ color: 'var(--text-card-tertiary)' }}>
+                    Conducted by Candidoskie P. Berdin II, Senior IT Manager</p>
                 </div>
                 <div>
                   <h4 className="font-semibold" style={{ color: 'var(--text-card-primary)' }}>Google Cloud Big Data and Machine Learning Fundamentals</h4>
                   <p style={{ color: 'var(--text-card-secondary)' }}>Google Cloud | August 2020 | Grade: 97.30%</p>
-                  <p className="text-sm" style={{ color: 'var(--text-card-tertiary)' }}>Reference: https://coursera.org/verify/UUQXGLPDM3VJ2019-2022</p>
+                  <p className="text-sm break-words" style={{ color: 'var(--text-card-tertiary)' }}>
+                    <a className="hover:text-yellow-800" href="https://coursera.org/verify/UUQXGLPDM3VJ2019-2022" target="_blank">⇢ See reference</a>
+                  </p>
                 </div>
                 <div>
                   <h4 className="font-semibold" style={{ color: 'var(--text-card-primary)' }}>Introduction to TensorFlow for AI, ML, and Deep Learning</h4>
                   <p style={{ color: 'var(--text-card-secondary)' }}>Deeplearning.AI | August 2020 | Grade: 97.82%</p>
-                  <p className="text-sm" style={{ color: 'var(--text-card-tertiary)' }}>Reference: https://coursera.org/verify/FFHG8BC72NKZ</p>
+                  <p className="text-sm break-words" style={{ color: 'var(--text-card-tertiary)' }}>
+                    <a className="hover:text-yellow-800" href="https://coursera.org/verify/FFHG8BC72NKZ" target="_blank">⇢ See reference</a>
+                  </p>
                 </div>
               </div>
             </div>

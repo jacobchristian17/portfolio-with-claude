@@ -50,7 +50,7 @@ export default function PDFViewer({ pdfUrl, title = "PDF Document", className = 
         <h3 className="text-2xl font-bold text-royal-gradient">{title}</h3>
         <button
           onClick={handleDownload}
-          className="btn-royal flex items-center gap-2 px-4 py-2 text-sm"
+          className="btn-royal flex items-center gap-2  px-6 py-3 max-lg:px-2 max-lg:py-2 max-lg:rounded-full text-sm pdf-viewer" //sm:px-2 sm:py-1
           aria-label={`Download ${title}`}
         >
           <svg 
@@ -66,7 +66,7 @@ export default function PDFViewer({ pdfUrl, title = "PDF Document", className = 
               d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" 
             />
           </svg>
-          Download
+          <span className="hidden lg:inline">Download</span>
         </button>
       </div>
       

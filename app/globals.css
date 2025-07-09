@@ -304,16 +304,12 @@ body {
   background: linear-gradient(135deg, var(--royal-blue) 0%, var(--royal-blue-light) 100%);
   color: white;
   border: none;
-  padding: 0.75rem 1.5rem;
+  /* padding: 0.75rem 1.5rem; */
   border-radius: 0.5rem;
   font-weight: 600;
   transition: all 0.3s ease;
   box-shadow: 0 4px 15px rgba(30, 64, 175, 0.3);
-}
-
-.btn-royal:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(30, 64, 175, 0.4);
+  cursor: pointer;
 }
 
 .btn-gold {
@@ -324,4 +320,9 @@ body {
 
 .hero-img {
   transition: all 0.3s ease;
+}
+
+.btn-royal.pdf-viewer:hover{
+  background: var(--gold);
+  /* color: var(--) */
 }
