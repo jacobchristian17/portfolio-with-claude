@@ -95,7 +95,7 @@ export default function FloatingPDFButton({ targetId, className = "" }: Floating
           isHovered ? 'max-w-24 opacity-100 ml-2' : 'max-w-0 opacity-0 ml-0'
         }`}
       >
-        View Resume
+        Go to CV
       </span>
     </button>
   );

@@ -10,6 +10,7 @@ import { useAppSelector } from "./store/hooks";
 import { ragService } from "./services/ragService";
 import HeroImage from "./components/HeroImage";
 import { useRef } from "react";
+import TradingView from "./components/TradingView";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -317,6 +318,7 @@ export default function Home() {
           </div>
         </div>
       </div>
+      <TradingView />
     </div>
   );
 }

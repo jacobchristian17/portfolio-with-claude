@@ -8,6 +8,7 @@ const links = [
   { href: "/about-work", label: "Work Experience", icon: "💼" },
   { href: "/about-school", label: "Education", icon: "🎓" },
   { href: "/about-me", label: "🥷🏻 About Me", icon: "🥷🏻" },
+  { href: "/trading", label: "Trading", icon: "📈" },
 ];
 
 export default function Navbar() {

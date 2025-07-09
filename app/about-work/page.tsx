@@ -186,7 +186,7 @@ export default function AboutWork() {
             <PDFViewer
               id="pdf-viewer"
               pdfUrl="/resume.pdf"
-              title="Jacob's Resume"
+              title="Curriculum Vitae (CV)"
               className=""
             />
           </div>

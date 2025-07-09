@@ -39,7 +39,7 @@ export default function AboutMe() {
           {/* Background & Origins */}
           <div className="mb-8">
             <h2 className="text-2xl font-semibold mb-4" style={{ borderColor: 'var(--text-secondary)' }}>Background & Journey</h2>
-            <div className="bg-gray-50 rounded-lg p-6">
+            <div className="bg-yellow-50 rounded-lg p-6">
               <div className="space-y-4">
                 <div>
                   <h3 className="text-xl font-medium text-gray-800 mb-2">Origins</h3>
@@ -112,9 +112,9 @@ export default function AboutMe() {
           {/* Personal Philosophy */}
           <div className="mb-8">
             <h2 className="text-2xl font-semibold text mb-4" style={{ borderColor: 'var(--text-secondary)' }}>Personal Philosophy</h2>
-            <div className="bg-yellow-50 rounded-lg p-6">
+            <div className="bg-blue-50 rounded-lg p-6">
               <div className="space-y-4">
-                <div className="border-l-4 border-yellow-400 pl-4">
+                <div className="border-l-4 border-blue-900 pl-4">
                   <h4 className="font-semibold text-gray-800 mb-2">🧩 Problem-Solving Mindset</h4>
                   <p className="leading-relaxed md:text-justify" style={{ color: 'var(--text-card-primary)' }}>
                     I treat code examples like puzzles - each challenge is an opportunity to learn and grow.
@@ -122,7 +122,7 @@ export default function AboutMe() {
                   </p>
                 </div>
 
-                <div className="border-l-4 border-yellow-400 pl-4">
+                <div className="border-l-4 border-blue-900 pl-4">
                   <h4 className="font-semibold text-gray-800 mb-2">🚀 Innovation & Impact</h4>
                   <p className="leading-relaxed md:text-justify" style={{ color: 'var(--text-card-primary)' }}>
                     I&rsquo;m passionate about creating innovative solutions that make a positive impact.
@@ -131,7 +131,7 @@ export default function AboutMe() {
                   </p>
                 </div>
 
-                <div className="border-l-4 border-yellow-400 pl-4">
+                <div className="border-l-4 border-blue-900 pl-4">
                   <h4 className="font-semibold text-gray-800 mb-2">📚 Continuous Learning</h4>
                   <p className="leading-relaxed md:text-justify" style={{ color: 'var(--text-card-primary)' }}>
                     I&rsquo;m always eager to learn new technologies and stay current with industry trends.

@@ -46,30 +46,6 @@ export default function PDFViewer({ pdfUrl, title = "PDF Document", className = 
 
   return (
     <div id={id} className={`glass-card rounded-2xl p-6 hover-glow ${className}`}>
-      <div className="flex justify-between items-center mb-4">
-        <h3 className="text-2xl font-bold text-royal-gradient">{title}</h3>
-        <button
-          onClick={handleDownload}
-          className="btn-royal flex items-center gap-2  px-6 py-3 max-lg:px-2 max-lg:py-2 max-lg:rounded-full text-sm pdf-viewer" //sm:px-2 sm:py-1
-          aria-label={`Download ${title}`}
-        >
-          <svg 
-            className="w-4 h-4" 
-            fill="none" 
-            stroke="currentColor" 
-            viewBox="0 0 24 24"
-          >
-            <path 
-              strokeLinecap="round" 
-              strokeLinejoin="round" 
-              strokeWidth={2} 
-              d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" 
-            />
-          </svg>
-          <span className="hidden lg:inline">Download</span>
-        </button>
-      </div>
-      
       <div className="relative bg-gray-100 rounded-lg overflow-hidden" style={{ height: '600px' }}>
         {isLoading && (
           <div className="absolute inset-0 flex items-center justify-center bg-gray-100">
@@ -79,7 +55,7 @@ export default function PDFViewer({ pdfUrl, title = "PDF Document", className = 
             </div>
           </div>
         )}
-        
+
         {(error || showFallback) && (
           <div className="absolute inset-0 flex items-center justify-center bg-blue-50 dark:bg-blue-900/20">
             <div className="text-center p-6">
@@ -109,7 +85,7 @@ export default function PDFViewer({ pdfUrl, title = "PDF Document", className = 
             </div>
           </div>
         )}
-        
+
         <iframe
           src={`${pdfUrl}#toolbar=1&navpanes=0&scrollbar=1&view=FitH`}
           title={title}
@@ -118,6 +94,30 @@ export default function PDFViewer({ pdfUrl, title = "PDF Document", className = 
           onError={handleError}
           style={{ display: (error || showFallback) ? 'none' : 'block' }}
         />
+      </div>
+
+      <div className="flex justify-between items-center mt-4 mx-4">
+        <h3 className="text-2xl text-royal-gradient">{title}</h3>
+        <button
+          onClick={handleDownload}
+          className="btn-royal flex items-center gap-2  px-6 py-3 max-lg:px-2 max-lg:py-2 max-lg:rounded-full text-sm pdf-viewer" //sm:px-2 sm:py-1
+          aria-label={`Download ${title}`}
+        >
+          <svg
+            className="w-4 h-4"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+            />
+          </svg>
+          <span className="hidden lg:inline">Download</span>
+        </button>
       </div>
     </div>
   );
