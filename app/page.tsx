@@ -268,7 +268,7 @@ export default function Home() {
           <div className="glass-card rounded-2xl p-4 lg:p-8 hover-lift border-royal-gradient">
             <div className="text-center mb-6">
               <div className="text-4xl mb-4">💼</div>
-              <h3 className="text-2xl font-bold text-royal-gradient mb-4">Work Experience</h3>
+              <h3 className="max-md:text-justify text-2xl font-bold text-royal-gradient mb-4">Work Experience</h3>
             </div>
             <p className="mb-6 leading-relaxed italic" style={{ color: 'var(--text-secondary)' }}>
               Explore my professional journey from small business clients to Fortune 500 companies featuring cutting-edge technologies and AI-first development.
@@ -284,7 +284,7 @@ export default function Home() {
           <div className="glass-card rounded-2xl p-4 lg:p-8 hover-lift border-royal-gradient">
             <div className="text-center mb-6">
               <div className="text-4xl mb-4">🎓</div>
-              <h3 className="text-2xl font-bold text-royal-gradient mb-4">Education</h3>
+              <h3 className="max-md:text-justify text-2xl font-bold text-royal-gradient mb-4">Education</h3>
             </div>
             <p className="mb-6 leading-relaxed italic" style={{ color: 'var(--text-secondary)' }}>
               Discover my Computer Engineering degree and AI research projects, including
@@ -301,7 +301,7 @@ export default function Home() {
           <div className="glass-card rounded-2xl p-4 lg:p-8 hover-lift border-royal-gradient">
             <div className="text-center mb-6">
               <div className="text-4xl mb-4">🥷🏻</div>
-              <h3 className="text-2xl font-bold text-royal-gradient mb-4">About Me</h3>
+              <h3 className="max-md:text-justify text-2xl font-bold text-royal-gradient mb-4">About Me</h3>
             </div>
             <p className="mb-6 leading-relaxed italic" style={{ color: 'var(--text-secondary)' }}>
               Get to know the person behind the code - my interests, philosophy,

@@ -4,7 +4,7 @@ export default function ArtSpaceship() {
         <div className="sticky inset-0 h-1/2 max-sm:h-1/4 m-auto relative z-0">
             <div className="absolute bottom-0 right-0 h-full">
                 {Array(N).fill(null).map((_, i) =>
-                <div key={`art-${i}`}className="leading-none whitespace-pre-wrap text-left text-sm max-sm:text-[0.4rem] spaceship">
+                <div key={`art-${i}`}className="leading-none whitespace-pre-wrap text-left text-sm max-sm:text-[0.35rem] spaceship">
                     {""}                                                                                         888           d8b<br />
                     {""}                                                                                         888           Y8P                 <br />
                     {""}                                                                                         888                            <br />

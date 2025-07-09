@@ -21,13 +21,13 @@ export default function AboutMe() {
               Meet Jacob 🥷🏻
             </h2>
             <div className="bg-blue-50 rounded-lg p-6">
-              <p className="leading-relaxed lg:text-justify mb-4" style={{ color: 'var(--text-card-primary)' }}>
+              <p className="leading-relaxed md:text-justify mb-4" style={{ color: 'var(--text-card-primary)' }}>
                 — I&rsquo;m Jacob, the developer and publisher of this website/web application. I&rsquo;m currently 27 years old
                 and passionate about creating something! <br /><br /><span className="max-md:flex max-md:flex-col leading-tlg:ight justify-center w-full italic"><img className="w-24 h-full" src="https://www.icegif.com/wp-content/uploads/2023/05/icegif-771.gif" alt="funny jif"/></span><span className="italic leading-none">I express my self through music, arts, and video games. Typical nerd stuff</span>
               </p>
               {/* <div className="lg:flex justify-center w-full"><div className="section-divider relative z-3 about-me"></div></div>
               <br /> */}
-              <p className="leading-relaxed lg:text-justify" style={{ color: 'var(--text-card-primary)' }}>
+              <p className="leading-relaxed md:text-justify" style={{ color: 'var(--text-card-primary)' }}>
                 — In my journey as a software engineer for more than 5 years, I learned that being stagnant is a thing of the past; living without improving takes the fun out of life for me. I&rsquo;m eager to learn new technologies and enjoy solving complex problems.
                 I look at software engineering like a very big puzzle - there&rsquo;s something deeply satisfying about finding
                 elegant solutions to challenging problems!
@@ -43,7 +43,7 @@ export default function AboutMe() {
               <div className="space-y-4">
                 <div>
                   <h3 className="text-xl font-medium text-gray-800 mb-2">Origins</h3>
-                  <p className="leading-relaxed lg:text-justify" style={{ color: 'var(--text-card-primary)' }}>
+                  <p className="leading-relaxed md:text-justify" style={{ color: 'var(--text-card-primary)' }}>
                     Originally from the City of Cabanatuan, Nueva Ecija, Philippines. My journey took me across
                     different countries and cities, each contributing to my diverse perspective and adaptability.
                   </p>
@@ -85,11 +85,11 @@ export default function AboutMe() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="bg-blue-50 rounded-lg p-6">
                 <h3 className="font-semibold text-blue-800 mb-3">🎮 Gaming</h3>
-                <p className="leading-relaxed lg:text-justify mb-3" style={{ color: 'var(--text-card-primary)' }}>
+                <p className="leading-relaxed md:text-justify mb-3" style={{ color: 'var(--text-card-primary)' }}>
                   I enjoy playing video games that involve planning and team coordination like Dota2 and Valorant.
                   These games help me develop strategic thinking and collaboration skills.
                 </p>
-                <p className="leading-relaxed lg:text-justify" style={{ color: 'var(--text-card-primary)' }}>
+                <p className="leading-relaxed md:text-justify" style={{ color: 'var(--text-card-primary)' }}>
                   I also enjoy single-player games like Tetris and puzzles, which complement my love for
                   problem-solving in programming.
                 </p>
@@ -97,11 +97,11 @@ export default function AboutMe() {
 
               <div className="bg-blue-50 rounded-lg p-6">
                 <h3 className="font-semibold text-blue-800 mb-3">🏖️ Travel & Photography</h3>
-                <p className="leading-relaxed lg:text-justify mb-3" style={{ color: 'var(--text-card-primary)' }}>
+                <p className="leading-relaxed md:text-justify mb-3" style={{ color: 'var(--text-card-primary)' }}>
                   Outside of work, I love going to beaches and exploring different places with my significant other.
                   There&rsquo;s something refreshing about discovering new locations and cultures.
                 </p>
-                <p className="leading-relaxed lg:text-justify" style={{ color: 'var(--text-card-primary)' }}>
+                <p className="leading-relaxed md:text-justify" style={{ color: 'var(--text-card-primary)' }}>
                   Photography allows me to capture these moments and see the world from different perspectives,
                   much like how I approach coding challenges.
                 </p>
@@ -116,7 +116,7 @@ export default function AboutMe() {
               <div className="space-y-4">
                 <div className="border-l-4 border-yellow-400 pl-4">
                   <h4 className="font-semibold text-gray-800 mb-2">🧩 Problem-Solving Mindset</h4>
-                  <p className="leading-relaxed lg:text-justify" style={{ color: 'var(--text-card-primary)' }}>
+                  <p className="leading-relaxed md:text-justify" style={{ color: 'var(--text-card-primary)' }}>
                     I treat code examples like puzzles - each challenge is an opportunity to learn and grow.
                     This mindset drives my continuous pursuit of elegant and efficient solutions.
                   </p>
@@ -124,7 +124,7 @@ export default function AboutMe() {
 
                 <div className="border-l-4 border-yellow-400 pl-4">
                   <h4 className="font-semibold text-gray-800 mb-2">🚀 Innovation & Impact</h4>
-                  <p className="leading-relaxed lg:text-justify" style={{ color: 'var(--text-card-primary)' }}>
+                  <p className="leading-relaxed md:text-justify" style={{ color: 'var(--text-card-primary)' }}>
                     I&rsquo;m passionate about creating innovative solutions that make a positive impact.
                     Whether it&rsquo;s improving user experience or solving complex technical challenges,
                     I aim to contribute meaningfully to every project.
@@ -133,7 +133,7 @@ export default function AboutMe() {
 
                 <div className="border-l-4 border-yellow-400 pl-4">
                   <h4 className="font-semibold text-gray-800 mb-2">📚 Continuous Learning</h4>
-                  <p className="leading-relaxed lg:text-justify" style={{ color: 'var(--text-card-primary)' }}>
+                  <p className="leading-relaxed md:text-justify" style={{ color: 'var(--text-card-primary)' }}>
                     I&rsquo;m always eager to learn new technologies and stay current with industry trends.
                     The field of technology evolves rapidly, and I embrace this constant evolution as
                     an opportunity for growth.
@@ -183,10 +183,10 @@ export default function AboutMe() {
           {/* Contact & Connect */}
           <div className="bg-gray-50 rounded-lg p-6">
             <h2 className="text-2xl font-semibold text-gray-800 mb-4">Other notes</h2>
-            <p className="leading-relaxed lg:text-justify mb-4" style={{ color: 'var(--text-card-primary)' }}>
+            <p className="leading-relaxed md:text-justify mb-4" style={{ color: 'var(--text-card-primary)' }}>
               I would love to hear from you! 🫵🏻 Reach me out for collaborating on interesting projects, connecting with fellow developers and tech enthusiasts.
             </p>
-            <p className="leading-relaxed lg:text-justify" style={{ color: 'var(--text-card-primary)' }}>
+            <p className="leading-relaxed md:text-justify" style={{ color: 'var(--text-card-primary)' }}>
               Feel free to explore my work, which will be published publicly on Github! You can know more about my experience and education through the menu or you can ask 🤖 Francesca yourself!
             </p>
           </div>
