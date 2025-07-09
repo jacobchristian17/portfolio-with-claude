@@ -24,14 +24,14 @@ export default function TradingPage() {
             {/* API Status */}
             <APIStatus />
 
-            {/* Market Stats */}
+            {/* Description */}
             <div className="bg-gray-900 rounded-lg p-4">
               <h3 className="text-lg font-semibold mb-4">Claude Sonnet 4</h3>
               <p>
                 This section is powered by <a target="_blank" href="https://www.anthropic.com/">Anthropic</a> with <a target="_blank" href="https://www.anthropic.com/claude-code">Claude Code</a>.
                 <br />
                 <br />
-                <strong>Time:</strong> <em>~45 minutes</em>
+                <strong>Development Time:</strong> <em>~45 minutes</em>
                 <br />
                 <strong>Prompt types used:</strong>
                 <ul className="list-inside">
@@ -43,12 +43,12 @@ export default function TradingPage() {
                 <ul className="list-inside">
                   <li className="italic"><span className="mr-2">-</span>Read/Write files</li>
                   <li className="italic"><span className="mr-2">-</span>Execute CLI commands</li>
-                  <li className="italic"><span className="mr-2">-</span>Analyze codebase</li>
-                  <li className="italic"><span className="mr-2">-</span>Troubleshoot errors</li>
+                  <li className="italic"><span className="mr-2">-</span>Analyze code base</li>
+                  <li className="italic"><span className="mr-2">-</span>Debug & troubleshoot errors</li>
                 </ul>
                 <br />
                 <br />
-                Check out the complete developer's journal <a href="#">here!</a>
+                Check out the complete developer's journal <a href="#">soon!</a>
               </p>
               {/* <div className="space-y-3">
                 <div className="flex justify-between">
