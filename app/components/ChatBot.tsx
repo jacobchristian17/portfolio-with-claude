@@ -18,9 +18,23 @@ export default function ChatBot({
   const { isDarkMode } = useAppSelector((state) => state.theme);
   const { messages, isLoading, ragSettings } = useAppSelector((state) => state.messages);
   const [input, setInput] = useState("");
+  const [collapsedSources, setCollapsedSources] = useState<Set<string>>(new Set());
+  const [collapsedContext, setCollapsedContext] = useState<Set<string>>(new Set());
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const messagesContainerRef = useRef<HTMLDivElement>(null);
 
+  /**
+   * Scrolls the message container to the bottom to show the latest message.
+   * Uses requestAnimationFrame to ensure DOM updates are complete before scrolling.
+   * This provides smooth scrolling behavior and prevents timing issues with DOM updates.
+   * 
+   * @function scrollToBottom
+   * @returns {void}
+   * 
+   * @example
+   * // Called automatically when new messages are added
+   * scrollToBottom();
+   */
   const scrollToBottom = () => {
     if (messagesContainerRef.current) {
       const container = messagesContainerRef.current;
@@ -38,6 +52,35 @@ export default function ChatBot({
     }
   }, [messages.length]);
 
+  /**
+   * Handles form submission for sending chat messages.
+   * Processes user input, generates RAG context if available, calls external message handler,
+   * and manages the complete message lifecycle including error handling.
+   * 
+   * @async
+   * @function handleSubmit
+   * @param {React.FormEvent} e - The form submission event
+   * @returns {Promise<void>}
+   * 
+   * @throws {Error} When message processing fails, displays error message to user
+   * 
+   * @example
+   * // Called when user submits the chat form
+   * <form onSubmit={handleSubmit}>
+   *   <input type="text" value={input} />
+   *   <button type="submit">Send</button>
+   * </form>
+   * 
+   * @description
+   * Process flow:
+   * 1. Validates input and checks loading state
+   * 2. Creates and dispatches user message
+   * 3. Generates RAG context if indexes are selected
+   * 4. Calls external message handler or provides fallback response
+   * 5. Creates and dispatches assistant message with sources and context
+   * 6. Handles errors gracefully with user-friendly error messages
+   * 7. Always clears loading state in finally block
+   */
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!input.trim() || isLoading) return;
@@ -125,12 +168,104 @@ Please provide a helpful response based on the context above.`;
     }
   };
 
+  /**
+   * Clears all chat messages and resets UI state.
+   * Dispatches the clearMessages action and resets all collapse states for sources and context.
+   * This provides a clean slate for the user to start a new conversation.
+   * 
+   * @function handleClearMessages
+   * @returns {void}
+   * 
+   * @example
+   * // Called when user clicks the clear messages button
+   * <button onClick={handleClearMessages}>Clear Chat</button>
+   * 
+   * @description
+   * Actions performed:
+   * 1. Dispatches clearMessages() to remove all messages from Redux store
+   * 2. Resets collapsedSources state to empty Set
+   * 3. Resets collapsedContext state to empty Set
+   * 4. UI automatically updates to show empty state message
+   */
   const handleClearMessages = () => {
     dispatch(clearMessages());
+    setCollapsedSources(new Set());
+    setCollapsedContext(new Set());
+  };
+
+  /**
+   * Toggles the collapse state of the sources section for a specific message.
+   * Uses Set data structure to efficiently track which message sources are collapsed.
+   * Provides smooth UI interaction for showing/hiding source information.
+   * 
+   * @function toggleSources
+   * @param {string} messageId - The unique identifier of the message whose sources to toggle
+   * @returns {void}
+   * 
+   * @example
+   * // Called when user clicks on sources header
+   * <button onClick={() => toggleSources(message.id)}>
+   *   Sources ({message.sources.length})
+   * </button>
+   * 
+   * @description
+   * Toggle logic:
+   * 1. Creates a new Set from the previous collapsed sources state
+   * 2. If messageId exists in set, removes it (expand sources)
+   * 3. If messageId doesn't exist in set, adds it (collapse sources)
+   * 4. Updates state with the new Set
+   * 5. UI automatically reflects the change with smooth animations
+   */
+  const toggleSources = (messageId: string) => {
+    setCollapsedSources(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(messageId)) {
+        newSet.delete(messageId);
+      } else {
+        newSet.add(messageId);
+      }
+      return newSet;
+    });
+  };
+
+  /**
+   * Toggles the collapse state of the RAG context section for a specific message.
+   * Manages the visibility of contextual relevance information including similarity scores.
+   * Uses Set data structure for efficient state management and smooth UI interactions.
+   * 
+   * @function toggleContext
+   * @param {string} messageId - The unique identifier of the message whose context to toggle
+   * @returns {void}
+   * 
+   * @example
+   * // Called when user clicks on context relevance header
+   * <button onClick={() => toggleContext(message.id)}>
+   *   Context relevance ({message.ragContext.relevantDocuments.length})
+   * </button>
+   * 
+   * @description
+   * Toggle logic:
+   * 1. Creates a new Set from the previous collapsed context state
+   * 2. If messageId exists in set, removes it (expand context)
+   * 3. If messageId doesn't exist in set, adds it (collapse context)
+   * 4. Updates state with the new Set
+   * 5. UI shows/hides RAG context with document categories, titles, and similarity scores
+   * 6. Smooth animations provide visual feedback for the state change
+   */
+  const toggleContext = (messageId: string) => {
+    setCollapsedContext(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(messageId)) {
+        newSet.delete(messageId);
+      } else {
+        newSet.add(messageId);
+      }
+      return newSet;
+    });
   };
 
   return (
-    <div className="flex flex-col h-96 glass-card rounded-2xl overflow-hidden shadow-royal">
+    <div className="flex flex-col h-128 glass-card rounded-2xl overflow-hidden shadow-royal">
       {/* Header */}
       <div className="bg-royal-gradient text-white p-4 rounded-t-2xl flex justify-between items-center">
         <div>
@@ -176,26 +311,58 @@ Please provide a helpful response based on the context above.`;
               <p className="text-sm" style={{ color: message.role === "user" ? 'var(--text-usr-primary)' : 'var(--text-primary)' }}>{message.content}</p>
               {message.sources && message.sources.length > 0 && (
                 <div className="mt-2 text-xs opacity-75">
-                  <p className="font-medium" style={{ color: isDarkMode ? 'var(--gold-dark)' :  'var(--text-primary)'}}>Sources:</p>
-                  <ul className="list-disc list-inside">
-                    {message.sources.map((source, index) => (
-                      <li key={index} style={{ color: 'var(--text-secondary)' }}>{source}</li>
-                    ))}
-                  </ul>
+                  <button
+                    onClick={() => toggleSources(message.id)}
+                    className="flex items-center gap-1 font-medium hover:opacity-100 transition-opacity"
+                    style={{ color: isDarkMode ? 'var(--gold-dark)' : 'var(--text-primary)' }}
+                  >
+                    <svg
+                      className={`w-3 h-3 transition-transform ${collapsedSources.has(message.id) ? 'rotate-90' : 'rotate-0'}`}
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                    Sources ({message.sources.length})
+                  </button>
+                  {collapsedSources.has(message.id) && (
+                    <ul className="list-disc list-inside mt-1 pl-4">
+                      {message.sources.map((source, index) => (
+                        <li key={index} style={{ color: 'var(--text-secondary)' }}>{source}</li>
+                      ))}
+                    </ul>
+                  )}
                 </div>
               )}
               {message.ragContext && message.ragContext.relevantDocuments.length > 0 && (
                 <div className="mt-2 text-xs opacity-75">
-                  <p className="font-medium" style={{ color: isDarkMode ? 'var(--gold-dark)' : 'var(--text-primary)' }}>Context relevance:</p>
-                  <ul className="list-disc list-inside">
-                    {message.ragContext.relevantDocuments.map((doc, index) => (
-                      <li key={index}>
-                        <span className="font-normal" style={{ color: isDarkMode? 'var(--gold-light)': 'var(--text-secondary)' }}>[{doc.category}] </span>
-                        <span className="font-bold" style={{ color: isDarkMode? 'var(--gold-light)': 'var(--text-secondary)' }}>{doc.title} </span>
-                        <span style={{ color: isDarkMode? 'var(--gold-light)': 'var(--text-secondary)' }}> - {Math.round(doc.similarity * 100)}% match</span>
-                      </li>
-                    ))}
-                  </ul>
+                  <button
+                    onClick={() => toggleContext(message.id)}
+                    className="flex items-center gap-1 font-medium hover:opacity-100 transition-opacity"
+                    style={{ color: isDarkMode ? 'var(--gold-dark)' : 'var(--text-primary)' }}
+                  >
+                    <svg
+                      className={`w-3 h-3 transition-transform ${collapsedContext.has(message.id) ? 'rotate-90' : 'rotate-0'}`}
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                    Context relevance ({message.ragContext.relevantDocuments.length})
+                  </button>
+                  {collapsedContext.has(message.id) && (
+                    <ul className="list-disc list-inside mt-1 pl-4">
+                      {message.ragContext.relevantDocuments.map((doc, index) => (
+                        <li key={index}>
+                          <span className="font-normal" style={{ color: isDarkMode? 'var(--gold-light)': 'var(--text-secondary)' }}>[{doc.category}] </span>
+                          <span className="font-bold" style={{ color: isDarkMode? 'var(--gold-light)': 'var(--text-secondary)' }}>{doc.title} </span>
+                          <span style={{ color: isDarkMode? 'var(--gold-light)': 'var(--text-secondary)' }}> - {Math.round(doc.similarity * 100)}% match</span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </div>
               )}
               <p className="text-xs mt-1 opacity-75">
@@ -221,7 +388,7 @@ Please provide a helpful response based on the context above.`;
       </div>
 
       {/* Input */}
-      <form onSubmit={handleSubmit} className="p-4 border-t border-gray-200">
+      <form onSubmit={handleSubmit} className="p-4 mt-1 border-t border-gray-200">
         <div className="flex space-x-2">
           <input
             type="text"
