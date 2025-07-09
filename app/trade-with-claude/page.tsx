@@ -6,8 +6,8 @@ export default function TradingPage() {
     <div className="min-h-screen bg-gray-950 text-white">
       <div className="container mx-auto px-4 py-8">
         <div className="mb-8">
-          <h1 className="text-4xl font-bold mb-2">Trading Dashboard</h1>
-          <p className="text-gray-400">Real-time cryptocurrency trading interface powered by Binance API</p>
+          <h1 className="text-4xl font-bold mb-2">Bitcoin Price Chart</h1>
+          <p className="text-gray-400">Real-time cryptocurrency chart powered with Binance API</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
@@ -26,30 +26,37 @@ export default function TradingPage() {
 
             {/* Description */}
             <div className="bg-gray-900 rounded-lg p-4">
-              <h3 className="text-lg font-semibold mb-4">Claude Sonnet 4</h3>
-              <p>
-                This section is powered by <a target="_blank" href="https://www.anthropic.com/">Anthropic</a> with <a target="_blank" href="https://www.anthropic.com/claude-code">Claude Code</a>.
+              <h3 className="text-lg font-semibold mb-4">Dev Notes 📝</h3>
+              <div>
+                <h2 className="text-md">Introduction</h2>
+                <div className="text-justify text-sm italic leading-releaxed">— This price chart is a React component that integrates Binance API to display the real time  BTC/USDT trading pair.</div>
                 <br />
+                <h2 className="text-md">Runthrough</h2>
+                <div className="text-justify text-sm italic leading-releaxed">— This UI component was built with the assistance of Anthropic&lsquo;s <a target="_blank" className="text-amber-500 hover:text-amber-600 hover:underline" href="https://www.anthropic.com/claude-code">Claude Code</a>. It abled me to ship this feature in <em>MINUTES</em>; a task that would have otherwise taken weeks to learn and develop. The models used were <span className="font-semibold italic">Sonnet 4 (98%)</span> and <span className="font-semibold italic">Haiku 3.5 (2%)</span>.</div>
                 <br />
-                <strong>Development Time:</strong> <em>~45 minutes</em>
+                <div className="text-sm">
+                  <strong>🕒 Development Time:</strong> <em className="bg-yellow-200 text-black">~45 minutes</em>
+                  <br />
+                  <strong>🗒️ Prompt types used:</strong>
+                  <ul className="list-inside">
+                    <li className="italic"><span className="pr-2">-</span>Natural language</li>
+                    <li className="italic"><span className="pr-2">-</span>Images</li>
+                    <li className="italic"><span className="pr-2">-</span><a target="_blank" className="text-amber-500 hover:text-amber-600 hover:underline" href="https://github.com/denis-kralj/PromptEngineeringPrimer">Markdown Prompts Framework (MPF)</a></li>
+                  </ul>
+                  <br />
+                  <strong>🤖 Agentic tasks executed:</strong>
+                  <ul className="list-inside">
+                    <li className="italic"><span className="pr-2">-</span>Read/Write files</li>
+                    <li className="italic"><span className="pr-2">-</span>Execute CLI commands</li>
+                    <li className="italic"><span className="pr-2">-</span>Integrated APIs</li>
+                    <li className="italic"><span className="pr-2">-</span>Analyze code base</li>
+                    <li className="italic"><span className="pr-2">-</span>Debug & troubleshoot errors</li>
+                  </ul>
+                </div>
                 <br />
-                <strong>Prompt types used:</strong>
-                <ul className="list-inside">
-                  <li className="italic"><span className="mr-2">-</span>Natural language</li>
-                  <li className="italic"><span className="mr-2">-</span>Image</li>
-                  <li className="italic"><span className="mr-2">-</span><a target="_blank" href="https://github.com/denis-kralj/PromptEngineeringPrimer">Markdown Prompt Framework (MPF)</a></li>
-                </ul>
-                <strong>Agentic tasks executed:</strong>
-                <ul className="list-inside">
-                  <li className="italic"><span className="mr-2">-</span>Read/Write files</li>
-                  <li className="italic"><span className="mr-2">-</span>Execute CLI commands</li>
-                  <li className="italic"><span className="mr-2">-</span>Analyze code base</li>
-                  <li className="italic"><span className="mr-2">-</span>Debug & troubleshoot errors</li>
-                </ul>
-                <br />
-                <br />
-                Check out the complete developer's journal <a href="#">soon!</a>
-              </p>
+
+                <span className="text-sm italic leading-releaxed">More detailed documentation coming up <a className="text-amber-500 hover:text-amber-600 hover:underline" href="#">soon!</a></span>
+              </div>
               {/* <div className="space-y-3">
                 <div className="flex justify-between">
                   <span className="text-gray-400">24h Volume</span>

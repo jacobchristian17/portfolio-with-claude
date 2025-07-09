@@ -7,7 +7,7 @@ const links = [
   { href: "/", label: "Home", icon: "🏠" },
   { href: "/about-work", label: "Career", icon: "💼" },
   { href: "/about-me", label: "🥷🏻 About Me", icon: "🥷🏻" },
-  { href: "/trading", label: "📈 Claude Code Demo", icon: "📈" },
+  { href: "/trade-with-claude", label: "🤖 Claude Code Demo", icon: "🤖" },
 ];
 
 export default function Navbar() {
