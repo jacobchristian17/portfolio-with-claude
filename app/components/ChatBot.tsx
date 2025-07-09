@@ -270,9 +270,9 @@ Please provide a helpful response based on the context above.`;
       {/* Header */}
       <div className="bg-royal-gradient text-white p-4 rounded-t-2xl flex justify-between items-center">
         <div>
-          <h3 className="text-lg font-semibold">🤖 Ask Francesca!</h3>
+          <h3 className="text-lg font-semibold "> 🙋🏻‍♀️Ask Francesca!</h3>
           <p className="text-sm text-blue-100 max-sm:text-xs">
-            She knows a thing or two about Jacob
+            She knows a thing or two about Jacob (づ￣ 3￣)づ
           </p>
         </div>
         <button
@@ -368,7 +368,7 @@ Please provide a helpful response based on the context above.`;
                   )}
                 </div>
               )}
-              <p className="text-xs mt-1 opacity-75">
+              <p className="text-xs mt-1 opacity-75 text-right">
                 {new Date(message.timestamp).toLocaleTimeString()}
               </p>
             </div>

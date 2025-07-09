@@ -9,7 +9,7 @@ export default function AboutWork() {
       <HeroImage />
       <div className="max-w-4xl mx-auto backdrop-blur-[1px] relative z-3">
         <div className="glass-card rounded-lg shadow-lg md:p-8 max-sm:p-4">
-          <h1 className="text-3xl font-bold mb-6" style={{ color: 'var(--text-primary)' }}>Work Experience</h1>
+          <h1 className="text-3xl font-bold mb-6" style={{ color: 'var(--text-primary)' }}>Work life</h1>
 
           {/* Current Position */}
           <div className="mb-8 border-l-4 border-yellow-500 pl-2 md:pl-6">

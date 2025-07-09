@@ -113,6 +113,7 @@ button {
   background: linear-gradient(135deg, var(--royal-blue) 0%, var(--royal-blue-light) 100%);
 }
 
+.bg-knowledge-doc-dot,
 .bg-gold-gradient {
   background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
 }
@@ -129,6 +130,10 @@ button {
   background: linear-gradient(135deg, var(--warm-gray) 0%, var(--soft-white) 100%);
 }
 
+.dark .bg-knowledge-doc-dot {
+  background: linear-gradient(135deg, var(--royal-blue) 0%, var(--royal-blue-light) 100%);
+}
+
 /* Glass Effect Cards */
 .dark .glass-card,
 .glass-card {
@@ -139,7 +144,7 @@ button {
   transition: background 0.3s ease, border 0.3s ease;
 }
 
-.dark .glass-card p{
+.dark .glass-card p {
   color: white;
 }
 
@@ -152,16 +157,41 @@ button {
 }
 
 .glass-card-royal:hover {
-  background: var(--gold-dark);
-  border: 1px solid var(--glass-border-royal);
+  background: var(--glass-bg-gold);
+  border: 1px solid var(--glass-border-gold);
 }
 
+.dark .glass-card-royal:hover {
+  background: var(--gold-dark);
+  border: 1px solid var(--glass-border-gold);
+}
+
+/* RAG Controls */
+.knowledge-doc-box,
+.knowledge-doc-box-h:hover,
 .glass-card-gold {
   background: var(--glass-bg-gold);
   backdrop-filter: blur(20px);
   border: 1px solid var(--glass-border-gold);
   box-shadow: 0 8px 32px rgba(245, 158, 11, 0.15);
-  transition: background 0.3s ease, border 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+.dark .knowledge-doc-box,
+.dark .knowledge-doc-box-h:hover {
+  background: var(--glass-bg-royal);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border-royal);
+  box-shadow: 0 8px 32px rgba(30, 64, 175, 0.15);
+  transition: all 0.3s ease;
+}
+
+.knowledge-doc-checkbox {
+  accent-color: var(--gold-dark);
+}
+
+.dark .knowledge-doc-checkbox {
+  accent-color: var(--royal-blue);
 }
 
 /* Custom Shadows */
@@ -193,6 +223,10 @@ button {
 
 .hover-glow:hover {
   box-shadow: 0 0 30px rgba(245, 158, 11, 0.3);
+}
+
+.dark .hover-glow:hover {
+  box-shadow: 0 0 30px rgba(11, 101, 245, 0.3);
 }
 
 /* Smooth Gradients for Borders */
@@ -230,6 +264,7 @@ button {
   .logo-carousel {
     animation: scroll-left 8s linear infinite;
   }
+
   .logo-carousel-track {
     gap: 1rem;
   }
@@ -317,12 +352,14 @@ button {
   background: linear-gradient(90deg, transparent, var(--royal-blue), var(--gold), transparent);
   height: 2px;
 }
+
 .section-divider.about-me {
-  background: rgba(0,0,0,0.5);
+  background: rgba(0, 0, 0, 0.5);
   height: 10px;
   width: 10px;
   border-radius: 50%;
 }
+
 /* Button Styles */
 .btn-royal {
   background: linear-gradient(135deg, var(--royal-blue) 0%, var(--royal-blue-light) 100%);
@@ -346,20 +383,25 @@ button {
   transition: all 0.3s ease;
 }
 
-.btn-royal.pdf-viewer:hover{
+.btn-royal.pdf-viewer:hover {
   background: var(--gold);
   /* color: var(--) */
 }
-.spaceship{
+
+.spaceship {
   color: var(--glass-border-royal)
 }
+
 .dark .spaceship {
   color: var(--glass-border-gold)
 }
 
 .big-first-letter::first-letter {
-  font-size: 3rem;         /* ~text-5xl */
-  font-weight: 700;        /* bold */
+  font-size: 3rem;
+  /* ~text-5xl */
+  font-weight: 700;
+  /* bold */
   float: left;
-  line-height: 1;          /* ~leading-none */
+  line-height: 1;
+  /* ~leading-none */
 }

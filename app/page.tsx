@@ -10,7 +10,6 @@ import { useAppSelector } from "./store/hooks";
 import { ragService } from "./services/ragService";
 import HeroImage from "./components/HeroImage";
 import { useRef } from "react";
-import TradingView from "./components/TradingView";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -76,7 +75,6 @@ export default function Home() {
   };
 
   const handleSubmit = async (index: any) => {
-    console.log("handleSubmit shit")
     const input = sampleQuestions[index]
 
     // Scroll to chatbot smoothly
@@ -173,18 +171,18 @@ export default function Home() {
           <HeroImage />
         </div>
         {/* Hero Section */}
-        <div className="text-center mb-12">
+        <div className="text-center mb-12 select-none">
           <div className="floating">
             <h1 className="text-6xl font-bold text-royal-gradient mb-6">
               Welcome to Jacob&rsquo;s Space 🥷🏻
             </h1>
           </div>
-          <p className="text-2xl mb-6 font-medium" style={{ color: 'var(--text-primary)' }}>
+          <p className="text-2xl mb-6 font-medium font-bold text-royal-gradient">
             Full-Stack Developer & AI Enthusiast
           </p>
           <p className="text-lg max-w-3xl mx-auto leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
             Discover my professional journey through an AI-powered experience. Explore my work,
-            education, or personal interests with <strong>Francesca</strong>, my lovely AI Assistant
+            education, and personal interests with <span className="font-bold text-royal-gradient cursor-pointer" onClick={scrollToChatBot}>Francesca</span>, my lovely AI Assistant
           </p>
         </div>
 
@@ -269,7 +267,7 @@ export default function Home() {
           <div className="glass-card rounded-2xl p-4 lg:p-8 hover-lift border-royal-gradient">
             <div className="text-center mb-6">
               <div className="text-4xl mb-4">💼</div>
-              <h3 className="max-md:text-justify text-2xl font-bold text-royal-gradient mb-4">Work Experience</h3>
+              <h3 className="max-md:text-justify text-2xl font-bold text-royal-gradient mb-4">Career</h3>
             </div>
             <p className="mb-6 leading-relaxed italic" style={{ color: 'var(--text-secondary)' }}>
               Explore my professional journey from small business clients to Fortune 500 companies featuring cutting-edge technologies and AI-first development.

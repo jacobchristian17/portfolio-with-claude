@@ -5,10 +5,9 @@ import { useState, useEffect } from "react";
 
 const links = [
   { href: "/", label: "Home", icon: "🏠" },
-  { href: "/about-work", label: "Work Experience", icon: "💼" },
-  { href: "/about-school", label: "Education", icon: "🎓" },
+  { href: "/about-work", label: "Career", icon: "💼" },
   { href: "/about-me", label: "🥷🏻 About Me", icon: "🥷🏻" },
-  { href: "/trading", label: "Trading", icon: "📈" },
+  { href: "/trading", label: "📈 Claude Code Demo", icon: "📈" },
 ];
 
 export default function Navbar() {
@@ -20,7 +19,7 @@ export default function Navbar() {
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      
+
       if (currentScrollY === 0) {
         // Always show navbar at the top
         setIsVisible(true);
@@ -31,12 +30,12 @@ export default function Navbar() {
         // Show navbar when scrolling up
         setIsVisible(true);
       }
-      
+
       setLastScrollY(currentScrollY);
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    
+
     return () => window.removeEventListener('scroll', handleScroll);
   }, [lastScrollY]);
 
@@ -52,21 +51,24 @@ export default function Navbar() {
     <nav className={`navbar-backdrop fixed top-0 left-0 right-0 z-50 px-6 py-4 ${isVisible ? 'navbar-visible' : 'navbar-hidden'}`}>
       <div className="max-w-7xl mx-auto">
         <div className="flex items-center justify-between">
-          <div className="text-2xl font-bold text-royal-gradient">
-            Jacob&rsquo;s Space
-          </div>
-          
+          <Link
+            href="/"
+          >
+            <span className="text-2xl font-bold text-royal-gradient">
+              Jacob&rsquo;s Space
+            </span>
+          </Link>
+
           {/* Desktop Navigation */}
-          <ul className="hidden md:flex space-x-8">
+          <ul className="hidden md:flex justify-center align-center space-x-8">
             {links.map((link) => (
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  className={`flex items-center space-x-2 px-4 py-2 rounded-full transition-all duration-300 ${
-                    pathname === link.href 
-                      ? "bg-royal-gradient text-white shadow-royal" 
-                      : "hover:bg-glass-card hover:shadow-soft"
-                  }`}
+                  className={`flex items-center space-x-2 px-4 py-2 rounded-full transition-all duration-100 hover:scale-105 hover:shadow-soft ${pathname === link.href
+                    ? "bg-royal-gradient text-white shadow-royal"
+                    : ""
+                    }`}
                   style={pathname !== link.href ? { color: 'var(--text-primary)' } : {}}
                 >
                   <span className="font-medium">{link.label}</span>
@@ -95,11 +97,10 @@ export default function Navbar() {
                 <Link
                   href={link.href}
                   onClick={closeMobileMenu}
-                  className={`flex items-center space-x-2 px-4 py-3 rounded-full transition-all duration-300 ${
-                    pathname === link.href 
-                      ? "bg-royal-gradient text-white shadow-royal" 
-                      : "hover:bg-glass-card hover:shadow-soft"
-                  }`}
+                  className={`flex items-center space-x-2 px-4 py-3 rounded-full transition-all duration-300 ${pathname === link.href
+                    ? "bg-royal-gradient text-white shadow-royal"
+                    : "hover:bg-glass-card hover:shadow-soft"
+                    }`}
                   style={pathname !== link.href ? { color: 'var(--text-primary)' } : {}}
                 >
                   <span className="font-medium">{link.label}</span>

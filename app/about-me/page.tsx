@@ -22,7 +22,7 @@ export default function AboutMe() {
             </h2>
             <div className="bg-blue-50 rounded-lg p-6">
               <p className="leading-relaxed md:text-justify mb-4" style={{ color: 'var(--text-card-primary)' }}>
-                — I&rsquo;m Jacob, the developer and publisher of this website/web application. I&rsquo;m currently 27 years old
+                — I&rsquo;m Jacob, the developer and publisher of this site. I&rsquo;m currently 27 years old
                 and passionate about creating something! <br /><br /><span className="max-md:flex max-md:flex-col leading-tlg:ight justify-center w-full italic"><img className="w-24 h-full" src="https://www.icegif.com/wp-content/uploads/2023/05/icegif-771.gif" alt="funny jif"/></span><span className="italic leading-none">I express my self through music, arts, and video games. Typical nerd stuff</span>
               </p>
               {/* <div className="lg:flex justify-center w-full"><div className="section-divider relative z-3 about-me"></div></div>
