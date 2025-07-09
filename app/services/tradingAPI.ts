@@ -1,43 +1,100 @@
-// Trading API Service for real-time cryptocurrency data
+/**
+ * Trading API Service for real-time cryptocurrency data
+ * Provides REST API and WebSocket connections to cryptocurrency exchanges
+ */
+
+/**
+ * Represents a single candlestick/OHLCV data point
+ * @interface CandleData
+ */
 export interface CandleData {
+  /** Unix timestamp in milliseconds */
   time: number;
+  /** Opening price */
   open: number;
+  /** Highest price during the period */
   high: number;
+  /** Lowest price during the period */
   low: number;
+  /** Closing price */
   close: number;
+  /** Trading volume during the period */
   volume: number;
 }
 
+/**
+ * 24-hour ticker statistics for a trading pair
+ * @interface TickerData
+ */
 export interface TickerData {
+  /** Trading pair symbol (e.g., "BTCUSDT") */
   symbol: string;
+  /** Current price */
   price: number;
+  /** 24-hour price change in absolute value */
   change: number;
+  /** 24-hour price change as percentage */
   changePercent: number;
+  /** 24-hour highest price */
   high24h: number;
+  /** 24-hour lowest price */
   low24h: number;
+  /** 24-hour trading volume */
   volume24h: number;
+  /** Timestamp of the data */
   timestamp: number;
 }
 
+/**
+ * Single order book entry
+ * @interface OrderBookEntry
+ */
 export interface OrderBookEntry {
+  /** Price level */
   price: number;
+  /** Quantity at this price level */
   quantity: number;
 }
 
+/**
+ * Order book data containing bids and asks
+ * @interface OrderBook
+ */
 export interface OrderBook {
+  /** Buy orders sorted by price (descending) */
   bids: OrderBookEntry[];
+  /** Sell orders sorted by price (ascending) */
   asks: OrderBookEntry[];
 }
 
+/**
+ * Trading API client for cryptocurrency exchanges
+ * Supports REST API calls and WebSocket connections for real-time data
+ * @class TradingAPI
+ */
 export class TradingAPI {
+  /** Base URL for REST API endpoints */
   private baseUrl: string;
+  /** WebSocket URL for real-time data streams */
   private wsUrl: string;
+  /** Active WebSocket connection */
   private ws: WebSocket | null = null;
+  /** Map of subscription callbacks */
   private subscribers: Map<string, (data: any) => void> = new Map();
+  /** Current reconnection attempt count */
   private reconnectAttempts = 0;
+  /** Maximum number of reconnection attempts */
   private maxReconnectAttempts = 5;
+  /** Interval between reconnection attempts in milliseconds */
   private reconnectInterval = 3000;
 
+  /**
+   * Creates a new TradingAPI instance
+   * @param {('binance'|'coinbase'|'bybit')} exchange - Exchange to connect to
+   * @throws {Error} If exchange is not supported
+   * @example
+   * const api = new TradingAPI('binance');
+   */
   constructor(exchange: 'binance' | 'coinbase' | 'bybit' = 'binance') {
     switch (exchange) {
       case 'binance':
@@ -55,7 +112,16 @@ export class TradingAPI {
     }
   }
 
-  // Get historical candlestick data
+  /**
+   * Retrieves historical candlestick data for a trading pair
+   * @param {string} symbol - Trading pair symbol (e.g., "BTCUSDT")
+   * @param {string} interval - Time interval for candles ("1m", "5m", "15m", "1h", "4h", "1d")
+   * @param {number} limit - Maximum number of candles to return (1-1000)
+   * @returns {Promise<CandleData[]>} Array of candlestick data
+   * @throws {Error} If API request fails
+   * @example
+   * const candles = await api.getHistoricalData('BTCUSDT', '1h', 100);
+   */
   async getHistoricalData(
     symbol: string = 'BTCUSDT',
     interval: string = '1m',
@@ -86,7 +152,14 @@ export class TradingAPI {
     }
   }
 
-  // Get current ticker data
+  /**
+   * Retrieves 24-hour ticker statistics for a trading pair
+   * @param {string} symbol - Trading pair symbol (e.g., "BTCUSDT")
+   * @returns {Promise<TickerData>} 24-hour ticker data
+   * @throws {Error} If API request fails
+   * @example
+   * const ticker = await api.getTickerData('BTCUSDT');
+   */
   async getTickerData(symbol: string = 'BTCUSDT'): Promise<TickerData> {
     try {
       const response = await fetch(`${this.baseUrl}/ticker/24hr?symbol=${symbol}`);
@@ -113,7 +186,15 @@ export class TradingAPI {
     }
   }
 
-  // Get order book data
+  /**
+   * Retrieves order book data for a trading pair
+   * @param {string} symbol - Trading pair symbol (e.g., "BTCUSDT")
+   * @param {number} limit - Number of price levels to return (5, 10, 20, 50, 100, 500, 1000)
+   * @returns {Promise<OrderBook>} Order book with bids and asks
+   * @throws {Error} If API request fails
+   * @example
+   * const orderBook = await api.getOrderBook('BTCUSDT', 20);
+   */
   async getOrderBook(symbol: string = 'BTCUSDT', limit: number = 10): Promise<OrderBook> {
     try {
       const response = await fetch(`${this.baseUrl}/depth?symbol=${symbol}&limit=${limit}`);
@@ -140,7 +221,18 @@ export class TradingAPI {
     }
   }
 
-  // Subscribe to real-time data via WebSocket
+  /**
+   * Subscribes to real-time data via WebSocket connection
+   * @param {string} symbol - Trading pair symbol in lowercase (e.g., "btcusdt")
+   * @param {Function} callback - Function to handle incoming data
+   * @param {string[]} streams - Array of stream types to subscribe to
+   * @returns {Function} Unsubscribe function
+   * @throws {Error} If WebSocket connection fails
+   * @example
+   * const unsubscribe = api.subscribeToRealTimeData('btcusdt', (data) => {
+   *   console.log(data);
+   * }, ['ticker', 'kline_1m']);
+   */
   subscribeToRealTimeData(
     symbol: string = 'btcusdt',
     callback: (data: any) => void,
