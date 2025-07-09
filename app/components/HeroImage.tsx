@@ -34,25 +34,28 @@ export default function HeroImage() {
 
     return (
         <div
-            className={`fixed inset-0 top-0 w-full h-full ${isMobile ? 'z-2':'z-0'}`}>
-            {isDarkMode && <Image
+            className={`fixed inset-0 top-0 w-full h-full ${isMobile ? 'z-2' : 'z-0'}`}>
+            <Image
                 src={hero1.img}
                 alt={hero1.alt}
                 fill
                 priority
-                className={`object-contain ${isMobile ? "object-bottom" : "translate-x-[40vw]"
-                    }`}
+                className={`object-contain 
+                    ${isMobile ? "object-bottom" : "translate-x-[40vw]"}
+                    ${isDarkMode ? "visible" : "hidden"}
+                `}
                 style={!isMobile ? { transform: `translateY(${currentSpeed + 100}px)` } : { transform: `translateY(${currentSpeed + 10}vw)` }}
-            />}
-            {!isDarkMode && <Image
+            />
+            <Image
                 src={hero1Shadow.img}
                 alt={hero1Shadow.alt}
                 fill
-                priority
-                className={`object-contain ${isMobile ? "object-bottom" : "translate-x-[40vw]"
-                    }`}
+                className={`object-contain 
+                    ${isMobile ? "object-bottom" : "translate-x-[40vw]"}
+                    ${isDarkMode ? "hidden" : "visible"}
+                `}
                 style={!isMobile ? { transform: `translateY(${currentSpeed + 100}px)` } : { transform: `translateY(${currentSpeed + 10}vw)` }}
-            />}
+            />
         </div>
     )
 
