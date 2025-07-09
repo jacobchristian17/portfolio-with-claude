@@ -31,9 +31,8 @@ export default function FloatingPDFButton({ targetId, className = "" }: Floating
     const checkInitialVisibility = () => {
       const pdfRect = pdfElement.getBoundingClientRect();
       const pdfPosition = pdfRect.top + window.scrollY;
-
       // Show button when scrolled past 300px but PDF is not in view
-      setIsVisible(pdfRect.top > 100);
+      setIsVisible(pdfRect.top > 500);
     };
 
     checkInitialVisibility();
@@ -67,7 +66,7 @@ export default function FloatingPDFButton({ targetId, className = "" }: Floating
   return (
     <button
       onClick={scrollToPDF}
-      className={`fixed top-30 right-4 z-50 flex items-center gap-2 px-4 py-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110 active:scale-95 ${isScrollingToPDF ? 'animate-pulse' : ''
+      className={`fixed top-30 right-4 z-50 flex items-center gap-2 px-4 py-3 rounded-full shadow-lg transition-all duration-1000 hover:scale-110 active:scale-95 cursor-pointer ${isScrollingToPDF ? 'animate-pulse' : ''
         } bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-medium ${className}`}
       aria-label="Scroll to PDF viewer"
       title="View Resume PDF"
