@@ -153,7 +153,7 @@ class LLMService {
         'Authorization': `Bearer ${this.config.apiKey}`,
       },
       body: JSON.stringify({
-        model: this.config.model || 'llama3-8b-8192',
+        model: this.config.model || 'meta-llama/llama-4-scout-17b-16e-instruct',
         messages: [
           {
             role: 'user',

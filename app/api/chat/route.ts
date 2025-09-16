@@ -11,14 +11,28 @@ export async function POST(request: NextRequest) {
     }
 
     // Get LLM configuration from environment variables
-    const llmConfig = {
-      provider: (process.env.LLM_PROVIDER as any) || 'openai',
-      apiKey: process.env.LLM_API_KEY,
-      model: process.env.LLM_MODEL,
-      baseUrl: process.env.LLM_BASE_URL,
-      temperature: parseFloat(process.env.LLM_TEMPERATURE || '0.7'),
-      maxTokens: parseInt(process.env.LLM_MAX_TOKENS || '1000'),
-    } as any;
+    // Support both generic LLM_ and provider-specific (GROQ_) prefixes
+    const provider = (process.env.LLM_PROVIDER as any) || 'groq';
+
+    let llmConfig;
+    if (provider === 'groq') {
+      llmConfig = {
+        provider: 'groq',
+        apiKey: process.env.GROQ_API_KEY || process.env.LLM_API_KEY,
+        model: process.env.GROQ_MODEL || process.env.LLM_MODEL || 'llama3-8b-8192',
+        temperature: parseFloat(process.env.GROQ_TEMPERATURE || process.env.LLM_TEMPERATURE || '0.7'),
+        maxTokens: parseInt(process.env.GROQ_MAX_TOKENS || process.env.LLM_MAX_TOKENS || '1000'),
+      };
+    } else {
+      llmConfig = {
+        provider: provider,
+        apiKey: process.env.LLM_API_KEY,
+        model: process.env.LLM_MODEL,
+        baseUrl: process.env.LLM_BASE_URL,
+        temperature: parseFloat(process.env.LLM_TEMPERATURE || '0.7'),
+        maxTokens: parseInt(process.env.LLM_MAX_TOKENS || '1000'),
+      };
+    }
 
     // Initialize LLM service
     const llmService = new LLMService(llmConfig);
