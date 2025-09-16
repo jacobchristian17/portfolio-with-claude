@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "./components/Navbar";
 import StoreProvider from "./store/StoreProvider";
 import FloatingThemeToggle from "./components/FloatingThemeToggle";
+import { Analytics } from "@vercel/analytics/next"
 
 export const metadata: Metadata = {
   title: "Jacob's Space",
@@ -23,6 +24,7 @@ export default function RootLayout({
           <main className="pt-24 pb-24">{children}</main>
           <FloatingThemeToggle />
         </StoreProvider>
+        <Analytics />
       </body>
     </html>
   );
