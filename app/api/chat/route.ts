@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import LLMService from '../../services/llmService';
+import LLMService, { LLMConfig } from '../../services/llmService';
 import { ragService } from '../../services/ragService';
 
 export async function POST(request: NextRequest) {
@@ -12,12 +12,12 @@ export async function POST(request: NextRequest) {
 
     // Get LLM configuration from environment variables
     // Support both generic LLM_ and provider-specific (GROQ_) prefixes
-    const provider = (process.env.LLM_PROVIDER as any) || 'groq';
+    const provider = (process.env.LLM_PROVIDER as LLMConfig['provider']) || 'groq';
 
-    let llmConfig;
+    let llmConfig: LLMConfig;
     if (provider === 'groq') {
       llmConfig = {
-        provider: 'groq',
+        provider: 'groq' as const,
         apiKey: process.env.GROQ_API_KEY || process.env.LLM_API_KEY,
         model: process.env.GROQ_MODEL || process.env.LLM_MODEL || 'llama3-8b-8192',
         temperature: parseFloat(process.env.GROQ_TEMPERATURE || process.env.LLM_TEMPERATURE || '0.7'),
