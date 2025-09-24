@@ -5,9 +5,6 @@ import { useState, useEffect } from "react";
 
 const links = [
   { href: "/", label: "Home", icon: "🏠" },
-  { href: "/about-work", label: "Career", icon: "💼" },
-  { href: "/about-me", label: "🥷🏻 About Me", icon: "🥷🏻" },
-  { href: "/trade-with-claude", label: "🤖 Claude Code Demo", icon: "🤖" },
 ];
 
 export default function Navbar() {

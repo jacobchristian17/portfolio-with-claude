@@ -1,7 +1,5 @@
 "use client";
 import HeroImage from "../components/HeroImage"
-import PDFViewer from "../components/PDFViewer"
-import FloatingPDFButton from "../components/FloatingPDFButton"
 
 export default function AboutWork() {
   return (
@@ -181,18 +179,8 @@ export default function AboutWork() {
             </p>
           </div>
 
-          {/* Resume PDF Viewer */}
-          <div className="mb-8">
-            <PDFViewer
-              id="pdf-viewer"
-              pdfUrl="/resume.pdf"
-              title="Curriculum Vitae (CV)"
-              className=""
-            />
-          </div>
         </div>
       </div>
-      <FloatingPDFButton targetId="pdf-viewer" />
     </div>
   );
 }
