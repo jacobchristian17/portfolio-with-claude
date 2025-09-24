@@ -21,7 +21,7 @@ export default function Home() {
     "What are his hobbies?"
   ]
 
-  const handleMessage = async (message: string) => {
+  const handleMessage = async (message: string, conversationHistory?: any[]) => {
     try {
       console.log('Sending message:', message);
       const response = await fetch('/api/chat', {
@@ -33,6 +33,7 @@ export default function Home() {
           message,
           ragEnabled: true,
           selectedIndexes: ['work', 'school', 'about_me'],
+          conversationHistory: conversationHistory || [],
         }),
       });
 

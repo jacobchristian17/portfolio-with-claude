@@ -24,6 +24,7 @@ export interface RAGContext {
 class RAGService {
   private documents: Document[] = [];
   private initialized = false;
+  private personalInfo = {};
 
   constructor() {
     this.initializeIndexes();
@@ -32,155 +33,480 @@ class RAGService {
   private initializeIndexes() {
     if (this.initialized) return;
 
+    this.personalInfo = {
+      "personal_info": {
+        "name": "Jacob Christian P. Guanzing",
+        "job_title": "Full Stack & AI Integration Engineer",
+        "address_line": {
+          "street": "69 Coronado St.,",
+          "barangay": "Hulo",
+          "city": "Mandaluyong",
+          "country": "Philippines",
+          "zip": "1550"
+        },
+        "mobile": "+639673802998",
+        "email": "jcpguanzing@gmail.com",
+        "website": {
+          "url": "https://jacobs-space.vercel.app",
+          "text": "jacobs-space.vercel.app"
+        },
+        "linkedin": {
+          "url": "https://www.linkedin.com/in/jcpguanzing/",
+          "text": "linkedin.com/in/jcpguanzing",
+          "icon_url": "https://logospng.org/download/linkedin/logo-linkedin-icon-4096.png"
+        }
+      },
+      "work_info": {
+        "summary": "Software Engineer with '5+ years' of experience building fast-moving, AI-driven web applications for global enterprises and cross-border teams. Specialized in shipping scalable React + Next.js platforms with integrated ML/AI features, modern UI/UX, and rapid deployment pipelines (AWS, Azure). Proven ability to deliver features from concept to launch, collaborate async across time zones, and iterate quickly in product environments.",
+        "experience": [
+          {
+            "role": "AI/UX Developer",
+            "company": "Seven Seven Global Services Inc.",
+            "location": "(US F500C) — Pasig, NCR",
+            "period": "Aug 2024 - Aug 2025",
+            "features": [
+              "Shipped '1 GenAI/ RAG Chatbot & 20+ UI features' to a proprietary platform app used by individuals and teams worldwide",
+              "Integrated '4 frontend APIs' in response to proprietary LLM secure endpoint access",
+              "Collaborated with 5+ ML Engineers & Data Scientists to deploy LLM solutions",
+              "Collaborated with 3+ UX designers for frontend design & implementation",
+              "Implemented '20+ automated UI testing suites' with Playwright, 'reducing QA cycles by 70%'",
+              "Participated in code reviews maintaining '>90% code quality standards'"
+            ]
+          },
+          {
+            "role": "UI/UX Developer",
+            "company": "GHD Pty, Ltd.",
+            "location": "(AU/CA) — Makati, NCR",
+            "period": "May 2023 - Aug 2024",
+            "features": [
+              "Built '30+ CMS frontend components' improving usability of content authors for company website management",
+              "'Led Angular Ionic upgrade from v12 to v18' for cross-platform Health & Safety mobile app for iOS and Android users",
+              "Developed '4+ reusable components' with React memoization, 'improving loading performance by 30%'",
+              "Implemented '10+ automated testing' with Selenium, 'reducing manual testing cycles by 50%'"
+            ]
+          },
+          {
+            "role": "MERN Stack Developer",
+            "company": "Vertere Global Solutions Inc.",
+            "location": "San Juan, NCR",
+            "period": "June 2022 - April 2023",
+            "features": [
+              "Developed 'Check Request System' for five different HQs, processing 500+ transactions each per month for liquidation, cheque processing, and cash advances",
+              "'Profit & Loss Dashboard' for Finance dept., used for expense management",
+              "Deployed '4 production applications' using Docker containerization and Azure cloud infrastructure",
+              "Implemented HTTPS security protocols and maintained Linux-based server instances with '99.9% uptime'"
+            ]
+          },
+          {
+            "role": "Full Stack Developer",
+            "company": "Freelance Clients",
+            "location": "(GL) — Mandaluyong, NCR",
+            "period": "March 2020 - April 2022",
+            "features": [
+              "Delivered '4+ e-commerce websites' with modern parallax design with SEO",
+              "Published with '72.5% On-page' score for Accelerate International Logistics",
+              "Provided live coding tutorials to US-based clients",
+              "Built tutorial platform user management system for academic institution"
+            ]
+          }
+        ],
+        "skills": {
+          "hard_skills": [
+            {
+              "category": "Frontend Tools",
+              "skill_list": [
+                "React Native",
+                "Redux",
+                "Angular",
+                "Ionic",
+                "HTML5",
+                "Tailwind CSS 3",
+                ".NET",
+                "JavaScript ES6",
+                "TypeScript",
+                "NextJS",
+                "GraphQL",
+                "jQuery",
+                "Bootstrap",
+                "SASS",
+                "SCSS"
+              ]
+            },
+            {
+              "category": "Frontend Concepts",
+              "skill_list": [
+                "User Interfaces",
+                "User Experience",
+                "API Integration",
+                "TDD",
+                "Test-Driven Development",
+                "Responsive Design",
+                "Data visualization",
+                "Product development",
+                "Microservices",
+                "Unit testing"
+              ]
+            },
+            {
+              "category": "Backend",
+              "skill_list": [
+                "Python Django",
+                "Node",
+                "Express.js",
+                "REST API",
+                "Websocket",
+                "Database",
+                "MongoDB",
+                "SQL Server",
+                "MySQL",
+                "PostgreSQL"
+              ]
+            },
+            {
+              "category": "Cloud & DevOps",
+              "skill_list": [
+                "AWS EC2 S3 Lambda",
+                "Microsoft Azure",
+                "Firebase",
+                "Docker",
+                "NGINX",
+                "Linux",
+                "CI/CD",
+                "HTTPS",
+                "OAuth 2.0",
+                "Jenkins",
+                "Serverless"
+              ]
+            },
+            {
+              "category": "Agile",
+              "skill_list": [
+                "Confluence",
+                "Jira",
+                "Scrum",
+                "Kanban"
+              ]
+            },
+            {
+              "category": "Tools",
+              "skill_list": [
+                "Git version control",
+                "GitHub",
+                "GitLab",
+                "BitBucket",
+                "Figma",
+                "Storybook",
+                "Playwright",
+                "Cypress",
+                "Jest"
+              ]
+            },
+            {
+              "category": "Software Engineering",
+              "skill_list": [
+                "Data Structure Algorithms",
+                "Design software",
+                "Design Systems",
+                "Design Patterns",
+                "Troubleshooting",
+                "Best practices",
+                "Feasibility study"
+              ]
+            }
+          ],
+          "soft_skills": [
+            {
+              "category": "Leadership",
+              "skill_list": [
+                "Cross-functional team collaboration",
+                "Code review leadership",
+                "Technical ownership",
+                "Leading colleagues"
+              ]
+            },
+            {
+              "category": "Communication",
+              "skill_list": [
+                "Business requirements gathering",
+                "Technical documentation",
+                "Stakeholder engagement",
+                "Technical specifications",
+                "Team mentorship",
+                "Collaboration skills"
+              ]
+            },
+            {
+              "category": "Problem Solving",
+              "skill_list": [
+                "Algorithm design",
+                "Strong analytics",
+                "Logic visualization",
+                "Debugging",
+                "Research",
+                "Automation"
+              ]
+            },
+            {
+              "category": "Project Management",
+              "skill_list": [
+                "Agile methodologies",
+                "Sprint planning",
+                "Time management",
+                "SDLC",
+                "Design and development"
+              ]
+            },
+            {
+              "category": "Work Ethics",
+              "skill_list": [
+                "Analytical thinking",
+                "Visionary",
+                "Intuitive",
+                "Flexibility",
+                "Innovation",
+                "Self-driven",
+                "Leadership experience",
+                "Ability to work independently",
+                "Communication skills",
+                "Adaptability",
+                "Creativity"
+              ]
+            },
+            {
+              "category": "Languages",
+              "skill_list": [
+                "English (Professional)",
+                "Filipino (Native)"
+              ]
+            }
+          ]
+        }
+      },
+      "education": {
+        "degree": "Bachelor of Science in Computer Engineering",
+        "school_location": "Mapua University, Manila, PH",
+        "period": "2015-2022"
+      },
+      "certifications": [
+        {
+          "certification_name": "Certified Lean Six Sigma White Belt",
+          "certification_provider": "Six Sigma PH",
+          "certification_date": "2025",
+          "certification_link": "https://sixsigma.freshlearn.com/certificate/1556969"
+        },
+        {
+          "certification_name": "Basics of UI Design",
+          "certification_provider": "Cambridge International Qualifications, UK",
+          "certification_date": "2025",
+          "certification_link": "https://uniathena.com/verify/certificate?certID=1370-7221-9127"
+        },
+        {
+          "certification_name": "Google Cloud Big Data and Machine Learning Fundamentals",
+          "certification_provider": "Google Cloud Platform - GCP",
+          "certification_date": "2020",
+          "certification_link": "https://coursera.org/verify/UUQXGLPDM3VJ2019-2022"
+        },
+        {
+          "certification_name": "Introduction to TensorFlow for AI, ML, and Deep Learning",
+          "certification_provider": "DeepLearning.AI",
+          "certification_date": "2020",
+          "certification_link": "https://coursera.org/verify/FFHG8BC72NKZ"
+        }
+      ],
+      "other": {
+        "interest_and_hobbies": [
+          {
+            "title": "Emerging Technologies",
+            "content": "Passionate about adopting cutting-edge tools to enhance development efficiency. In 2020, I mastered React for frontend development during my academic years. By 2022, I transitioned to mobile-first development, followed by cross-platform PWAs and native mobile apps in 2023. Today, I leverage LLMs, AI-augmented workflows, and prompt engineering to accelerate web development."
+          },
+          {
+            "title": "Continuous Learning",
+            "content": "I stay motivated by actively explore advancements in AI/ML technologies, cloud platforms, and modern frontend frameworks, following the latest trends in software development with articles and blogs. Received technical training during my tenure on enterprise corporations"
+          }
+        ]
+      }
+    }
+
+    // Generate documents from personalInfo
+    const info: any = this.personalInfo;
+
     this.documents = [
-      // Work Index
-      {
-        id: 'work-1',
-        content: 'Worked with a Fortune 500 company, a long standing client of 77 Global Services Inc. Developed and shipped new features of a Chatbot, contributed to the update from legacy that includes dynamic configuration and reusable Frontend components. Worked side-to-side with ML Engineers, lead code reviews, and contributed to automated end-to-end testing. Tools used are React with Next, Redux, and used Jenkins and AWS for pipeline deployments',
+      // Work Experience Documents - Generated from personalInfo
+      ...info.work_info.experience.map((exp: any, index: number) => ({
+        id: `work-exp-${index + 1}`,
+        content: `${exp.role} at ${exp.company} in ${exp.location} from ${exp.period}. ${exp.features.join('. ')}`,
         metadata: {
-          title: 'Current Position - IA/UX Developer (Server-side Frontend) at 77 Global Services Inc. from August 2024 to present',
+          title: `${exp.role} at ${exp.company} (${exp.period})`,
+          category: 'work' as const,
+          tags: this.extractTagsFromExperience(exp),
+          source: 'Work Experience'
+        }
+      })),
+
+      // Professional Summary
+      {
+        id: 'work-summary',
+        content: info.work_info.summary,
+        metadata: {
+          title: 'Professional Summary',
           category: 'work',
-          tags: ['software engineering', 'frontend', 'react', 'next', 'redux', 'typescript'],
-          source: 'Resume'
+          tags: ['experience', 'summary', 'ai', 'full-stack', 'react', 'nextjs', 'ml', 'aws', 'azure', '5+ years'],
+          source: 'Professional Summary'
         }
       },
+
+      // Technical Skills - Frontend
       {
-        id: 'work-2',
-        content: 'Previously worked as a UI/UX Developer for GHD as direct full-time software developer. Developed cross-platform components for Content Management System, which can be seen on the company website https://ghd.com. Collaborated with UI/UX Designers in the Global Team, worked with QA for test suites and automated end-to-end and unit testing, resolved feature defects, lead pull requests and code reviews. Also, another project is a Forms Validation/Submission Application (H&SE) developed in Angular/Ionic. Improved existing features and contributed to upgrade the Angular core from v12 to v18',
+        id: 'work-skills-frontend',
+        content: `Frontend development expertise includes: ${info.work_info.skills.hard_skills[0].skill_list.join(', ')}. Also experienced with ${info.work_info.skills.hard_skills[1].skill_list.join(', ')}`,
         metadata: {
-          title: 'Previous Role - Frontend Developer at GHD from May 2023 to August 2024',
+          title: 'Frontend Technical Skills',
           category: 'work',
-          tags: ['frontend', 'react', 'typescript', 'CMS', 'OAuth2', 'Angularv12', 'Angularv18'],
-          source: 'Resume'
+          tags: [...info.work_info.skills.hard_skills[0].skill_list.map((s: string) => s.toLowerCase()), 'frontend', 'ui', 'ux'],
+          source: 'Technical Skills'
         }
       },
+
+      // Technical Skills - Backend
       {
-        id: 'work-3',
-        content: 'Full stack developer with Megawide Construction Corp., a client of Vertere Global Solutions Inc. Worked with legacy React class-component application, delivered optimizations and new features, improved backend performance and data consistency with MongoDB, spearheaded publishing the web app from the clients local servers to cloud with Linux, Docker, Nginx, and Microsoft Azure. Maintained legacy databases, developed manual pipelines, and updated features of Annual Stock Holder Meetings, maintained Profit & Loss Dashboard, developed 360-degree Survey System from conception to publishing, and also general basic devops as part of everyday development lifecycle',
+        id: 'work-skills-backend',
+        content: `Backend development skills: ${info.work_info.skills.hard_skills[2].skill_list.join(', ')}`,
         metadata: {
-          title: 'Previous Role - MERN Stack Developer (Fullstack) at Vertere Global Solutions Inc. from  June 2022 to April 2023',
+          title: 'Backend Technical Skills',
           category: 'work',
-          tags: ['react', 'typescript', 'microsoft azure', 'docker', 'agile', 'nginx', 'nodejs', 'express', 'mongodb', 'mysql'],
-          source: 'Resume'
+          tags: [...info.work_info.skills.hard_skills[2].skill_list.map((s: string) => s.toLowerCase()), 'backend', 'api', 'database'],
+          source: 'Technical Skills'
         }
       },
+
+      // Technical Skills - Cloud & DevOps
       {
-        id: 'work-4',
-        content: 'Started as a full stack developer on freelance years, developed and published websites, applications, and mockups for clients, and live code tutoring.',
+        id: 'work-skills-cloud',
+        content: `Cloud and DevOps expertise: ${info.work_info.skills.hard_skills[3].skill_list.join(', ')}`,
         metadata: {
-          title: 'Previous Role - Full Stack Developer with Freelance jobs from March 2020 to April 2022',
+          title: 'Cloud & DevOps Skills',
           category: 'work',
-          tags: ['react', 'typescript', 'microsoft azure', 'docker', 'agile', 'nginx', 'nodejs', 'express', 'mongodb', 'mysql'],
-          source: 'Resume'
+          tags: [...info.work_info.skills.hard_skills[3].skill_list.map((s: string) => s.toLowerCase()), 'cloud', 'devops', 'infrastructure'],
+          source: 'Technical Skills'
         }
       },
-      {
-        id: 'work-5',
-        content: 'Proficient in modern web technologies including React, Next.js, Redux, TypeScript, Node.js, Express, Docker, and Git. Experience in working on Microservices for CI/CD Pipelines with Microsoft Azure, AWS, Jenkins, and remote repositories like Microsoft Azure Repository, Bitbucket, and GitLab. Experience with agile methodologies with scrum masters, business analysts, and product owners; SDLC includes Jira with Gitbucket for ticketing and resolve system. Has experience in working with development team, leading pull requests and resolving merge conflicts on a command terminal level with Git for production-grade code versioning.',
+
+      // Soft Skills
+      ...info.work_info.skills.soft_skills.map((skill: any, index: number) => ({
+        id: `work-soft-${index + 1}`,
+        content: `${skill.category} skills include: ${skill.skill_list.join(', ')}`,
         metadata: {
-          title: 'Core Technical Skills',
-          category: 'work',
-          tags: ['react', 'nextjs', 'typescript', 'nodejs', 'express', 'aws', 'microsoft azure', 'jenkins', 'docker', 'linux', 'ci/cd', 'agile',],
-          source: 'Core Technical Skills'
-        }
-      },
-      {
-        id: 'work-6',
-        content: 'Currently using Generative and Agentic AI tools for augmented development. By making use of prompt engineering to get the most out of the LLM, his goal is to get more accurate and predictable responses to the model. This enables him to ship features more faster withought compromising the quality of the code, and to improve overall software engineering and critical thinking skills. Generative AI tools include OpenAI, Groq. Agentic AI tools include Claude Code. Improving myself to be an AI-First Software Developer that can ship features faster, tackle more complex task, and solve better problems with accuracy without compromising scalability of the code and the products being delivered',
-        metadata: {
-          title: 'Improved Skillset',
-          category: 'work',
-          tags: ['gpt', 'rag', 'llm', 'prompt engineering', 'ai-first', 'latest ai tools', 'generative ai', 'agentic ai', 'context engineering'],
-          source: 'Improving Technical Skills'
-        }
-      },
-      {
-        id: 'work-7',
-        content: 'Can work with colleagues or alone, finish deliverables at or before the expected time; listen to people and take critisism without prejudice, understanding that all of this is just part of work. I enjoy working with like minded people, who works at their best to beat the market. I enjoy spending time with my colleagues on and off work, and is open to know them on a personal level.',
-        metadata: {
-          title: 'Soft Skills',
-          category: 'work',
-          tags: ['communication', 'team oriented', 'soft skills', 'coordination', 'honesty'],
+          title: `${skill.category} Skills`,
+          category: 'work' as const,
+          tags: [...skill.skill_list.map((s: string) => s.toLowerCase()), 'soft skills'],
           source: 'Soft Skills'
         }
-      },
-      {
-        id: 'work-8',
-        content: 'Completed the following trainings: 1) Certified Lean Sig Sigma White Belt at Sig Sigma PH on February 2025 (reference: https://sixsigma.freshlearn.com/certificate/1556969) 2) Basics of UI Design at Cambridge International Qualifications, UK on Feb 2025 (reference: https://uniathena.com/verify/certificate?certID=1370-7221-9127) 3) Odoo v14 Software Development Training and 4) Ionic Mobile Application Development at Megawide Construction Corp. on December 2023 conducted by Candidoskie P. Berdin II, Senior IT Manager 5) Google Cloude Big Data and Machine Learning Fundamentals at Google Cloud on August 2020 with Grade: 97.30% (reference: https://coursera.org/verify/UUQXGLPDM3VJ2019-2022) 6) Introduction to Tensorflow for Artificial Intelligence, Machine Learning, and Deep Learning at Deeplearning.AI on August 2020 with Grade: 97.82% (refernece: https://coursera.org/verify/FFHG8BC72NKZ)',
+      })),
+
+      // Certifications
+      ...info.certifications.map((cert: any, index: number) => ({
+        id: `work-cert-${index + 1}`,
+        content: `${cert.certification_name} from ${cert.certification_provider} in ${cert.certification_date}. Verification: ${cert.certification_link}`,
         metadata: {
-          title: 'Certifications',
-          category: 'work',
-          tags: ['certifications', 'six sigma', 'cambridge', 'training'],
+          title: cert.certification_name,
+          category: 'work' as const,
+          tags: ['certification', 'training', cert.certification_provider.toLowerCase(), cert.certification_name.toLowerCase()],
           source: 'Certifications'
         }
-      },
-      
-      // School Index
+      })),
+
+      // Education
       {
-        id: 'school-1',
-        content: 'Bachelor of Science in Computer Engieering from Mapua University, Manila, Philippines in 2022. Majored in .NET5 Fullstack Technology, and published a thesis tittled "Determination of Driver’s Alertness Based on Eye State with Edge Computing" ',
+        id: 'school-degree',
+        content: `${info.education.degree} from ${info.education.school_location} (${info.education.period}). Specialized in .NET5 Fullstack Technology and computer engineering fundamentals.`,
         metadata: {
-          title: 'Education - Computer Engineering Degree',
+          title: 'Computer Engineering Degree',
           category: 'school',
-          tags: ['computer engineering', 'algorithms', 'data structures', 'machine learning', 'education', 'study'],
-          source: 'Academic Records'
+          tags: ['education', 'degree', 'computer engineering', 'mapua', 'university', '.net', 'fullstack'],
+          source: 'Education'
         }
       },
+
+      // Thesis Project
       {
-        id: 'school-2',
-        content: 'Senior thesis project: Applied AI-powered Face and Motion detection to an ARM64 device as an edge computing agent. It analyzes real-time camera feed input to detect and conclude the state of the eyes of a person. Practical applications include drowsiness detection using eye state. Algorithms included are Convolutional Neural Networks, Deep learning, Sigmoid Classification',
+        id: 'school-thesis',
+        content: `Senior thesis project: "Determination of Driver's Alertness Based on Eye State with Edge Computing". Applied AI-powered Face and Motion detection to an ARM64 device as an edge computing agent. It analyzes real-time camera feed input to detect and conclude the state of the eyes of a person. Practical applications include drowsiness detection using eye state. Algorithms included Convolutional Neural Networks, Deep learning, and Sigmoid Classification.`,
         metadata: {
-          title: 'Thesis Project - Determination of Driver’s Alertness Based on Eye State with Edge Computing',
+          title: 'Thesis Project - AI & Edge Computing',
           category: 'school',
-          tags: ['ai', 'nlp', 'machine learning', 'thesis', 'capstone', 'project'],
-          source: 'Project Portfolio'
+          tags: ['thesis', 'ai', 'machine learning', 'edge computing', 'computer vision', 'cnn', 'deep learning', 'arm64'],
+          source: 'Academic Project'
         }
       },
-      
-      // About Me Index
+
+      // Personal Info
       {
-        id: 'about-1',
-        content: 'My hobbies are playing video games that involve planning and team coordination like Dota2 and Valorant. I also enjoy single player games like tetris and puzzles. I treat code examples like puzzles. I am always eager to learn new technologies. Outside of work, I love going to beaches, photography, and exploring different places with my significant other.',
+        id: 'about-contact',
+        content: `${info.personal_info.name} is a ${info.personal_info.job_title} based in ${info.personal_info.address_line.city}, ${info.personal_info.address_line.country}. Contact: ${info.personal_info.email}, ${info.personal_info.mobile}. Portfolio: ${info.personal_info.website.url}. LinkedIn: ${info.personal_info.linkedin.url}`,
         metadata: {
-          title: 'Hobbies, Interests, and Values',
+          title: 'Contact Information',
           category: 'about_me',
-          tags: ['hobbies','interests','values'],
-          source: 'Personal Statement'
+          tags: ['contact', 'email', 'phone', 'location', 'linkedin', 'portfolio', 'personal'],
+          source: 'Contact Info'
         }
       },
+
+      // Interests and Hobbies
+      ...info.other.interest_and_hobbies.map((interest: any, index: number) => ({
+        id: `about-interest-${index + 1}`,
+        content: interest.content,
+        metadata: {
+          title: interest.title,
+          category: 'about_me' as const,
+          tags: ['interests', 'hobbies', 'personal', interest.title.toLowerCase()],
+          source: 'Personal Interests'
+        }
+      })),
+
+      // Additional personal info
       {
-        id: 'about-2',
-        content: 'Im currently 27 years old. Originally from City of Cabanatuan, Nueva Ecija. I moved to Kuwait to finish my junior and senior highschool years, and then to Mandaluyong to pursue my study in Mapua University as Computer Engineer.',
+        id: 'about-personal',
+        content: 'Jacob is 27 years old, originally from Cabanatuan City, Nueva Ecija. He lived in Kuwait during junior and senior high school, then moved to Mandaluyong to pursue Computer Engineering at Mapua University. He enjoys playing strategic video games like Dota2 and Valorant, as well as puzzles. Outside of work, he loves beaches, photography, and traveling with his partner of 9 years, Francesca, after whom this AI assistant is named.',
         metadata: {
           title: 'Personal Background',
           category: 'about_me',
-          tags: ['location', 'home', 'work location'],
+          tags: ['personal', 'background', 'age', 'location', 'hobbies', 'games', 'travel', 'photography'],
           source: 'Personal Bio'
         }
-      },
-      {
-        id: 'about-4',
-        content: 'The developer and publisher of this website/ web application is 🥷🏻Jacob. ',
-        metadata: {
-          title: 'Personal Profile',
-          category: 'about_me',
-          tags: ['information', 'profile', 'personal', 'publisher'],
-          source: 'Personal Profile'
-        }
-      },
-      {
-        id: 'about-4',
-        content: "This AI Assistant is named after Jacob's partner of 9 years. They love to travel to different places",
-        metadata: {
-          title: 'AI Chatbot',
-          category: 'about_me',
-          tags: ['francesca','ai assistant','assistant name'],
-          source: 'Personal Profile'
-        }
-      },
+      }
     ];
 
     this.initialized = true;
+  }
+
+  // Helper method to extract tags from experience
+  private extractTagsFromExperience(exp: any): string[] {
+    const tags: string[] = [];
+
+    // Extract technologies from role and features
+    const techKeywords = ['react', 'angular', 'vue', 'nodejs', 'python', 'aws', 'azure', 'docker', 'kubernetes', 'jenkins',
+                          'typescript', 'javascript', 'redux', 'nextjs', 'graphql', 'playwright', 'selenium', 'jest',
+                          'mongodb', 'mysql', 'postgresql', 'ci/cd', 'api', 'llm', 'ai', 'ml', 'chatbot', 'rag'];
+
+    const fullText = `${exp.role} ${exp.features.join(' ')}`.toLowerCase();
+
+    techKeywords.forEach(tech => {
+      if (fullText.includes(tech)) {
+        tags.push(tech);
+      }
+    });
+
+    // Add role-based tags
+    if (exp.role.toLowerCase().includes('frontend')) tags.push('frontend');
+    if (exp.role.toLowerCase().includes('backend')) tags.push('backend');
+    if (exp.role.toLowerCase().includes('fullstack') || exp.role.toLowerCase().includes('full stack')) tags.push('fullstack');
+    if (exp.role.toLowerCase().includes('ai') || exp.role.toLowerCase().includes('ml')) tags.push('ai', 'machine learning');
+    if (exp.role.toLowerCase().includes('ux') || exp.role.toLowerCase().includes('ui')) tags.push('ui', 'ux', 'design');
+
+    // Add company as tag
+    tags.push(exp.company.toLowerCase());
+
+    return [...new Set(tags)]; // Remove duplicates
   }
 
   // Enhanced text similarity with better keyword matching
@@ -189,13 +515,13 @@ class RAGService {
     const contentWords = document.content.toLowerCase().split(/\s+/);
     const tagWords = document.metadata.tags.join(' ').toLowerCase().split(/\s+/);
     const titleWords = document.metadata.title.toLowerCase().split(/\s+/);
-    
+
     // Combine all document text
     const allDocText = `${document.content} ${document.metadata.tags.join(' ')} ${document.metadata.title}`.toLowerCase();
-    
+
     let score = 0;
     const maxScore = queryWords.length;
-    
+
     for (const queryWord of queryWords) {
       // Exact word match in content (highest weight)
       if (contentWords.includes(queryWord)) {
@@ -213,7 +539,7 @@ class RAGService {
       else if (allDocText.includes(queryWord)) {
         score += 0.5;
       }
-      
+
       // Boost score for work-related terms
       if (['work', 'experience', 'job', 'career', 'position', 'role', 'skills', 'developer', 'engineer', 'technical', 'certification', 'training'].includes(queryWord)) {
         if (document.metadata.category === 'work') {
@@ -221,23 +547,23 @@ class RAGService {
         }
       }
     }
-    
+
     // Normalize score (0-1 range)
     const normalizedScore = Math.min(score / (maxScore * 3), 1);
-    
+
     // Debug logging
     console.log(`Query: "${query}" | Document: "${document.metadata.title}" | Score: ${normalizedScore.toFixed(3)}`);
-    
+
     return normalizedScore;
   }
 
   public async searchDocuments(
-    query: string, 
+    query: string,
     indexes: ('work' | 'school' | 'about_me')[] = ['work', 'school', 'about_me'],
     topK: number = 3
   ): Promise<SearchResult[]> {
     // Filter documents by selected indexes
-    const filteredDocs = this.documents.filter(doc => 
+    const filteredDocs = this.documents.filter(doc =>
       indexes.includes(doc.metadata.category)
     );
 
@@ -252,14 +578,14 @@ class RAGService {
       .sort((a, b) => b.similarity - a.similarity)
       .slice(0, topK)
       .filter(result => result.similarity > 0.05); // Lowered threshold for better matching
-    
+
     // Additional debug logging
     console.log(`\nRAG Search Results for "${query}":`);
     console.log(`Found ${filteredResults.length} relevant documents (threshold: 0.05)`);
     filteredResults.forEach((result, index) => {
       console.log(`${index + 1}. ${result.document.metadata.title} - Score: ${result.similarity.toFixed(3)}`);
     });
-    
+
     return filteredResults;
   }
 
@@ -268,7 +594,7 @@ class RAGService {
     indexes: ('work' | 'school' | 'about_me')[] = ['work', 'school', 'about_me']
   ): Promise<RAGContext> {
     const relevantDocuments = await this.searchDocuments(query, indexes);
-    
+
     return {
       query,
       relevantDocuments,

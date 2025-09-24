@@ -18,7 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
-      <body>
+      <body> 
         <StoreProvider>
           <Navbar />
           <main className="pt-24 pb-24">{children}</main>

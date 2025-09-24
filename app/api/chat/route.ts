@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
-import LLMService, { LLMConfig } from '../../services/llmService';
+import LLMService, { LLMConfig, ChatMessage } from '../../services/llmService';
 import { ragService } from '../../services/ragService';
 
 export async function POST(request: NextRequest) {
   try {
-    const { message, ragEnabled = true, selectedIndexes = ['work', 'school', 'about_me'] } = await request.json();
+    const { message, ragEnabled = true, selectedIndexes = ['work', 'school', 'about_me'], conversationHistory = [] } = await request.json();
 
     if (!message || typeof message !== 'string') {
       return NextResponse.json({ error: 'Message is required' }, { status: 400 });
@@ -22,6 +22,8 @@ export async function POST(request: NextRequest) {
         model: process.env.GROQ_MODEL || process.env.LLM_MODEL || 'llama3-8b-8192',
         temperature: parseFloat(process.env.GROQ_TEMPERATURE || process.env.LLM_TEMPERATURE || '0.7'),
         maxTokens: parseInt(process.env.GROQ_MAX_TOKENS || process.env.LLM_MAX_TOKENS || '1000'),
+        contextWindowSize: parseInt(process.env.LLM_CONTEXT_WINDOW_SIZE || '10'),
+        maxContextTokens: parseInt(process.env.LLM_MAX_CONTEXT_TOKENS || '2000'),
       };
     } else {
       llmConfig = {
@@ -31,11 +33,19 @@ export async function POST(request: NextRequest) {
         baseUrl: process.env.LLM_BASE_URL,
         temperature: parseFloat(process.env.LLM_TEMPERATURE || '0.7'),
         maxTokens: parseInt(process.env.LLM_MAX_TOKENS || '1000'),
+        contextWindowSize: parseInt(process.env.LLM_CONTEXT_WINDOW_SIZE || '10'),
+        maxContextTokens: parseInt(process.env.LLM_MAX_CONTEXT_TOKENS || '2000'),
       };
     }
 
     // Initialize LLM service
     const llmService = new LLMService(llmConfig);
+
+    // Format conversation history for LLM
+    const formattedHistory: ChatMessage[] = conversationHistory.map((msg: any) => ({
+      role: msg.role as 'user' | 'assistant',
+      content: msg.content,
+    }));
 
     let responseContent = '';
     let sources: string[] = [];
@@ -76,7 +86,7 @@ export async function POST(request: NextRequest) {
         - Do not include greetings
         `;
 
-        const llmResponse = await llmService.generateResponse(contextPrompt);
+        const llmResponse = await llmService.generateResponse(contextPrompt, formattedHistory);
         responseContent = llmResponse.content;
       } else {
         // No relevant documents found
@@ -97,7 +107,7 @@ export async function POST(request: NextRequest) {
         - Do not include greetings
         `;
 
-        const llmResponse = await llmService.generateResponse(noContextPrompt);
+        const llmResponse = await llmService.generateResponse(noContextPrompt, formattedHistory);
         responseContent = llmResponse.content;
       }
     } else {
@@ -106,7 +116,7 @@ export async function POST(request: NextRequest) {
 
 Please provide a helpful response. If you don't have specific information about Jacob, you can provide general assistance or suggest asking about topics that might be in Jacob's portfolio like work experience, education, or personal interests.`;
 
-      const llmResponse = await llmService.generateResponse(basicPrompt);
+      const llmResponse = await llmService.generateResponse(basicPrompt, formattedHistory);
       responseContent = llmResponse.content;
     }
 

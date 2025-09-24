@@ -7,7 +7,7 @@ import { ragService } from "../services/ragService";
 import ArtSpaceship from "../assets/ascii/ArtSpaceship";
 
 interface ChatBotProps {
-  onMessage?: (message: string) => Promise<{ content: string; sources?: string[] }>;
+  onMessage?: (message: string, conversationHistory?: any[]) => Promise<{ content: string; sources?: string[] }>;
   ragEnabled?: boolean;
   documents?: string[];
 }
@@ -101,6 +101,12 @@ export default function ChatBot({
       let response;
       let ragContext = undefined;
 
+      // Prepare conversation history for context window
+      const conversationHistory = messages.map(msg => ({
+        role: msg.role,
+        content: msg.content,
+      }));
+
       // RAG is always enabled, check if any indexes are selected
       if (ragSettings.selectedIndexes.length > 0) {
         // Get RAG context
@@ -129,19 +135,19 @@ User question: ${input}
 Please provide a helpful response based on the context above.`;
 
           response = onMessage
-            ? await onMessage(contextPrompt)
+            ? await onMessage(contextPrompt, conversationHistory)
             : {
               content: `Based on the relevant information I found, here's what I can tell you: ${ragData.relevantDocuments[0]?.document.content.substring(0, 200)}...`,
               sources: ragData.relevantDocuments.map(result => result.document.metadata.title)
             };
         } else {
           response = onMessage
-            ? await onMessage(input)
+            ? await onMessage(input, conversationHistory)
             : { content: "I don't have specific information about that topic in my knowledge base. Could you try rephrasing your question?" };
         }
       } else {
         response = onMessage
-          ? await onMessage(input)
+          ? await onMessage(input, conversationHistory)
           : { content: "Please select at least one knowledge area to get personalized responses about Jacob!" };
       }
 
