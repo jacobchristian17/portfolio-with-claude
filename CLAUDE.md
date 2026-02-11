@@ -39,3 +39,24 @@ The application uses a persistent navigation bar with route-based active states 
 
 ### Repository:
 - Format the commit with `[Feature] - Changelog`
+
+## Git Workflow (OpenClaw/Chico)
+
+### SSH Setup (required each session)
+```bash
+eval "$(ssh-agent -s)" && SSH_ASKPASS=~/.ssh/askpass-portfolio.sh SSH_ASKPASS_REQUIRE=force ssh-add ~/.ssh/id_ed25519 < /dev/null
+```
+
+### Push Flow
+1. Make changes
+2. `git add -A && git commit -m "[Feature] - Description"`
+3. Run SSH setup above (if not done this session)
+4. `git push`
+
+### Deployment
+- **Auto-deploy**: Vercel deploys on push to `main`
+- **CI**: GitHub Actions runs lint, typecheck, build before deploy
+- **Notifications**: Telegram notification on deploy status
+
+### Working Directory
+When using OpenClaw, work from: `/home/jacob/.openclaw/workspace/portfolio`
