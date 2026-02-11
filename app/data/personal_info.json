@@ -1,0 +1,36 @@
+{
+  "name": "Jacob Christian",
+  "title": "Full Stack & AI Integration",
+  "tagline": "Building intelligent solutions from startup to Fortune 500",
+  "summary": "5+ years turning ideas into production-ready software",
+  "skills": {
+    "primary": ["React", "Next.js", "TypeScript", "Node.js", "AI Integration"],
+    "secondary": ["Redux", "MongoDB", "Docker", "AWS", "Azure"]
+  },
+  "impact": [
+    {
+      "emoji": "🏢",
+      "company": "Fortune 500",
+      "impact": "Shipped AI chatbot features serving enterprise customers"
+    },
+    {
+      "emoji": "🌍",
+      "company": "GHD",
+      "impact": "Built global CMS components live on ghd.com"
+    },
+    {
+      "emoji": "☁️",
+      "company": "Megawide",
+      "impact": "Migrated legacy systems to cloud, cutting deployment time"
+    },
+    {
+      "emoji": "🚀",
+      "company": "Freelance",
+      "impact": "Delivered 10+ web apps from concept to launch"
+    }
+  ],
+  "cta": {
+    "primary": "Ask Francesca",
+    "secondary": "View Work"
+  }
+}
