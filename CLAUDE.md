@@ -63,3 +63,12 @@ eval "$(ssh-agent -s)" && SSH_ASKPASS=~/.ssh/askpass-portfolio.sh SSH_ASKPASS_RE
 
 ### Working Directory
 When using OpenClaw, work from: `/home/jacob/.openclaw/workspace/portfolio`
+
+### Commands
+
+#### `/local` - Start local dev server with public tunnel
+1. Install dependencies: `npm install`
+2. Start dev server: `npm run dev -- -H 0.0.0.0` (background)
+3. Create tunnel: `npx localtunnel --port 3000` (background)
+4. Get tunnel password: `curl -s https://loca.lt/mytunnelpassword`
+5. Share the tunnel URL and password with Jacob
