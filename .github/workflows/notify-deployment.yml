@@ -26,16 +26,13 @@ jobs:
             STATUS="failed to deploy"
           fi
           
-          MESSAGE="${EMOJI} *Vercel Deployment*
+          SHORT_SHA="${COMMIT_SHA:0:7}"
           
-          Repository: \`${REPO_NAME}\`
-          Status: ${STATUS}
-          Commit: \`${COMMIT_SHA:0:7}\`
-          
-          🔗 [View Deployment](${DEPLOYMENT_URL})"
-          
+          # Use JSON payload for reliable delivery
           curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
-            -d chat_id="${TELEGRAM_CHAT_ID}" \
-            -d text="${MESSAGE}" \
-            -d parse_mode="Markdown" \
-            -d disable_web_page_preview="true"
+            -H "Content-Type: application/json" \
+            -d "{
+              \"chat_id\": \"${TELEGRAM_CHAT_ID}\",
+              \"text\": \"${EMOJI} Vercel Deployment\n\nRepo: ${REPO_NAME}\nStatus: ${STATUS}\nCommit: ${SHORT_SHA}\n\n🔗 ${DEPLOYMENT_URL}\",
+              \"disable_web_page_preview\": true
+            }"
