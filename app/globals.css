@@ -296,6 +296,34 @@ button {
   background-clip: text;
 }
 
+.text-royal-gradient-animated {
+  background: linear-gradient(
+    135deg,
+    var(--royal-blue),
+    var(--royal-blue-light),
+    var(--gold),
+    var(--gold-light),
+    var(--royal-blue)
+  );
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradient-shift 6s ease infinite;
+}
+
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
 /* Navbar Backdrop */
 .navbar-backdrop {
   backdrop-filter: blur(20px);

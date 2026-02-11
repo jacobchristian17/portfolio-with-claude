@@ -178,7 +178,7 @@ export default function Home() {
               Welcome to Jacob&rsquo;s Space 🥷🏻
             </h1>
           </div>
-          <p id="hero-subtitle" className="text-2xl mb-6 font-medium font-bold text-royal-gradient">
+          <p id="hero-subtitle" className="text-2xl mb-6 font-medium font-bold text-royal-gradient-animated">
             Developer and AI Integration
           </p>
           <p id="hero-description" className="text-lg max-w-3xl mx-auto leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
