@@ -67,6 +67,7 @@ jobs:
   notify:
     needs: [deploy]
     runs-on: ubuntu-latest
+    environment: Production
     name: Telegram Notification
     if: always() && github.event_name == 'push' && github.ref == 'refs/heads/main'
     steps:
