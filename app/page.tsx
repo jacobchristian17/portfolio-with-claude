@@ -220,14 +220,18 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Skills Carousel */}
-        <div id="section-skills-carousel" className="mb-16 relative z-3">
-          <TechCarousel 
-            title="⚙️ Tech Stack" 
-            techItems={techStack} 
-            subtitle="Professional experience with the following tools and frameworks:" 
-          />
-        </div>
+      </div>
+
+      {/* Skills Carousel - Full Width */}
+      <div id="section-skills-carousel" className="w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] mb-16 relative z-3">
+        <TechCarousel 
+          title="⚙️ Tech Stack" 
+          techItems={techStack} 
+          subtitle="Professional experience with the following tools and frameworks:" 
+        />
+      </div>
+
+      <div className="max-w-7xl mx-auto px-6 relative z-1">
 
         {/* Chatbot Section */}
         <div id="section-chatbot-header" className="text-center mb-8">
