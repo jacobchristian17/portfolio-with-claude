@@ -9,15 +9,15 @@ export default function AboutMe() {
     borderColor: isDarkMode ? "border-blue-200" : "border-blue-900"
   }
   return (
-    <div className="min-h-screen p-6" >
+    <div id="page-about-me" className="min-h-screen p-6" >
       <HeroImage />
-      <div className="max-w-4xl mx-auto backdrop-blur-[1px] relative z-3">
-        <div className={"glass-card rounded-lg shadow-lg p-4 md:p-8"}>
-          <h1 className="text-3xl font-bold mb-6" style={{ color: 'var(--text-primary)' }}>About Me</h1>
+      <div id="about-me-container" className="max-w-4xl mx-auto backdrop-blur-[1px] relative z-3">
+        <div id="about-me-card" className={"glass-card rounded-lg shadow-lg p-4 md:p-8"}>
+          <h1 id="about-me-title" className="text-3xl font-bold mb-6" style={{ color: 'var(--text-primary)' }}>About Me</h1>
 
           {/* Personal Introduction */}
-          <div className="mb-8 border-l-4 pl-2 md:pl-6" style={{ borderColor: 'var(--text-secondary)' }}>
-            <h2 className="text-2xl font-semibold mb-1 md:mb-4" style={{ color: 'var(--text-secondary)' }}>
+          <div id="section-intro" className="mb-8 border-l-4 pl-2 md:pl-6" style={{ borderColor: 'var(--text-secondary)' }}>
+            <h2 id="section-intro-title" className="text-2xl font-semibold mb-1 md:mb-4" style={{ color: 'var(--text-secondary)' }}>
               Meet Jacob 🥷🏻
             </h2>
             <div className="bg-blue-50 rounded-lg p-6">
@@ -37,8 +37,8 @@ export default function AboutMe() {
           </div>
 
           {/* Background & Origins */}
-          <div className="mb-8">
-            <h2 className="text-2xl font-semibold mb-4" style={{ borderColor: 'var(--text-secondary)' }}>Background & Journey</h2>
+          <div id="section-background" className="mb-8">
+            <h2 id="section-background-title" className="text-2xl font-semibold mb-4" style={{ borderColor: 'var(--text-secondary)' }}>Background & Journey</h2>
             <div className="bg-yellow-50 rounded-lg p-6">
               <div className="space-y-4">
                 <div>
@@ -80,8 +80,8 @@ export default function AboutMe() {
           </div>
 
           {/* Hobbies & Interests */}
-          <div className="mb-8">
-            <h2 className="text-2xl font-semibold mb-4" style={{ borderColor: 'var(--text-secondary)' }}>Hobbies & Interests</h2>
+          <div id="section-hobbies" className="mb-8">
+            <h2 id="section-hobbies-title" className="text-2xl font-semibold mb-4" style={{ borderColor: 'var(--text-secondary)' }}>Hobbies & Interests</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="bg-blue-50 rounded-lg p-6">
                 <h3 className="font-semibold text-blue-800 mb-3">🎮 Gaming</h3>
@@ -110,8 +110,8 @@ export default function AboutMe() {
           </div>
 
           {/* Personal Philosophy */}
-          <div className="mb-8">
-            <h2 className="text-2xl font-semibold text mb-4" style={{ borderColor: 'var(--text-secondary)' }}>Personal Philosophy</h2>
+          <div id="section-philosophy" className="mb-8">
+            <h2 id="section-philosophy-title" className="text-2xl font-semibold text mb-4" style={{ borderColor: 'var(--text-secondary)' }}>Personal Philosophy</h2>
             <div className="bg-blue-50 rounded-lg p-6">
               <div className="space-y-4">
                 <div className="border-l-4 border-blue-900 pl-4">
@@ -144,8 +144,8 @@ export default function AboutMe() {
           </div>
 
           {/* Fun Facts */}
-          <div className="mb-8">
-            <h2 className="text-2xl font-semibold mb-4" style={{ borderColor: 'var(--text-secondary)' }}>Fun Facts</h2>
+          <div id="section-fun-facts" className="mb-8">
+            <h2 id="section-fun-facts-title" className="text-2xl font-semibold mb-4" style={{ borderColor: 'var(--text-secondary)' }}>Fun Facts</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               <div className="bg-blue-50 p-4 rounded-lg text-center">
                 <div className="text-2xl mb-2">🎯</div>
@@ -181,8 +181,8 @@ export default function AboutMe() {
           </div>
 
           {/* Contact & Connect */}
-          <div className="bg-gray-50 rounded-lg p-6">
-            <h2 className="text-2xl font-semibold text-gray-800 mb-4">Other notes</h2>
+          <div id="section-contact" className="bg-gray-50 rounded-lg p-6">
+            <h2 id="section-contact-title" className="text-2xl font-semibold text-gray-800 mb-4">Other notes</h2>
             <p className="leading-relaxed md:text-justify mb-4" style={{ color: 'var(--text-card-primary)' }}>
               I would love to hear from you! 🫵🏻 Reach me out for collaborating on interesting projects, connecting with fellow developers and tech enthusiasts.
             </p>

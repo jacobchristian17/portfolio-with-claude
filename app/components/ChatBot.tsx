@@ -272,16 +272,17 @@ Please provide a helpful response based on the context above.`;
   };
 
   return (
-    <div className="flex flex-col h-128 glass-card rounded-2xl overflow-hidden shadow-royal">
+    <div id="chatbot" className="flex flex-col h-128 glass-card rounded-2xl overflow-hidden shadow-royal">
       {/* Header */}
-      <div className="bg-royal-gradient text-white p-4 rounded-t-2xl flex justify-between items-center">
-        <div>
-          <h3 className="text-lg font-semibold "> 🙋🏻‍♀️Ask Francesca!</h3>
-          <p className="text-sm text-blue-100 max-sm:text-xs">
+      <div id="chatbot-header" className="bg-royal-gradient text-white p-4 rounded-t-2xl flex justify-between items-center">
+        <div id="chatbot-header-info">
+          <h3 id="chatbot-title" className="text-lg font-semibold "> 🙋🏻‍♀️Ask Francesca!</h3>
+          <p id="chatbot-subtitle" className="text-sm text-blue-100 max-sm:text-xs">
             She knows a thing or two about Jacob (づ￣ 3￣)づ
           </p>
         </div>
         <button
+          id="btn-clear-messages"
           onClick={handleClearMessages}
           className="btn-gold text-sm px-3 py-1 cursor-pointer rounded-full flex items-center justify-center w-12 h-12 max-md:w-10 max-md:h-10 hover:text-yellow-500"
         >
@@ -295,11 +296,12 @@ Please provide a helpful response based on the context above.`;
 
       {/* Messages */}
       <div
+        id="chatbot-messages"
         ref={messagesContainerRef}
         className="flex-1 overflow-y-auto p-4 space-y-4 scroll-smooth"
       >
         {messages.length === 0 ? (
-          <div className="text-center text-gray-500 text-sm">
+          <div id="chatbot-empty-state" className="text-center text-gray-500 text-sm">
             Reveal a secret ASCII art by starting the conversation!
           </div>
         ) : (
@@ -397,9 +399,10 @@ Please provide a helpful response based on the context above.`;
       </div>
 
       {/* Input */}
-      <form onSubmit={handleSubmit} className="p-4 mt-1 border-t border-gray-200">
-        <div className="flex space-x-2">
+      <form id="chatbot-form" onSubmit={handleSubmit} className="p-4 mt-1 border-t border-gray-200">
+        <div id="chatbot-input-container" className="flex space-x-2">
           <input
+            id="input-chat-message"
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
@@ -415,6 +418,7 @@ Please provide a helpful response based on the context above.`;
 
           </button> */}
           <button
+            id="btn-send-message"
             type="submit"
             disabled={isLoading || !input.trim()}
             className="btn-royal disabled:opacity-50 disabled:cursor-not-allowed px-4 py-2 max-sm:px-2"

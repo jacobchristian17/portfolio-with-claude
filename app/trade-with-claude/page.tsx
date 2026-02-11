@@ -3,16 +3,16 @@ import APIStatus from '../components/APIStatus';
 
 export default function TradingPage() {
   return (
-    <div className="min-h-screen bg-gray-950 text-white">
-      <div className="container mx-auto px-4 py-8">
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold mb-2">Bitcoin Price Chart</h1>
-          <p className="text-gray-400">Real-time cryptocurrency chart powered with Binance API</p>
+    <div id="page-trading" className="min-h-screen bg-gray-950 text-white">
+      <div id="trading-container" className="container mx-auto px-4 py-8">
+        <div id="trading-header" className="mb-8">
+          <h1 id="trading-title" className="text-4xl font-bold mb-2">Bitcoin Price Chart</h1>
+          <p id="trading-subtitle" className="text-gray-400">Real-time cryptocurrency chart powered with Binance API</p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+        <div id="trading-grid" className="grid grid-cols-1 lg:grid-cols-4 gap-6">
           {/* Main Chart */}
-          <div className="lg:col-span-3">
+          <div id="trading-chart-container" className="lg:col-span-3">
             <TradingView
               symbol="BTC/USDT"
               height={500}
@@ -20,13 +20,13 @@ export default function TradingPage() {
           </div>
 
           {/* Sidebar */}
-          <div className="space-y-6">
+          <div id="trading-sidebar" className="space-y-6">
             {/* API Status */}
             <APIStatus />
 
             {/* Description */}
-            <div className="bg-gray-900 rounded-lg p-4">
-              <h3 className="text-lg font-semibold mb-4">Dev Notes 📝</h3>
+            <div id="trading-dev-notes" className="bg-gray-900 rounded-lg p-4">
+              <h3 id="dev-notes-title" className="text-lg font-semibold mb-4">Dev Notes 📝</h3>
               <div>
                 <h2 className="text-md">Introduction</h2>
                 <div className="text-justify text-sm italic leading-releaxed">— This price chart is a React component that integrates Binance API to display the real time  BTC/USDT trading pair.</div>

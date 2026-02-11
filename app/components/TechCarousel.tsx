@@ -21,17 +21,17 @@ export default function TechCarousel({
   className = ""
 }: TechCarouselProps) {
   return (
-    <div className={`w-full overflow-hidden backdrop-blur-sm py-6 relative z-3 ${className}`} style={{ backgroundColor: 'var(--carousel-bg)' }}>
-      <div className="text-center mb-8">
-        <h3 className="text-2xl font-bold text-royal-gradient">{title}</h3>
+    <div id="tech-carousel" className={`w-full overflow-hidden backdrop-blur-sm py-6 relative z-3 ${className}`} style={{ backgroundColor: 'var(--carousel-bg)' }}>
+      <div id="tech-carousel-header" className="text-center mb-8">
+        <h3 id="tech-carousel-title" className="text-2xl font-bold text-royal-gradient">{title}</h3>
         {subtitle && (
-          <p className="mt-2" style={{ color: 'var(--text-secondary)' }}>{subtitle}</p>
+          <p id="tech-carousel-subtitle" className="mt-2" style={{ color: 'var(--text-secondary)' }}>{subtitle}</p>
         )}
       </div>
 
-      <div className="relative h-40 overflow-hidden w-[200vw] max-sm:w-[800vw]">
-        <div className="logo-carousel">
-          <div className="logo-carousel-track">
+      <div id="tech-carousel-container" className="relative h-40 overflow-hidden w-[200vw] max-sm:w-[800vw]">
+        <div id="tech-carousel-wrapper" className="logo-carousel">
+          <div id="tech-carousel-track" className="logo-carousel-track">
             {/* First set of items */}
             {techItems.map((tech, index) => (
               <div

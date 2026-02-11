@@ -163,44 +163,44 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen">
-      <div className="hidden lg:block">
+    <div id="home-page" className="min-h-screen">
+      <div id="hero-image-desktop" className="hidden lg:block">
         <HeroImage />
       </div>
-      <div className="max-w-7xl mx-auto px-6 py-8 relative z-1">
-        <div className="lg:hidden">
+      <div id="home-content" className="max-w-7xl mx-auto px-6 py-8 relative z-1">
+        <div id="hero-image-mobile" className="lg:hidden">
           <HeroImage />
         </div>
         {/* Hero Section */}
-        <div className="text-center mb-12 select-none">
-          <div className="floating">
-            <h1 className="text-6xl font-bold text-royal-gradient mb-6">
+        <div id="section-hero" className="text-center mb-12 select-none">
+          <div id="hero-title-container" className="floating">
+            <h1 id="hero-title" className="text-6xl font-bold text-royal-gradient mb-6">
               Welcome to Jacob&rsquo;s Space 🥷🏻
             </h1>
           </div>
-          <p className="text-2xl mb-6 font-medium font-bold text-royal-gradient">
+          <p id="hero-subtitle" className="text-2xl mb-6 font-medium font-bold text-royal-gradient">
             Full-Stack Developer & AI Enthusiast
           </p>
-          <p className="text-lg max-w-3xl mx-auto leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+          <p id="hero-description" className="text-lg max-w-3xl mx-auto leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
             Discover my professional journey through an AI-powered experience. Explore my work,
-            education, and personal interests with <span className="font-bold text-royal-gradient cursor-pointer" onClick={scrollToChatBot}>Francesca</span>, my lovely AI Assistant
+            education, and personal interests with <span id="hero-francesca-link" className="font-bold text-royal-gradient cursor-pointer" onClick={scrollToChatBot}>Francesca</span>, my lovely AI Assistant
           </p>
         </div>
 
         {/* Mobile: Try These Questions First */}
-        <div className="mb-12 lg:hidden relative z-3">
-          <div className="glass-card rounded-2xl p-8 hover-glow">
-            <h3 className="font-bold mb-8 text-royal-gradient text-2xl text-center">✨ Try These Questions</h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-              <div className="glass-card-royal px-6 py-3 rounded-xl text-center font-medium hover-lift cursor-pointer transition-all duration-300" onClick={() => handleSubmit(0)}>
+        <div id="section-questions-mobile" className="mb-12 lg:hidden relative z-3">
+          <div id="questions-card-mobile" className="glass-card rounded-2xl p-8 hover-glow">
+            <h3 id="questions-title-mobile" className="font-bold mb-8 text-royal-gradient text-2xl text-center">✨ Try These Questions</h3>
+            <div id="questions-grid-mobile" className="grid grid-cols-1 md:grid-cols-3 gap-3">
+              <div id="btn-question-work-mobile" className="glass-card-royal px-6 py-3 rounded-xl text-center font-medium hover-lift cursor-pointer transition-all duration-300" onClick={() => handleSubmit(0)}>
                 <div className="text-3xl mb-3">💼</div>
                 <div className="font-semibold" style={{ color: 'var(--text-primary)' }}>"What&rsquo;s Jacob&rsquo;s React experience?"</div>
               </div>
-              <div className="glass-card-royal px-6 py-3 rounded-xl text-center font-medium hover-lift cursor-pointer transition-all duration-300" onClick={() => handleSubmit(1)}>
+              <div id="btn-question-education-mobile" className="glass-card-royal px-6 py-3 rounded-xl text-center font-medium hover-lift cursor-pointer transition-all duration-300" onClick={() => handleSubmit(1)}>
                 <div className="text-3xl mb-3">🎓</div>
                 <div className="font-semibold" style={{ color: 'var(--text-primary)' }}>"Tells me about his education"</div>
               </div>
-              <div className="glass-card-royal px-6 py-3 rounded-xl text-center font-medium hover-lift cursor-pointer transition-all duration-300" onClick={() => handleSubmit(2)}>
+              <div id="btn-question-hobbies-mobile" className="glass-card-royal px-6 py-3 rounded-xl text-center font-medium hover-lift cursor-pointer transition-all duration-300" onClick={() => handleSubmit(2)}>
                 <div className="text-3xl mb-3">🥷🏻</div>
                 <div className="font-semibold" style={{ color: 'var(--text-primary)' }}>"What are his hobbies?"</div>
               </div>
@@ -209,10 +209,10 @@ export default function Home() {
         </div>
 
         {/* Chatbot Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8  relative z-3" ref={chatBotRef}>
+        <div id="section-chatbot" className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8  relative z-3" ref={chatBotRef}>
           {/* Main Chatbot */}
-          <div className="lg:col-span-2">
-            <div className="glass-card rounded-2xl p-2 hover-lift">
+          <div id="chatbot-container" className="lg:col-span-2">
+            <div id="chatbot-card" className="glass-card rounded-2xl p-2 hover-lift">
               <ChatBot
                 onMessage={handleMessage}
                 ragEnabled={true}
@@ -222,27 +222,27 @@ export default function Home() {
           </div>
 
           {/* Controls */}
-          <div className="space-y-6">
-            <div className="glass-card rounded-2xl p-1 hover-glow">
+          <div id="rag-controls-container" className="space-y-6">
+            <div id="rag-controls-card" className="glass-card rounded-2xl p-1 hover-glow">
               <RAGControls />
             </div>
           </div>
         </div>
 
         {/* Desktop: Try These Questions */}
-        <div className="mb-12 hidden lg:block relative z-3">
-          <div className="glass-card rounded-2xl p-8 hover-glow">
-            <h3 className="font-bold mb-8 text-royal-gradient text-2xl text-center">✨ Try These Questions</h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="glass-card-royal p-6 rounded-xl text-center font-medium hover-lift cursor-pointer transition-all duration-300" onClick={() => handleSubmit(0)}>
+        <div id="section-questions-desktop" className="mb-12 hidden lg:block relative z-3">
+          <div id="questions-card-desktop" className="glass-card rounded-2xl p-8 hover-glow">
+            <h3 id="questions-title-desktop" className="font-bold mb-8 text-royal-gradient text-2xl text-center">✨ Try These Questions</h3>
+            <div id="questions-grid-desktop" className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div id="btn-question-work-desktop" className="glass-card-royal p-6 rounded-xl text-center font-medium hover-lift cursor-pointer transition-all duration-300" onClick={() => handleSubmit(0)}>
                 <div className="text-3xl mb-3">💼</div>
                 <div className="font-semibold" style={{ color: 'var(--text-primary)' }}>"What&rsquo;s Jacob&rsquo;s React experience?"</div>
               </div>
-              <div className="glass-card-royal p-6 rounded-xl text-center font-medium hover-lift cursor-pointer transition-all duration-300" onClick={() => handleSubmit(1)}>
+              <div id="btn-question-education-desktop" className="glass-card-royal p-6 rounded-xl text-center font-medium hover-lift cursor-pointer transition-all duration-300" onClick={() => handleSubmit(1)}>
                 <div className="text-3xl mb-3">🎓</div>
                 <div className="font-semibold" style={{ color: 'var(--text-primary)' }}>"Tells me about his education"</div>
               </div>
-              <div className="glass-card-royal p-6 rounded-xl text-center font-medium hover-lift cursor-pointer transition-all duration-300" onClick={() => handleSubmit(2)}>
+              <div id="btn-question-hobbies-desktop" className="glass-card-royal p-6 rounded-xl text-center font-medium hover-lift cursor-pointer transition-all duration-300" onClick={() => handleSubmit(2)}>
                 <div className="text-3xl mb-3">🥷🏻</div>
                 <div className="font-semibold" style={{ color: 'var(--text-primary)' }}>"What are his hobbies?"</div>
               </div>
@@ -254,26 +254,27 @@ export default function Home() {
         {/* Technology Carousel Section */}
       </div>
 
-      <div className="section-divider relative z-3"></div>
+      <div id="section-divider-1" className="section-divider relative z-3"></div>
 
       <TechCarousel title="⚙️ Tech Stack" techItems={techStack} subtitle="Professional experience with the following tools and frameworks:" />
 
 
-      <div className="section-divider relative z-3 mb-24"></div>
+      <div id="section-divider-2" className="section-divider relative z-3 mb-24"></div>
 
-      <div className="max-w-7xl mx-auto px-6 relative z-3">
+      <div id="section-navigation" className="max-w-7xl mx-auto px-6 relative z-3">
 
         {/* Quick Navigation */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pb-40">
-          <div className="glass-card rounded-2xl p-4 lg:p-8 hover-lift border-royal-gradient">
-            <div className="text-center mb-6">
+        <div id="navigation-grid" className="grid grid-cols-1 md:grid-cols-3 gap-8 pb-40">
+          <div id="nav-card-career" className="glass-card rounded-2xl p-4 lg:p-8 hover-lift border-royal-gradient">
+            <div id="nav-card-career-header" className="text-center mb-6">
               <div className="text-4xl mb-4">💼</div>
-              <h3 className="max-md:text-justify text-2xl font-bold text-royal-gradient mb-4">Career</h3>
+              <h3 id="nav-card-career-title" className="max-md:text-justify text-2xl font-bold text-royal-gradient mb-4">Career</h3>
             </div>
-            <p className="mb-6 leading-relaxed italic" style={{ color: 'var(--text-secondary)' }}>
+            <p id="nav-card-career-desc" className="mb-6 leading-relaxed italic" style={{ color: 'var(--text-secondary)' }}>
               Explore my professional journey from small business clients to Fortune 500 companies featuring cutting-edge technologies and AI-first development.
             </p>
             <a
+              id="nav-link-career"
               href="/about-work"
               className="btn-royal w-full text-center block py-3"
             >
@@ -281,16 +282,17 @@ export default function Home() {
             </a>
           </div>
 
-          <div className="glass-card rounded-2xl p-4 lg:p-8 hover-lift border-royal-gradient">
-            <div className="text-center mb-6">
+          <div id="nav-card-education" className="glass-card rounded-2xl p-4 lg:p-8 hover-lift border-royal-gradient">
+            <div id="nav-card-education-header" className="text-center mb-6">
               <div className="text-4xl mb-4">🎓</div>
-              <h3 className="max-md:text-justify text-2xl font-bold text-royal-gradient mb-4">Education</h3>
+              <h3 id="nav-card-education-title" className="max-md:text-justify text-2xl font-bold text-royal-gradient mb-4">Education</h3>
             </div>
-            <p className="mb-6 leading-relaxed italic" style={{ color: 'var(--text-secondary)' }}>
+            <p id="nav-card-education-desc" className="mb-6 leading-relaxed italic" style={{ color: 'var(--text-secondary)' }}>
               Discover my Computer Engineering degree and AI research projects, including
               edge computing and neural network implementations.
             </p>
             <a
+              id="nav-link-education"
               href="/about-school"
               className="btn-royal w-full text-center block py-3"
             >
@@ -298,17 +300,18 @@ export default function Home() {
             </a>
           </div>
 
-          <div className="glass-card rounded-2xl p-4 lg:p-8 hover-lift border-royal-gradient">
-            <div className="text-center mb-6">
+          <div id="nav-card-about" className="glass-card rounded-2xl p-4 lg:p-8 hover-lift border-royal-gradient">
+            <div id="nav-card-about-header" className="text-center mb-6">
               <div className="text-4xl mb-4">🥷🏻</div>
-              <h3 className="max-md:text-justify text-2xl font-bold text-royal-gradient mb-4">About Me</h3>
+              <h3 id="nav-card-about-title" className="max-md:text-justify text-2xl font-bold text-royal-gradient mb-4">About Me</h3>
             </div>
-            <p className="mb-6 leading-relaxed italic" style={{ color: 'var(--text-secondary)' }}>
+            <p id="nav-card-about-desc" className="mb-6 leading-relaxed italic" style={{ color: 'var(--text-secondary)' }}>
               Get to know the person behind the code - my interests, philosophy,
               and what drives my passion for my career as a software engineer in general.
 
             </p>
             <a
+              id="nav-link-about"
               href="/about-me"
               className="btn-royal w-full text-center block py-3"
             >

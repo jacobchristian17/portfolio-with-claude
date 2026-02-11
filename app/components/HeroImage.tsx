@@ -34,8 +34,10 @@ export default function HeroImage() {
 
     return (
         <div
+            id="hero-image"
             className={`fixed inset-0 top-0 w-full h-full ${isMobile ? 'z-2' : 'z-0'}`}>
             <Image
+                id="hero-image-dark"
                 src={hero1.img}
                 alt={hero1.alt}
                 fill
@@ -47,6 +49,7 @@ export default function HeroImage() {
                 style={!isMobile ? { transform: `translateY(${currentSpeed + 100}px)` } : { transform: `translateY(${currentSpeed + 150}px)` }}
             />
             <Image
+                id="hero-image-light"
                 src={hero1Shadow.img}
                 alt={hero1Shadow.alt}
                 fill

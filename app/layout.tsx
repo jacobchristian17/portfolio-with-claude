@@ -18,10 +18,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
-      <body> 
+      <body id="layout-body"> 
         <StoreProvider>
           <Navbar />
-          <main className="pt-24 pb-24">{children}</main>
+          <main id="layout-main" className="pt-24 pb-24">{children}</main>
           <FloatingThemeToggle />
         </StoreProvider>
         <Analytics />

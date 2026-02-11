@@ -370,14 +370,15 @@ const TradingView: React.FC<TradingViewProps> = ({
 
   return (
     <div
+      id="trading-view"
       className="w-full bg-gray-900 rounded-lg p-4"
     >
       {/* Price Display */}
-      <div className="mb-4 flex items-center justify-between">
-        <div className="flex items-center space-x-4">
-          <div className="flex items-center space-x-2">
-            <h2 className="text-2xl font-bold text-white">{symbol}</h2>
-            <div className={`w-2 h-2 rounded-full ${isConnected ? 'bg-green-500' : 'bg-red-500'}`}></div>
+      <div id="trading-view-header" className="mb-4 flex items-center justify-between">
+        <div id="trading-view-price-info" className="flex items-center space-x-4">
+          <div id="trading-view-symbol" className="flex items-center space-x-2">
+            <h2 id="trading-view-symbol-text" className="text-2xl font-bold text-white">{symbol}</h2>
+            <div id="trading-view-connection-dot" className={`w-2 h-2 rounded-full ${isConnected ? 'bg-green-500' : 'bg-red-500'}`}></div>
           </div>
           <div className="flex items-center space-x-2">
             <span className="text-3xl font-mono text-white">
@@ -410,6 +411,7 @@ const TradingView: React.FC<TradingViewProps> = ({
 
       {/* Custom Chart */}
       <div
+        id="trading-chart"
         className="w-full rounded border border-gray-700 bg-gray-800 relative trading-chart"
         style={{
           height: `${height}px`,
@@ -418,6 +420,7 @@ const TradingView: React.FC<TradingViewProps> = ({
         }}
       >
         <svg
+          id="trading-chart-svg"
           width="100%"
           height={chartHeight}
           viewBox={`0 0 ${chartWidth} ${chartHeight}`}
@@ -706,8 +709,8 @@ const TradingView: React.FC<TradingViewProps> = ({
       </div>
 
       {/* Chart Controls */}
-      <div className="mt-4 flex items-center justify-between text-sm text-gray-400">
-        <div className="flex space-x-2">
+      <div id="trading-controls" className="mt-4 flex items-center justify-between text-sm text-gray-400">
+        <div id="trading-interval-buttons" className="flex space-x-2">
           {(['1m', '5m', '15m', '1h', '4h', '1d'] as TimeInterval[]).map((interval) => (
             <button
               key={interval}

@@ -3,15 +3,15 @@ import HeroImage from "../components/HeroImage"
 
 export default function AboutWork() {
   return (
-    <div className="min-h-screen p-6" style={{ background: 'linear-gradient(135deg, var(--warm-gray) 0%, var(--cream) 100%)' }}>
+    <div id="page-about-work" className="min-h-screen p-6" style={{ background: 'linear-gradient(135deg, var(--warm-gray) 0%, var(--cream) 100%)' }}>
       <HeroImage />
-      <div className="max-w-4xl mx-auto backdrop-blur-[1px] relative z-3">
-        <div className="glass-card rounded-lg shadow-lg md:p-8 max-sm:p-4">
-          <h1 className="text-3xl font-bold mb-6" style={{ color: 'var(--text-primary)' }}>Work life</h1>
+      <div id="about-work-container" className="max-w-4xl mx-auto backdrop-blur-[1px] relative z-3">
+        <div id="about-work-card" className="glass-card rounded-lg shadow-lg md:p-8 max-sm:p-4">
+          <h1 id="about-work-title" className="text-3xl font-bold mb-6" style={{ color: 'var(--text-primary)' }}>Work life</h1>
 
           {/* Current Position */}
-          <div className="mb-8 border-l-4 border-yellow-500 pl-2 md:pl-6">
-            <h2 className="text-2xl font-semibold text-yellow-600 mb-1 md:mb-4">
+          <div id="section-current-position" className="mb-8 border-l-4 border-yellow-500 pl-2 md:pl-6">
+            <h2 id="section-current-position-title" className="text-2xl font-semibold text-yellow-600 mb-1 md:mb-4">
               Current Position
             </h2>
             <div className="bg-blue-50 rounded-lg p-6">
@@ -30,8 +30,8 @@ export default function AboutWork() {
           </div>
 
           {/* Previous Roles */}
-          <div className="mb-8">
-            <h2 className="text-2xl font-semibold text-blue-600 mb-4" style={{ color: 'var(--text-primary)' }}>Previous Roles</h2>
+          <div id="section-previous-roles" className="mb-8">
+            <h2 id="section-previous-roles-title" className="text-2xl font-semibold text-blue-600 mb-4" style={{ color: 'var(--text-primary)' }}>Previous Roles</h2>
             <div className="space-y-6">
               <div className="bg-blue-50 rounded-lg p-6">
                 <h3 className="text-xl font-medium mb-2" style={{ color: 'var(--text-card-primary)' }}>
@@ -77,8 +77,8 @@ export default function AboutWork() {
           </div>
 
           {/* Technical Skills */}
-          <div className="mb-8">
-            <h2 className="text-2xl font-semibold mb-4" style={{ color: 'var(--text-primary)' }}>Core Technical Skills</h2>
+          <div id="section-technical-skills" className="mb-8">
+            <h2 id="section-technical-skills-title" className="text-2xl font-semibold mb-4" style={{ color: 'var(--text-primary)' }}>Core Technical Skills</h2>
             <div className="bg-blue-50 rounded-lg p-6">
               <p className="leading-relaxed mb-4" style={{ color: 'var(--text-card-primary)' }}>
                 Proficient in modern web technologies including React, Next.js, Redux, TypeScript, Node.js, Express,
@@ -95,8 +95,8 @@ export default function AboutWork() {
           </div>
 
           {/* AI and Modern Skills */}
-          <div className="mb-8">
-            <h2 className="text-2xl font-semibold mb-4" style={{ color: 'var(--text-primary)' }}>AI-First Development</h2>
+          <div id="section-ai-development" className="mb-8">
+            <h2 id="section-ai-development-title" className="text-2xl font-semibold mb-4" style={{ color: 'var(--text-primary)' }}>AI-First Development</h2>
             <div className="bg-blue-50 rounded-lg p-6">
               <p className="leading-relaxed" style={{ color: 'var(--text-card-secondary)' }}>
                 Currently using Generative and Agentic AI tools for augmented development through prompt engineering
@@ -109,8 +109,8 @@ export default function AboutWork() {
           </div>
 
           {/* Soft Skills */}
-          <div className="mb-8">
-            <h2 className="text-2xl font-semibold mb-4" style={{ color: 'var(--text-primary)' }}>Soft Skills</h2>
+          <div id="section-soft-skills" className="mb-8">
+            <h2 id="section-soft-skills-title" className="text-2xl font-semibold mb-4" style={{ color: 'var(--text-primary)' }}>Soft Skills</h2>
             <div className="bg-blue-50 rounded-lg p-6">
               <p className="leading-relaxed" style={{ color: 'var(--text-card-secondary)' }}>
                 Can work with colleagues or alone, finish deliverables at or before the expected time.
@@ -122,8 +122,8 @@ export default function AboutWork() {
           </div>
 
           {/* Certifications */}
-          <div className="mb-8">
-            <h2 className="text-2xl font-semibold text-yellow-600 mb-4">Certifications & Training</h2>
+          <div id="section-certifications" className="mb-8">
+            <h2 id="section-certifications-title" className="text-2xl font-semibold text-yellow-600 mb-4">Certifications & Training</h2>
             <div className="bg-orange-50 rounded-lg p-6">
               <div className="space-y-4">
                 <div>
@@ -165,8 +165,8 @@ export default function AboutWork() {
           </div>
 
           {/* Professional Journey Summary */}
-          <div className="bg-gray-50 rounded-lg p-6 mb-8">
-            <h2 className="text-2xl font-semibold mb-4" style={{ color: 'var(--text-card-primary)' }}>Professional Journey</h2>
+          <div id="section-journey-summary" className="bg-gray-50 rounded-lg p-6 mb-8">
+            <h2 id="section-journey-summary-title" className="text-2xl font-semibold mb-4" style={{ color: 'var(--text-card-primary)' }}>Professional Journey</h2>
             <p className="leading-relaxed mb-4" style={{ color: 'var(--text-card-primary)' }}>
               From freelance beginnings to Fortune 500 companies, my career has been driven by continuous learning
               and innovation. I&rsquo;ve evolved from traditional full-stack development to AI-first approaches,

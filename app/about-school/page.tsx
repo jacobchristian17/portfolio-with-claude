@@ -11,9 +11,10 @@ export default function AboutSchool() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 relative z-3">
-      <div className="fixed top-0 h-screen w-full">
+    <div id="page-about-school" className="min-h-screen bg-gray-100 relative z-3">
+      <div id="school-bg-container" className="fixed top-0 h-screen w-full">
         <Image
+          id="school-bg-image"
           src={school.img}
           alt={school.alt}
           fill
@@ -21,13 +22,13 @@ export default function AboutSchool() {
           priority
         />
       </div>
-      <div className="max-w-4xl mx-auto relative z-10 pt-6">
-        <div className={themePrefix.bgPrimary + " backdrop-blur-sm rounded-lg shadow-lg p-8"}>
-          <h1 className={"text-3xl font-bold mb-6"} style={{ color: 'var(--text-primary)' }}>Education</h1>
+      <div id="about-school-container" className="max-w-4xl mx-auto relative z-10 pt-6">
+        <div id="about-school-card" className={themePrefix.bgPrimary + " backdrop-blur-sm rounded-lg shadow-lg p-8"}>
+          <h1 id="about-school-title" className={"text-3xl font-bold mb-6"} style={{ color: 'var(--text-primary)' }}>Education</h1>
 
           {/* Education Overview */}
-          <div className={"mb-8 border-l-4 pl-6"} style={{ color: 'var(--text-primary)' }}>
-            <h2 className="text-2xl font-semibold mb-4" style={{ color: 'var(--text-primary)' }}>
+          <div id="section-degree" className={"mb-8 border-l-4 pl-6"} style={{ color: 'var(--text-primary)' }}>
+            <h2 id="section-degree-title" className="text-2xl font-semibold mb-4" style={{ color: 'var(--text-primary)' }}>
               Bachelor of Science in Computer Engineering
             </h2>
             <div className="bg-blue-50 rounded-lg p-6">
@@ -44,8 +45,8 @@ export default function AboutSchool() {
           </div>
 
           {/* Thesis Project */}
-          <div className="mb-8">
-            <h2 className="text-2xl font-semibold mb-4" style={{ color: 'var(--text-primary)' }}>Senior Thesis Project</h2>
+          <div id="section-thesis" className="mb-8">
+            <h2 id="section-thesis-title" className="text-2xl font-semibold mb-4" style={{ color: 'var(--text-primary)' }}>Senior Thesis Project</h2>
             <div className="bg-white rounded-lg p-6">
               <h3 className="text-xl font-medium text-gray-800 mb-3 ">
                 &ldquo;Determination of Driver&lsquo;s Alertness Based on Eye State with Edge Computing&rdquo;
@@ -101,8 +102,8 @@ export default function AboutSchool() {
           </div>
 
           {/* Key Coursework */}
-          <div className="mb-8">
-            <h2 className="text-2xl font-semibold mb-4" style={{ color: 'var(--text-primary)' }}>Key Coursework</h2>
+          <div id="section-coursework" className="mb-8">
+            <h2 id="section-coursework-title" className="text-2xl font-semibold mb-4" style={{ color: 'var(--text-primary)' }}>Key Coursework</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="bg-white rounded-lg p-6">
                 <h3 className="font-semibold text-gray-900 mb-3">Core Computer Engineering</h3>
@@ -131,8 +132,8 @@ export default function AboutSchool() {
           </div>
 
           {/* Academic Specialization */}
-          <div className="mb-8">
-            <h2 className="text-2xl font-semibold mb-4" style={{ color: 'var(--text-primary)' }}>Academic Specialization</h2>
+          <div id="section-specialization" className="mb-8">
+            <h2 id="section-specialization-title" className="text-2xl font-semibold mb-4" style={{ color: 'var(--text-primary)' }}>Academic Specialization</h2>
             <div className="bg-blue-50 rounded-lg p-6">
               <h3 className="text-xl font-medium text-gray-800 mb-3">
                 .NET5 Fullstack Technology Focus
@@ -174,8 +175,8 @@ export default function AboutSchool() {
           </div>
 
           {/* Academic Journey */}
-          <div className="bg-gray-50 rounded-lg p-6">
-            <h2 className="text-2xl font-semibold text-gray-800 mb-4">Academic Journey</h2>
+          <div id="section-academic-journey" className="bg-gray-50 rounded-lg p-6">
+            <h2 id="section-academic-journey-title" className="text-2xl font-semibold text-gray-800 mb-4">Academic Journey</h2>
             <div className="space-y-4">
               <div className="border-l-4 border-yellow-400 pl-4">
                 <h4 className="font-semibold text-gray-800">Research & Development Focus</h4>
