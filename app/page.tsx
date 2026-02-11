@@ -179,7 +179,7 @@ export default function Home() {
             </h1>
           </div>
           <p id="hero-subtitle" className="text-2xl mb-6 font-medium font-bold text-royal-gradient">
-            Full-Stack Developer & AI Enthusiast
+            Developer and AI Integration
           </p>
           <p id="hero-description" className="text-lg max-w-3xl mx-auto leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
             Discover my professional journey through an AI-powered experience. Explore my work,
