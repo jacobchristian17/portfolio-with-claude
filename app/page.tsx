@@ -174,7 +174,7 @@ export default function Home() {
         {/* Hero Section */}
         <div id="section-hero" className="text-center mb-12 select-none">
           <div id="hero-title-container" className="floating">
-            <h1 id="hero-title" className="text-6xl font-bold text-royal-gradient mb-6">
+            <h1 id="hero-title" className="text-6xl font-bold text-royal-gradient-animated mb-6">
               Welcome to Jacob&rsquo;s Space 🥷🏻
             </h1>
           </div>
@@ -183,7 +183,7 @@ export default function Home() {
           </p>
           <p id="hero-description" className="text-lg max-w-3xl mx-auto leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
             Discover my professional journey through an AI-powered experience. Explore my work,
-            education, and personal interests with <span id="hero-francesca-link" className="font-bold text-royal-gradient cursor-pointer" onClick={scrollToChatBot}>Francesca</span>, my lovely AI Assistant
+            education, and personal interests with <span id="hero-francesca-link" className="font-bold text-royal-gradient-animated cursor-pointer" onClick={scrollToChatBot}>Francesca</span>, my lovely AI Assistant
           </p>
         </div>
 
