@@ -433,3 +433,59 @@ button {
   line-height: 1;
   /* ~leading-none */
 }
+
+/* Impact Grid Styles */
+.impact-card {
+  position: relative;
+}
+
+/* Desktop: Show details on hover */
+@media (min-width: 768px) {
+  .impact-details {
+    max-height: 0;
+    opacity: 0;
+  }
+  
+  .impact-card:hover .impact-details {
+    max-height: 200px;
+    opacity: 1;
+  }
+  
+  .impact-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+  }
+}
+
+/* Mobile: Click to expand */
+@media (max-width: 767px) {
+  .impact-details {
+    max-height: 0;
+    opacity: 0;
+  }
+  
+  .mobile-details-visible {
+    max-height: 300px !important;
+    opacity: 1 !important;
+    margin-top: 1rem;
+  }
+  
+  .card-hidden {
+    opacity: 0;
+    transform: scale(0.8);
+    pointer-events: none;
+    position: absolute;
+    z-index: -1;
+  }
+  
+  .card-expanded {
+    grid-column: 1 / -1;
+    z-index: 10;
+    transform: scale(1.02);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+  }
+  
+  .mobile-expanded {
+    min-height: 200px;
+  }
+}

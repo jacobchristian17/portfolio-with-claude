@@ -9,6 +9,7 @@ import type { Message } from "./store/messageSlice";
 import { useAppSelector } from "./store/hooks";
 import { ragService } from "./services/ragService";
 import HeroImage from "./components/HeroImage";
+import ImpactGrid from "./components/ImpactGrid";
 import { useRef } from "react";
 import personalInfo from "./data/personal_info.json";
 
@@ -177,27 +178,7 @@ export default function Home() {
 
           {/* Business Impact Section */}
           <div id="section-impact" className="max-w-3xl mx-auto mb-12">
-            <div id="impact-grid" className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {personalInfo.impact.map((item, index) => (
-                <div 
-                  key={index}
-                  id={`impact-card-${index}`}
-                  className="glass-card rounded-xl p-4 hover-lift text-left"
-                >
-                  <div className="flex items-start gap-3">
-                    <span className="text-2xl">{item.emoji}</span>
-                    <div>
-                      <p id={`impact-company-${index}`} className="font-semibold text-royal-gradient text-sm mb-1">
-                        {item.company}
-                      </p>
-                      <p id={`impact-text-${index}`} className="text-sm" style={{ color: 'var(--text-secondary)' }}>
-                        {item.impact}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
+            <ImpactGrid items={personalInfo.impact} />
           </div>
 
           {/* CTA Buttons */}

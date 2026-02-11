@@ -11,22 +11,46 @@
     {
       "emoji": "🏢",
       "company": "Fortune 500",
-      "impact": "Shipped AI chatbot features serving enterprise customers"
+      "impact": "Shipped AI chatbot features serving enterprise customers",
+      "details": [
+        "Developed and shipped new chatbot features",
+        "Collaborated with ML Engineers on AI integration",
+        "Led code reviews and E2E test automation",
+        "Tech: React, Next.js, Redux, AWS, Jenkins"
+      ]
     },
     {
       "emoji": "🌍",
       "company": "GHD",
-      "impact": "Built global CMS components live on ghd.com"
+      "impact": "Built global CMS components live on ghd.com",
+      "details": [
+        "Cross-platform CMS components for global website",
+        "Collaborated with UI/UX designers worldwide",
+        "Angular/Ionic forms validation app (H&SE)",
+        "Upgraded Angular core from v12 to v18"
+      ]
     },
     {
       "emoji": "☁️",
       "company": "Megawide",
-      "impact": "Migrated legacy systems to cloud, cutting deployment time"
+      "impact": "Migrated legacy systems to cloud, cutting deployment time",
+      "details": [
+        "Cloud migration with Docker, Nginx, Azure",
+        "360-degree Survey System from scratch",
+        "Profit & Loss Dashboard maintenance",
+        "Annual Stockholder Meeting features"
+      ]
     },
     {
       "emoji": "🚀",
       "company": "Freelance",
-      "impact": "Delivered 10+ web apps from concept to launch"
+      "impact": "Delivered 10+ web apps from concept to launch",
+      "details": [
+        "Full stack development for various clients",
+        "End-to-end project delivery",
+        "Live code tutoring sessions",
+        "Custom websites and applications"
+      ]
     }
   ],
   "cta": {
