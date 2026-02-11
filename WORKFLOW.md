@@ -16,15 +16,31 @@ git checkout -b feature/your-feature-name
 ### 2. Make Changes
 ```bash
 git add .
-git commit -m "[Feature] - Brief description"
+git commit -m "feat: brief description"
 ```
 
-Commit format: `[Type] - description`
-- `[Feature]` - New feature
-- `[Fix]` - Bug fix
-- `[Docs]` - Documentation
-- `[Refactor]` - Code cleanup
-- `[Chore]` - Dependency updates, config
+Commit format (enforced by husky + commitlint):
+```
+<type>: <subject>
+```
+
+Types:
+- `feat` - New feature
+- `fix` - Bug fix
+- `docs` - Documentation
+- `refactor` - Code cleanup
+- `perf` - Performance improvement
+- `test` - Tests
+- `chore` - Dependency updates, config
+- `ci` - CI/CD changes
+- `style` - Formatting (no logic change)
+- `revert` - Revert a commit
+
+Examples:
+- `feat: add user authentication`
+- `fix: resolve sidebar collapse bug`
+- `docs: update README with setup instructions`
+- `chore: update Next.js to 15.5.12`
 
 ### 3. Push & Create PR
 ```bash
