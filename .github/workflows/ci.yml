@@ -50,9 +50,53 @@ jobs:
     runs-on: ubuntu-latest
     name: Deploy to Vercel
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    outputs:
+      url: ${{ steps.deploy.outputs.url }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - run: npx vercel deploy --prod --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Deploy to Vercel
+        id: deploy
+        run: |
+          URL=$(npx vercel deploy --prod --token=${{ secrets.VERCEL_TOKEN }} 2>&1 | grep -oE 'https://[^ ]+\.vercel\.app' | head -1)
+          echo "url=$URL" >> $GITHUB_OUTPUT
+          echo "Deployed to: $URL"
+
+  notify:
+    needs: [deploy]
+    runs-on: ubuntu-latest
+    name: Telegram Notification
+    if: always() && github.event_name == 'push' && github.ref == 'refs/heads/main'
+    steps:
+      - name: Send Telegram notification
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          DEPLOY_URL: ${{ needs.deploy.outputs.url }}
+          DEPLOY_STATUS: ${{ needs.deploy.result }}
+        run: |
+          if [ "$DEPLOY_STATUS" = "success" ]; then
+            EMOJI="✅"
+            STATUS="deployed"
+          else
+            EMOJI="❌"
+            STATUS="failed"
+          fi
+          
+          COMMIT_MSG=$(echo "${{ github.event.head_commit.message }}" | head -1)
+          COMMIT_SHORT="${{ github.sha }}"
+          COMMIT_SHORT="${COMMIT_SHORT:0:5}"
+          
+          MESSAGE="${EMOJI} *Deploy ${STATUS}*
+          
+          📦 \`${COMMIT_SHORT}\` ${COMMIT_MSG}
+          🔗 ${DEPLOY_URL:-'N/A'}
+          📂 [View commit](https://github.com/${{ github.repository }}/commit/${{ github.sha }})"
+          
+          curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
+            -d chat_id="${TELEGRAM_CHAT_ID}" \
+            -d text="${MESSAGE}" \
+            -d parse_mode="Markdown" \
+            -d disable_web_page_preview="true"
