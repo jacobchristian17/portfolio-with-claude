@@ -49,9 +49,12 @@ eval "$(ssh-agent -s)" && SSH_ASKPASS=~/.ssh/askpass-portfolio.sh SSH_ASKPASS_RE
 
 ### Push Flow
 1. Make changes
-2. `git add -A && git commit -m "[Feature] - Description"`
-3. Run SSH setup above (if not done this session)
-4. `git push`
+2. **Wait for explicit "commit and push" command from Jacob**
+3. `git add -A && git commit -m "[Feature] - Description"`
+4. Run SSH setup above (if not done this session)
+5. `git push`
+
+**Important**: Do NOT auto-commit/push. Wait for Jacob to say "commit and push" or similar.
 
 ### Deployment
 - **Auto-deploy**: Vercel deploys on push to `main`
