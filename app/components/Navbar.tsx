@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 
 const links = [
   { href: "/", label: "Home", icon: "🏠" },
@@ -10,39 +10,50 @@ const links = [
 export default function Navbar() {
   const pathname = usePathname();
   const [isVisible, setIsVisible] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const lastScrollY = useRef(0);
 
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
 
       if (currentScrollY === 0) {
-        // Always show navbar at the top
         setIsVisible(true);
-      } else if (currentScrollY > lastScrollY && currentScrollY > 100) {
-        // Hide navbar when scrolling down (after 100px)
+      } else if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
         setIsVisible(false);
-      } else if (currentScrollY < lastScrollY) {
-        // Show navbar when scrolling up
+        setIsMobileMenuOpen(false); // Close menu on scroll down
+      } else if (currentScrollY < lastScrollY.current) {
         setIsVisible(true);
       }
 
-      setLastScrollY(currentScrollY);
+      lastScrollY.current = currentScrollY;
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [lastScrollY]);
+  }, []);
 
-  const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen);
-  };
+  // Close menu on Escape key
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isMobileMenuOpen) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+    
+    if (isMobileMenuOpen) {
+      document.addEventListener('keydown', handleKeyDown);
+      return () => document.removeEventListener('keydown', handleKeyDown);
+    }
+  }, [isMobileMenuOpen]);
 
-  const closeMobileMenu = () => {
+  const toggleMobileMenu = useCallback(() => {
+    setIsMobileMenuOpen(prev => !prev);
+  }, []);
+
+  const closeMobileMenu = useCallback(() => {
     setIsMobileMenuOpen(false);
-  };
+  }, []);
 
   return (
     <nav id="navbar" className={`navbar-backdrop fixed top-0 left-0 right-0 z-50 px-6 py-4 ${isVisible ? 'navbar-visible' : 'navbar-hidden'}`}>
@@ -80,8 +91,10 @@ export default function Navbar() {
           <button
             id="navbar-mobile-toggle"
             onClick={toggleMobileMenu}
-            className="md:hidden flex flex-col justify-center items-center w-8 h-8 space-y-1 focus:outline-none"
-            aria-label="Toggle mobile menu"
+            className="md:hidden flex flex-col justify-center items-center w-8 h-8 space-y-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50 rounded"
+            aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isMobileMenuOpen}
+            aria-controls="navbar-mobile-menu"
           >
             <span className={`block w-6 h-0.5 bg-current transform transition-all duration-300 ${isMobileMenuOpen ? 'rotate-45 translate-y-2' : ''}`}></span>
             <span className={`block w-6 h-0.5 bg-current transition-all duration-300 ${isMobileMenuOpen ? 'opacity-0' : ''}`}></span>
