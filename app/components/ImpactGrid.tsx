@@ -39,12 +39,20 @@ export default function ImpactGrid({ items }: ImpactGridProps) {
   }, []);
 
   useEffect(() => {
+    let resizeTimer: NodeJS.Timeout;
     const checkMobile = () => {
       isMobileDevice.current = window.innerWidth < 768;
     };
+    const debouncedCheck = () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(checkMobile, 150);
+    };
     checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
+    window.addEventListener('resize', debouncedCheck);
+    return () => {
+      clearTimeout(resizeTimer);
+      window.removeEventListener('resize', debouncedCheck);
+    };
   }, []);
 
   // Store original and target positions for FLIP animation
@@ -149,6 +157,8 @@ export default function ImpactGrid({ items }: ImpactGridProps) {
   useEffect(() => {
     if (selectedIndex === null) return;
 
+    let listenersAdded = false;
+
     const handleClickOutside = (e: MouseEvent | TouchEvent) => {
       const target = e.target as HTMLElement;
       const clickedCard = target.closest('.impact-card');
@@ -162,6 +172,8 @@ export default function ImpactGrid({ items }: ImpactGridProps) {
     };
 
     const timer = setTimeout(() => {
+      if (!isMounted.current) return; // Guard against post-unmount execution
+      listenersAdded = true;
       document.addEventListener('click', handleClickOutside);
       document.addEventListener('touchstart', handleClickOutside);
       window.addEventListener('scroll', handleScroll);
@@ -169,9 +181,11 @@ export default function ImpactGrid({ items }: ImpactGridProps) {
 
     return () => {
       clearTimeout(timer);
-      document.removeEventListener('click', handleClickOutside);
-      document.removeEventListener('touchstart', handleClickOutside);
-      window.removeEventListener('scroll', handleScroll);
+      if (listenersAdded) {
+        document.removeEventListener('click', handleClickOutside);
+        document.removeEventListener('touchstart', handleClickOutside);
+        window.removeEventListener('scroll', handleScroll);
+      }
     };
   }, [selectedIndex, handleDeselect]);
 
@@ -217,7 +231,7 @@ export default function ImpactGrid({ items }: ImpactGridProps) {
         width,
         height: phase === 'details' ? 'auto' : height,
         zIndex: 50,
-        transition: 'all 0.45s ease-in-out',
+        transition: 'top 0.45s ease-in-out, left 0.45s ease-in-out, height 0.45s ease-in-out',
       };
     }
     
@@ -230,7 +244,7 @@ export default function ImpactGrid({ items }: ImpactGridProps) {
         width,
         height,
         zIndex: 50,
-        transition: 'all 0.45s ease-in-out',
+        transition: 'top 0.45s ease-in-out, left 0.45s ease-in-out, height 0.45s ease-in-out',
       };
     }
     
