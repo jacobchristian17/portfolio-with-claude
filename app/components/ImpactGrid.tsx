@@ -219,6 +219,20 @@ export default function ImpactGrid({ items }: ImpactGridProps) {
     }
   };
 
+  const handleKeyDown = useCallback((e: React.KeyboardEvent, index: number) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      if (selectedIndex === index) {
+        handleDeselect();
+      } else {
+        handleSelect(index);
+      }
+    } else if (e.key === 'Escape' && selectedIndex !== null) {
+      e.preventDefault();
+      handleDeselect();
+    }
+  }, [selectedIndex, handleSelect, handleDeselect]);
+
   // Memoized transition string
   const transitionStyle = `top 0.45s ${EASING}, left 0.45s ${EASING}, height 0.45s ${EASING}`;
 
@@ -288,12 +302,19 @@ export default function ImpactGrid({ items }: ImpactGridProps) {
               key={index}
               ref={el => { cardRefs.current[index] = el; }}
               id={`impact-card-${index}`}
+              role="button"
+              tabIndex={isHidden ? -1 : 0}
+              aria-expanded={isSelected}
+              aria-label={`${item.company}: ${item.impact}`}
               onClick={() => handleCardClick(index)}
+              onKeyDown={(e) => handleKeyDown(e, index)}
               onMouseEnter={() => handleMouseEnter(index)}
               className={`
                 impact-card glass-card rounded-xl p-4 cursor-pointer
                 h-[70px] sm:h-[98px]
                 transition-all duration-[450ms] ease-in-out
+                focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent
+                active:scale-[0.98] active:opacity-90 sm:active:scale-100 sm:active:opacity-100
                 ${isHidden ? 'opacity-0 pointer-events-none' : 'opacity-100'}
               `}
               style={getCardStyle(index)}

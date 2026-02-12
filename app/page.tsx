@@ -10,6 +10,7 @@ import { useAppSelector } from "./store/hooks";
 import { ragService } from "./services/ragService";
 import HeroImage from "./components/HeroImage";
 import ImpactGrid from "./components/ImpactGrid";
+import ErrorBoundary from "./components/ErrorBoundary";
 import { useRef } from "react";
 import personalInfo from "./data/personal_info.json";
 
@@ -178,7 +179,9 @@ export default function Home() {
 
           {/* Business Impact Section */}
           <div id="section-impact" className="max-w-3xl mx-auto mb-12">
-            <ImpactGrid items={personalInfo.impact} />
+            <ErrorBoundary componentName="ImpactGrid">
+              <ImpactGrid items={personalInfo.impact} />
+            </ErrorBoundary>
           </div>
 
           {/* CTA Buttons */}
