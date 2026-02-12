@@ -1,9 +1,19 @@
 "use client";
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useState, useRef, useEffect, useCallback, useMemo } from "react";
+
+// Constants
+const MOBILE_BREAKPOINT = 768;
+const TIMING = {
+  FRAME_1_DELAY: 30,
+  FRAME_2_DELAY: 420,
+  EXIT_DELAY: 50,
+  EXIT_CLEANUP: 500,
+  CLICK_LISTENER_DELAY: 100,
+} as const;
+
+const EASING = 'cubic-bezier(0.4, 0, 0.2, 1)'; // Smooth natural easing
 
 interface ImpactItem {
-  emoji?: string;
-  image?: string;
   company: string;
   impact: string;
   details: string[];
@@ -14,6 +24,7 @@ interface ImpactGridProps {
 }
 
 type Phase = 'idle' | 'reposition' | 'details';
+type FlipPhase = 'start' | 'animate' | 'exit';
 
 export default function ImpactGrid({ items }: ImpactGridProps) {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
@@ -41,21 +52,21 @@ export default function ImpactGrid({ items }: ImpactGridProps) {
   useEffect(() => {
     let resizeTimer: NodeJS.Timeout;
     const checkMobile = () => {
-      isMobileDevice.current = window.innerWidth < 768;
+      isMobileDevice.current = window.innerWidth < MOBILE_BREAKPOINT;
     };
     const debouncedCheck = () => {
       clearTimeout(resizeTimer);
       resizeTimer = setTimeout(checkMobile, 150);
     };
     checkMobile();
-    window.addEventListener('resize', debouncedCheck);
+    window.addEventListener('resize', debouncedCheck, { passive: true });
     return () => {
       clearTimeout(resizeTimer);
       window.removeEventListener('resize', debouncedCheck);
     };
   }, []);
 
-  // Store original and target positions for FLIP animation
+  // FLIP animation state
   const [flipState, setFlipState] = useState<{
     originalTop: number;
     originalLeft: number;
@@ -63,7 +74,7 @@ export default function ImpactGrid({ items }: ImpactGridProps) {
     targetLeft: number;
     width: number;
     height: number;
-    phase: 'start' | 'animate' | 'exit' | 'idle';
+    phase: FlipPhase;
   } | null>(null);
 
   // Calculate animation styles when card is selected
@@ -115,12 +126,12 @@ export default function ImpactGrid({ items }: ImpactGridProps) {
         setFlipState(prev => prev ? { ...prev, phase: 'animate' } : null);
         setPhase('reposition');
       }
-    }, 30);
+    }, TIMING.FRAME_1_DELAY);
     
     // Frame 2: Show details
     const t1 = setTimeout(() => {
       if (isMounted.current) setPhase('details');
-    }, 420);
+    }, TIMING.FRAME_2_DELAY);
     
     timeouts.current = [t0, t1];
   }, [selectedIndex, capturePositions]);
@@ -138,7 +149,7 @@ export default function ImpactGrid({ items }: ImpactGridProps) {
       if (isMounted.current) {
         setFlipState(prev => prev ? { ...prev, phase: 'exit' } : null);
       }
-    }, 50);
+    }, TIMING.EXIT_DELAY);
     
     // After position animation completes, clean up
     const t1 = setTimeout(() => {
@@ -147,7 +158,7 @@ export default function ImpactGrid({ items }: ImpactGridProps) {
         setFlipState(null);
         setContainerHeight(null);
       }
-    }, 500);
+    }, TIMING.EXIT_CLEANUP);
     
     timeouts.current = [t0, t1];
   }, [selectedIndex]);
@@ -178,12 +189,12 @@ export default function ImpactGrid({ items }: ImpactGridProps) {
     };
 
     const timer = setTimeout(() => {
-      if (!isMounted.current) return; // Guard against post-unmount execution
+      if (!isMounted.current) return;
       listenersAdded = true;
       document.addEventListener('click', handleClickOutside);
-      document.addEventListener('touchstart', handleClickOutside);
-      window.addEventListener('scroll', handleScroll);
-    }, 100);
+      document.addEventListener('touchstart', handleClickOutside, { passive: true });
+      window.addEventListener('scroll', handleScroll, { passive: true });
+    }, TIMING.CLICK_LISTENER_DELAY);
 
     return () => {
       clearTimeout(timer);
@@ -208,54 +219,55 @@ export default function ImpactGrid({ items }: ImpactGridProps) {
     }
   };
 
-  const getCardStyle = (index: number): React.CSSProperties => {
+  // Memoized transition string
+  const transitionStyle = `top 0.45s ${EASING}, left 0.45s ${EASING}, height 0.45s ${EASING}`;
+
+  const getCardStyle = useCallback((index: number): React.CSSProperties => {
     const isSelected = selectedIndex === index;
     
     if (!isSelected || !flipState) return {};
     
     const { originalTop, originalLeft, targetTop, targetLeft, width, height, phase: flipPhase } = flipState;
     
+    const baseStyle: React.CSSProperties = {
+      position: 'absolute',
+      width,
+      zIndex: 50,
+      willChange: 'top, left, height',
+    };
+    
     if (flipPhase === 'start') {
-      // At original position (no transition yet)
       return {
-        position: 'absolute',
+        ...baseStyle,
         top: originalTop,
         left: originalLeft,
-        width,
         height: phase === 'details' ? 'auto' : height,
-        zIndex: 50,
         transition: 'none',
       };
     }
     
     if (flipPhase === 'animate') {
-      // Animate to target position
       return {
-        position: 'absolute',
+        ...baseStyle,
         top: targetTop,
         left: targetLeft,
-        width,
         height: phase === 'details' ? 'auto' : height,
-        zIndex: 50,
-        transition: 'top 0.45s ease-in-out, left 0.45s ease-in-out, height 0.45s ease-in-out',
+        transition: transitionStyle,
       };
     }
     
     if (flipPhase === 'exit') {
-      // Animate back to original position
       return {
-        position: 'absolute',
+        ...baseStyle,
         top: originalTop,
         left: originalLeft,
-        width,
         height,
-        zIndex: 50,
-        transition: 'top 0.45s ease-in-out, left 0.45s ease-in-out, height 0.45s ease-in-out',
+        transition: transitionStyle,
       };
     }
     
     return {};
-  };
+  }, [selectedIndex, flipState, phase, transitionStyle]);
 
   return (
     <div 
@@ -270,7 +282,6 @@ export default function ImpactGrid({ items }: ImpactGridProps) {
         {items.map((item, index) => {
           const isSelected = selectedIndex === index;
           const isHidden = selectedIndex !== null && !isSelected;
-          const isAnimating = isSelected && (phase === 'reposition' || phase === 'details');
           
           return (
             <div
@@ -288,21 +299,17 @@ export default function ImpactGrid({ items }: ImpactGridProps) {
               style={getCardStyle(index)}
             >
               {/* Card Header */}
-              <div 
-                id={`impact-card-${index}-header`}
-                className="flex items-center justify-start w-full"
-              >
-                <div className="flex items-start max-w-full">
-                  <div className="flex-1 min-w-0 text-left">
-                    <p id={`impact-card-${index}-company`} className="font-bold text-white text-sm mb-1 text-left">
-                      {item.company}
-                    </p>
-                    <p id={`impact-card-${index}-impact`} className={`text-sm text-left ${isSelected ? 'whitespace-normal' : 'truncate'}`} style={{ color: "var(--text-secondary)" }}>
-                      {item.impact}
-                    </p>
-                  </div>
-                </div>
-              </div>
+              <header id={`impact-card-${index}-header`} className="text-left">
+                <h3 id={`impact-card-${index}-company`} className="font-bold text-white text-sm mb-1">
+                  {item.company}
+                </h3>
+                <p 
+                  id={`impact-card-${index}-impact`} 
+                  className={`text-sm text-[var(--text-secondary)] ${isSelected ? 'whitespace-normal' : 'truncate'}`}
+                >
+                  {item.impact}
+                </p>
+              </header>
 
               {/* Details */}
               <div 
