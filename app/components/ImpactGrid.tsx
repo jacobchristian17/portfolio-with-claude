@@ -1,6 +1,5 @@
 "use client";
 import { useState, useRef, useEffect, useCallback } from "react";
-import Image from "next/image";
 
 interface ImpactItem {
   emoji?: string;
@@ -19,6 +18,7 @@ type Phase = 'idle' | 'reposition' | 'details';
 export default function ImpactGrid({ items }: ImpactGridProps) {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [phase, setPhase] = useState<Phase>('idle');
+  const [containerHeight, setContainerHeight] = useState<number | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const isMobileDevice = useRef(false);
@@ -95,6 +95,11 @@ export default function ImpactGrid({ items }: ImpactGridProps) {
     
     clearTimeouts();
     
+    // Capture container height to prevent layout shift
+    if (containerRef.current) {
+      setContainerHeight(containerRef.current.offsetHeight);
+    }
+    
     // FLIP: Capture original position
     const positions = capturePositions(index);
     if (!positions) return;
@@ -115,7 +120,7 @@ export default function ImpactGrid({ items }: ImpactGridProps) {
     // Frame 2: Show details
     const t1 = setTimeout(() => {
       if (isMounted.current) setPhase('details');
-    }, 700);
+    }, 420);
     
     timeouts.current = [t0, t1];
   }, [selectedIndex, capturePositions]);
@@ -140,6 +145,7 @@ export default function ImpactGrid({ items }: ImpactGridProps) {
       if (isMounted.current) {
         setSelectedIndex(null);
         setFlipState(null);
+        setContainerHeight(null);
       }
     }, 500);
     
@@ -257,6 +263,7 @@ export default function ImpactGrid({ items }: ImpactGridProps) {
       className="relative"
       ref={containerRef}
       onMouseLeave={handleMouseLeave}
+      style={containerHeight ? { height: containerHeight, minHeight: containerHeight } : undefined}
     >
       {/* CSS Grid layout */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -276,7 +283,6 @@ export default function ImpactGrid({ items }: ImpactGridProps) {
                 impact-card glass-card rounded-xl p-4 cursor-pointer
                 h-[70px] sm:h-[98px]
                 transition-all duration-[450ms] ease-in-out
-                ${isAnimating ? '!h-auto' : ''}
                 ${isHidden ? 'opacity-0 pointer-events-none' : 'opacity-100'}
               `}
               style={getCardStyle(index)}
@@ -286,26 +292,12 @@ export default function ImpactGrid({ items }: ImpactGridProps) {
                 id={`impact-card-${index}-header`}
                 className="flex items-center justify-start w-full"
               >
-                <div className="flex items-start gap-3 max-w-full">
-                  {item.image ? (
-                    <div id={`impact-card-${index}-icon`} className="w-8 h-8 relative flex-shrink-0">
-                      <Image
-                        src={item.image}
-                        alt={item.company}
-                        fill
-                        className="object-contain"
-                      />
-                    </div>
-                  ) : (
-                    <span id={`impact-card-${index}-emoji`} className="text-2xl flex-shrink-0">
-                      {item.emoji}
-                    </span>
-                  )}
+                <div className="flex items-start max-w-full">
                   <div className="flex-1 min-w-0 text-left">
-                    <p id={`impact-card-${index}-company`} className="font-bold text-royal-gradient-sm text-sm mb-1 text-left">
+                    <p id={`impact-card-${index}-company`} className="font-bold text-white text-sm mb-1 text-left">
                       {item.company}
                     </p>
-                    <p id={`impact-card-${index}-impact`} className="text-sm truncate sm:whitespace-normal text-left" style={{ color: "var(--text-secondary)" }}>
+                    <p id={`impact-card-${index}-impact`} className={`text-sm text-left ${isSelected ? 'whitespace-normal' : 'truncate'}`} style={{ color: "var(--text-secondary)" }}>
                       {item.impact}
                     </p>
                   </div>
@@ -329,8 +321,7 @@ export default function ImpactGrid({ items }: ImpactGridProps) {
                       <li
                         key={detailIndex}
                         id={`impact-card-${index}-detail-${detailIndex}`}
-                        className="text-sm list-disc"
-                        style={{ color: "var(--text-secondary)" }}
+                        className="text-sm list-disc transition-colors duration-200 cursor-pointer text-[var(--text-secondary)] hover:!text-white"
                       >
                         {detail}
                       </li>

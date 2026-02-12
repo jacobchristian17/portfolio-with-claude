@@ -193,7 +193,7 @@ export default function Home() {
             <a
               id="btn-view-work"
               href="/about-work"
-              className="glass-card-royal px-8 py-3 rounded-xl font-semibold hover-lift transition-all duration-300 text-center"
+              className="hidden glass-card-royal px-8 py-3 rounded-xl font-semibold hover-lift transition-all duration-300 text-center"
               style={{ color: 'var(--text-primary)' }}
             >
               💼 View Work
