@@ -7,7 +7,9 @@ const TIMING = {
   FRAME_1_DELAY: 30,
   FRAME_2_DELAY: 420,
   EXIT_DELAY: 50,
-  EXIT_CLEANUP: 500,
+  EXIT_HEIGHT_SHRINK: 500,
+  EXIT_FADE_OUT: 950,
+  EXIT_CLEANUP: 1100,
   CLICK_LISTENER_DELAY: 100,
 } as const;
 
@@ -30,6 +32,7 @@ type FlipPhase = 'start' | 'animate' | 'exit';
 export default function ImpactGrid({ items }: ImpactGridProps) {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [phase, setPhase] = useState<Phase>('idle');
+  const [isExiting, setIsExiting] = useState(false);
   const [containerHeight, setContainerHeight] = useState<number | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -88,27 +91,33 @@ export default function ImpactGrid({ items }: ImpactGridProps) {
     width: number;
     height: number;
     phase: FlipPhase;
+    shouldShrinkHeight?: boolean;
+    shouldFadeOut?: boolean;
   } | null>(null);
 
   // Calculate animation styles when card is selected
   const capturePositions = useCallback((index: number) => {
     const card = cardRefs.current[index];
     const container = containerRef.current;
-    if (!card || !container) return null;
+    const referenceCard = cardRefs.current[0]; // Always use card 0 as reference
+    if (!card || !container || !referenceCard) return null;
 
     const containerRect = container.getBoundingClientRect();
     const cardRect = card.getBoundingClientRect();
+    const referenceRect = referenceCard.getBoundingClientRect();
 
     const originalTop = cardRect.top - containerRect.top;
     const originalLeft = cardRect.left - containerRect.left;
-    const centerLeft = (containerRect.width - cardRect.width) / 2;
+
+    // Always calculate target position based on reference card (card 0)
+    const centerLeft = (containerRect.width - referenceRect.width) / 2;
 
     return {
       originalTop,
       originalLeft,
       targetTop: 0,
       targetLeft: centerLeft,
-      width: cardRect.width,
+      width: referenceRect.width,
       height: cardRect.height,
       phase: 'start' as const,
     };
@@ -116,23 +125,26 @@ export default function ImpactGrid({ items }: ImpactGridProps) {
 
   const handleSelect = useCallback((index: number) => {
     if (!isMounted.current || selectedIndex === index) return;
-    
+
     clearTimeouts();
-    
+
+    // Reset exiting state
+    setIsExiting(false);
+
     // Capture container height to prevent layout shift
     if (containerRef.current) {
       setContainerHeight(containerRef.current.offsetHeight);
     }
-    
+
     // FLIP: Capture original position
     const positions = capturePositions(index);
     if (!positions) return;
-    
+
     // Set to original position first (no visual change)
     setFlipState(positions);
     setSelectedIndex(index);
     setPhase('idle');
-    
+
     // Frame 1: Animate to center-top position
     const t0 = setTimeout(() => {
       if (isMounted.current) {
@@ -140,40 +152,56 @@ export default function ImpactGrid({ items }: ImpactGridProps) {
         setPhase('reposition');
       }
     }, TIMING.FRAME_1_DELAY);
-    
+
     // Frame 2: Show details
     const t1 = setTimeout(() => {
       if (isMounted.current) setPhase('details');
     }, TIMING.FRAME_2_DELAY);
-    
+
     timeouts.current = [t0, t1];
   }, [selectedIndex, capturePositions]);
 
   const handleDeselect = useCallback(() => {
     if (!isMounted.current || selectedIndex === null) return;
-    
+
     clearTimeouts();
-    
+
     // Hide details first, then animate back
     setPhase('idle');
-    
-    // After details fade, animate position back to original
+    setIsExiting(true);
+
+    // Exit Frame 1: Animate position back to original (height stays expanded on mobile)
     const t0 = setTimeout(() => {
       if (isMounted.current) {
-        setFlipState(prev => prev ? { ...prev, phase: 'exit' } : null);
+        setFlipState(prev => prev ? { ...prev, phase: 'exit', shouldShrinkHeight: false, shouldFadeOut: false } : null);
       }
     }, TIMING.EXIT_DELAY);
-    
-    // After position animation completes, clean up
+
+    // Exit Frame 2: Trigger height shrink on mobile
     const t1 = setTimeout(() => {
+      if (isMounted.current) {
+        setFlipState(prev => prev ? { ...prev, shouldShrinkHeight: true } : null);
+      }
+    }, TIMING.EXIT_HEIGHT_SHRINK);
+
+    // Exit Frame 3: Fade out before cleanup to prevent visible snap
+    const t2 = setTimeout(() => {
+      if (isMounted.current) {
+        setFlipState(prev => prev ? { ...prev, shouldFadeOut: true } : null);
+      }
+    }, TIMING.EXIT_FADE_OUT);
+
+    // Exit Frame 4: After fade completes, clean up and unlock container
+    const t3 = setTimeout(() => {
       if (isMounted.current) {
         setSelectedIndex(null);
         setFlipState(null);
         setContainerHeight(null);
+        setIsExiting(false);
       }
     }, TIMING.EXIT_CLEANUP);
-    
-    timeouts.current = [t0, t1];
+
+    timeouts.current = [t0, t1, t2, t3];
   }, [selectedIndex]);
 
   const handleMouseEnter = (index: number) => {
@@ -249,53 +277,62 @@ export default function ImpactGrid({ items }: ImpactGridProps) {
   // Memoized transition string (instant if reduced motion)
   const getTransitionStyle = useCallback(() => {
     const duration = prefersReducedMotion.current ? '0s' : TRANSITION_DURATION;
-    return `top ${duration} ${EASING}, left ${duration} ${EASING}, height ${duration} ${EASING}`;
+    return `transform ${duration} ${EASING}, height ${duration} ${EASING}`;
   }, []);
 
   const getCardStyle = useCallback((index: number): React.CSSProperties => {
     const isSelected = selectedIndex === index;
-    
+
     if (!isSelected || !flipState) return {};
-    
-    const { originalTop, originalLeft, targetTop, targetLeft, width, height, phase: flipPhase } = flipState;
-    
+
+    const { originalTop, originalLeft, targetTop, targetLeft, width, height, phase: flipPhase, shouldFadeOut } = flipState;
+
+    // Calculate deltas for transform-based animation (GPU-accelerated)
+    const deltaX = targetLeft - originalLeft;
+    const deltaY = targetTop - originalTop;
+
     const baseStyle: React.CSSProperties = {
       position: 'absolute',
+      top: originalTop,
+      left: originalLeft,
       width,
       zIndex: 50,
-      willChange: 'top, left, height',
+      willChange: 'transform, height, opacity',
+      opacity: shouldFadeOut ? 0 : 1,
+      transition: shouldFadeOut ? 'opacity 0.15s ease-out' : 'none',
     };
-    
+
     if (flipPhase === 'start') {
       return {
         ...baseStyle,
-        top: originalTop,
-        left: originalLeft,
         height: phase === 'details' ? 'auto' : height,
+        transform: 'translate3d(0, 0, 0)', // GPU-accelerated, at original position
         transition: 'none',
       };
     }
-    
+
     if (flipPhase === 'animate') {
+      // On mobile: expand height in Frame 1 (reposition). On desktop: expand in Frame 2 (details)
+      const shouldExpandHeight = phase === 'details' || (isMobileDevice.current && phase === 'reposition');
       return {
         ...baseStyle,
-        top: targetTop,
-        left: targetLeft,
-        height: phase === 'details' ? 'auto' : height,
-        transition: getTransitionStyle(),
+        height: shouldExpandHeight ? 'auto' : height,
+        transform: `translate3d(${deltaX}px, ${deltaY}px, 0)`, // Move to target position
+        transition: shouldFadeOut ? `${getTransitionStyle()}, opacity 0.15s ease-out` : getTransitionStyle(),
       };
     }
-    
+
     if (flipPhase === 'exit') {
+      // On mobile: keep height expanded during position revert (Frame 1), then shrink in Frame 2
+      const shouldKeepHeightExpanded = isMobileDevice.current && !flipState.shouldShrinkHeight;
       return {
         ...baseStyle,
-        top: originalTop,
-        left: originalLeft,
-        height,
-        transition: getTransitionStyle(),
+        height: shouldKeepHeightExpanded ? 'auto' : height,
+        transform: 'translate3d(0, 0, 0)', // Return to original position
+        transition: shouldFadeOut ? `${getTransitionStyle()}, opacity 0.15s ease-out` : getTransitionStyle(),
       };
     }
-    
+
     return {};
   }, [selectedIndex, flipState, phase, getTransitionStyle]);
 
@@ -311,31 +348,46 @@ export default function ImpactGrid({ items }: ImpactGridProps) {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {items.map((item, index) => {
           const isSelected = selectedIndex === index;
-          const isHidden = selectedIndex !== null && !isSelected;
-          
+          const isHidden = selectedIndex !== null && !isSelected && !isExiting;
+
           return (
             <div
               key={index}
-              ref={el => { cardRefs.current[index] = el; }}
-              id={`impact-card-${index}`}
-              role="button"
-              tabIndex={isHidden ? -1 : 0}
-              aria-expanded={isSelected}
-              aria-label={`${item.company}: ${item.impact}`}
-              onClick={() => handleCardClick(index)}
-              onKeyDown={(e) => handleKeyDown(e, index)}
-              onMouseEnter={() => handleMouseEnter(index)}
               className={`
-                impact-card glass-card rounded-xl p-4 cursor-pointer
-                h-[70px] sm:h-[98px]
-                transition-all duration-[450ms] ease-in-out
-                motion-reduce:transition-none motion-reduce:duration-0
-                focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent
-                active:scale-[0.98] active:opacity-90 sm:active:scale-100 sm:active:opacity-100
-                ${isHidden ? 'opacity-0 pointer-events-none' : 'opacity-100'}
+                h-[80px] sm:h-[98px]
+                ${isSelected ? 'min-h-[80px] sm:min-h-[98px]' : ''}
               `}
-              style={getCardStyle(index)}
             >
+              {/* Placeholder to reserve space in grid when card is absolutely positioned */}
+              {isSelected && (
+                <div
+                  className="invisible h-[80px] sm:h-[98px]"
+                  aria-hidden="true"
+                />
+              )}
+
+              {/* Actual card */}
+              <div
+                ref={el => { cardRefs.current[index] = el; }}
+                id={`impact-card-${index}`}
+                role="button"
+                tabIndex={isHidden ? -1 : 0}
+                aria-expanded={isSelected}
+                aria-label={`${item.company}: ${item.impact}`}
+                onClick={() => handleCardClick(index)}
+                onKeyDown={(e) => handleKeyDown(e, index)}
+                onMouseEnter={() => handleMouseEnter(index)}
+                className={`
+                  impact-card glass-card rounded-xl p-4 cursor-pointer
+                  h-[80px] sm:h-[98px]
+                  transition-all duration-[450ms] ease-in-out
+                  motion-reduce:transition-none motion-reduce:duration-0
+                  focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent
+                  active:scale-[0.98] active:opacity-90 sm:active:scale-100 sm:active:opacity-100
+                  ${isHidden ? 'opacity-0 pointer-events-none' : 'opacity-100'}
+                `}
+                style={getCardStyle(index)}
+              >
               {/* Card Header */}
               <header id={`impact-card-${index}-header`} className="text-left">
                 <h3 id={`impact-card-${index}-company`} className="font-bold text-white text-sm mb-1">
@@ -374,6 +426,7 @@ export default function ImpactGrid({ items }: ImpactGridProps) {
                   </ul>
                 </div>
               </div>
+            </div>
             </div>
           );
         })}
