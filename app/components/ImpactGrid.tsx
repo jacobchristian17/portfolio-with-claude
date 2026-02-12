@@ -12,6 +12,7 @@ const TIMING = {
 } as const;
 
 const EASING = 'cubic-bezier(0.4, 0, 0.2, 1)'; // Smooth natural easing
+const TRANSITION_DURATION = '0.45s';
 
 interface ImpactItem {
   company: string;
@@ -33,6 +34,7 @@ export default function ImpactGrid({ items }: ImpactGridProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const isMobileDevice = useRef(false);
+  const prefersReducedMotion = useRef(false);
   const timeouts = useRef<NodeJS.Timeout[]>([]);
   const isMounted = useRef(true);
 
@@ -64,6 +66,17 @@ export default function ImpactGrid({ items }: ImpactGridProps) {
       clearTimeout(resizeTimer);
       window.removeEventListener('resize', debouncedCheck);
     };
+  }, []);
+
+  // Respect reduced motion preference
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    prefersReducedMotion.current = mediaQuery.matches;
+    const handler = (e: MediaQueryListEvent) => {
+      prefersReducedMotion.current = e.matches;
+    };
+    mediaQuery.addEventListener('change', handler);
+    return () => mediaQuery.removeEventListener('change', handler);
   }, []);
 
   // FLIP animation state
@@ -233,8 +246,11 @@ export default function ImpactGrid({ items }: ImpactGridProps) {
     }
   }, [selectedIndex, handleSelect, handleDeselect]);
 
-  // Memoized transition string
-  const transitionStyle = `top 0.45s ${EASING}, left 0.45s ${EASING}, height 0.45s ${EASING}`;
+  // Memoized transition string (instant if reduced motion)
+  const getTransitionStyle = useCallback(() => {
+    const duration = prefersReducedMotion.current ? '0s' : TRANSITION_DURATION;
+    return `top ${duration} ${EASING}, left ${duration} ${EASING}, height ${duration} ${EASING}`;
+  }, []);
 
   const getCardStyle = useCallback((index: number): React.CSSProperties => {
     const isSelected = selectedIndex === index;
@@ -266,7 +282,7 @@ export default function ImpactGrid({ items }: ImpactGridProps) {
         top: targetTop,
         left: targetLeft,
         height: phase === 'details' ? 'auto' : height,
-        transition: transitionStyle,
+        transition: getTransitionStyle(),
       };
     }
     
@@ -276,12 +292,12 @@ export default function ImpactGrid({ items }: ImpactGridProps) {
         top: originalTop,
         left: originalLeft,
         height,
-        transition: transitionStyle,
+        transition: getTransitionStyle(),
       };
     }
     
     return {};
-  }, [selectedIndex, flipState, phase, transitionStyle]);
+  }, [selectedIndex, flipState, phase, getTransitionStyle]);
 
   return (
     <div 
@@ -313,6 +329,7 @@ export default function ImpactGrid({ items }: ImpactGridProps) {
                 impact-card glass-card rounded-xl p-4 cursor-pointer
                 h-[70px] sm:h-[98px]
                 transition-all duration-[450ms] ease-in-out
+                motion-reduce:transition-none motion-reduce:duration-0
                 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent
                 active:scale-[0.98] active:opacity-90 sm:active:scale-100 sm:active:opacity-100
                 ${isHidden ? 'opacity-0 pointer-events-none' : 'opacity-100'}
