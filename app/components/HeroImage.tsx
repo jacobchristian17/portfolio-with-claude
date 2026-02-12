@@ -13,29 +13,39 @@ export default function HeroImage() {
 
     const [scrollY, setScrollY] = useState(0);
     const [isMobile, setIsMobile] = useState(false);
+    const [hasMounted, setHasMounted] = useState(false);
 
     useEffect(() => {
+        setHasMounted(true);
+        setIsMobile(window.innerWidth < 768);
+        
         const handleScroll = () => setScrollY(window.scrollY);
+        const handleResize = () => setIsMobile(window.innerWidth < 768);
+        
         window.addEventListener("scroll", handleScroll);
-        return () => window.removeEventListener("scroll", handleScroll);
-    }, []);
-
-    useEffect(() => {
-        const handleResize = () => {
-            setIsMobile(window.innerWidth < 768);
-        };
-        handleResize();
         window.addEventListener("resize", handleResize);
-        return () => window.removeEventListener("resize", handleResize);
+        
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+            window.removeEventListener("resize", handleResize);
+        };
     }, []);
 
     const viewSpeed = isMobile ? MOBILE_SPEED : SPEED;
-    const currentSpeed = scrollY * viewSpeed * DIRECTION
+    const currentSpeed = scrollY * viewSpeed * DIRECTION;
+
+    // Use CSS classes for responsive positioning, JS only for scroll effect
+    const getTransformStyle = () => {
+        if (!hasMounted) return {};
+        return { 
+            transform: `translateY(${currentSpeed + (isMobile ? 150 : 100)}px)` 
+        };
+    };
 
     return (
         <div
             id="hero-image"
-            className={`fixed inset-0 top-0 w-full h-full ${isMobile ? 'z-2' : 'z-0'}`}>
+            className="fixed inset-0 top-0 w-full h-full -z-10">
             <Image
                 id="hero-image-dark"
                 src={hero1.img}
@@ -43,10 +53,10 @@ export default function HeroImage() {
                 fill
                 priority
                 className={`object-contain 
-                    ${isMobile ? "object-bottom" : "translate-x-[40vw]"}
+                    object-bottom md:object-center md:translate-x-[40vw]
                     ${isDarkMode ? "visible" : "hidden"}
                 `}
-                style={!isMobile ? { transform: `translateY(${currentSpeed + 100}px)` } : { transform: `translateY(${currentSpeed + 150}px)` }}
+                style={getTransformStyle()}
             />
             <Image
                 id="hero-image-light"
@@ -54,10 +64,10 @@ export default function HeroImage() {
                 alt={hero1Shadow.alt}
                 fill
                 className={`object-contain 
-                    ${isMobile ? "object-bottom" : "translate-x-[40vw]"}
+                    object-bottom md:object-center md:translate-x-[40vw]
                     ${isDarkMode ? "hidden" : "visible"}
                 `}
-                style={!isMobile ? { transform: `translateY(${currentSpeed + 100}px)` } : { transform: `translateY(${currentSpeed + 150}px)` }}
+                style={getTransformStyle()}
             />
         </div>
     )

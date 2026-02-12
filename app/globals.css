@@ -237,37 +237,11 @@ button {
 }
 
 /* Logo Carousel Animation */
-.logo-carousel {
-  animation: scroll-left 25s linear infinite;
-  display: flex;
-  align-items: center;
-}
-
+/* Logo carousel - now uses JS drag/swipe */
 .logo-carousel-track {
   display: flex;
   align-items: center;
   gap: 2rem;
-  min-width: 200%;
-}
-
-@keyframes scroll-left {
-  0% {
-    transform: translateX(0);
-  }
-
-  100% {
-    transform: translateX(-50%);
-  }
-}
-
-@media (width < 640px) {
-  .logo-carousel {
-    animation: scroll-left 8s linear infinite;
-  }
-
-  .logo-carousel-track {
-    gap: 1rem;
-  }
 }
 
 /* Custom Bullet Points */
@@ -294,6 +268,15 @@ button {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+/* Steeper gradient for small text - more visible color transition */
+.text-royal-gradient-sm {
+  background: linear-gradient(90deg, var(--royal-blue) 0%, var(--royal-blue-light) 40%, var(--gold) 70%, var(--gold-light) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  background-size: 200% auto;
 }
 
 .text-royal-gradient-animated {
@@ -435,57 +418,11 @@ button {
 }
 
 /* Impact Grid Styles */
+/* Cards are absolutely positioned, transitions controlled by JS inline styles */
 .impact-card {
-  position: relative;
+  /* Transitions are set via inline styles for precise control */
 }
 
-/* Desktop: Show details on hover */
-@media (min-width: 768px) {
-  .impact-details {
-    max-height: 0;
-    opacity: 0;
-  }
-  
-  .impact-card:hover .impact-details {
-    max-height: 200px;
-    opacity: 1;
-  }
-  
-  .impact-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
-  }
-}
-
-/* Mobile: Click to expand */
-@media (max-width: 767px) {
-  .impact-details {
-    max-height: 0;
-    opacity: 0;
-  }
-  
-  .mobile-details-visible {
-    max-height: 300px !important;
-    opacity: 1 !important;
-    margin-top: 1rem;
-  }
-  
-  .card-hidden {
-    opacity: 0;
-    transform: scale(0.8);
-    pointer-events: none;
-    position: absolute;
-    z-index: -1;
-  }
-  
-  .card-expanded {
-    grid-column: 1 / -1;
-    z-index: 10;
-    transform: scale(1.02);
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
-  }
-  
-  .mobile-expanded {
-    min-height: 200px;
-  }
+.impact-details {
+  transition: all 0.7s ease-in-out;
 }

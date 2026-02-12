@@ -40,6 +40,33 @@ The application uses a persistent navigation bar with route-based active states 
 ### Repository:
 - Format the commit with `[Feature] - Changelog`
 
+## Ticket Workflow (OpenClaw/Chico)
+
+### Acceptance Criteria (REQUIRED)
+Before starting ANY ticket (frontend or backend):
+1. Review the ticket/task requirements
+2. **Confirm acceptance criteria with Jacob** — get explicit approval before writing code
+3. Only proceed after Jacob confirms the criteria
+
+### UI Testing (Frontend Changes)
+For any UI work (components, animations, DOM manipulations):
+1. Start dev server: `npm run dev -- -H 0.0.0.0`
+2. Open in browser tool and take **before screenshot** (if modifying existing UI)
+3. Make changes
+4. Take **after screenshot** to verify:
+   - Layout renders correctly
+   - Elements are positioned as expected
+   - Responsive states (if applicable)
+5. For animations/interactions:
+   - Use browser tool to click/hover/interact
+   - Capture multiple screenshots at different states
+   - Review CSS/JS for correct timing, easing, transforms
+6. For DOM manipulations:
+   - Take DOM snapshot before/after
+   - Verify element structure matches expectations
+
+**Limitation**: Can't watch animations in real-time — rely on code review + Jacob's eyes for final QA on timing/easing.
+
 ## Git Workflow (OpenClaw/Chico)
 
 ### SSH Setup (required each session)
@@ -64,11 +91,6 @@ eval "$(ssh-agent -s)" && SSH_ASKPASS=~/.ssh/askpass-portfolio.sh SSH_ASKPASS_RE
 ### Working Directory
 When using OpenClaw, work from: `/home/jacob/.openclaw/workspace/portfolio`
 
-### Commands
-
-#### `/local` - Start local dev server with public tunnel
-1. Install dependencies: `npm install`
-2. Start dev server: `npm run dev -- -H 0.0.0.0` (background)
-3. Create tunnel: `npx localtunnel --port 3000` (background)
-4. Get tunnel password: `curl -s https://loca.lt/mytunnelpassword`
-5. Share the tunnel URL and password with Jacob
+### Dev Access
+- Dev server runs on `localhost:3000`
+- External access via host machine `:5000` with SSL (no tunneling needed)
