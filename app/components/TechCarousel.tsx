@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import { memo } from "react";
 
 export interface TechItem {
   name: string;
@@ -14,7 +15,7 @@ interface TechCarouselProps {
   className?: string;
 }
 
-const TechItemCard = ({ tech }: { tech: TechItem }) => (
+const TechItemCard = memo(({ tech }: { tech: TechItem }) => (
   <div className="group flex flex-col items-center justify-center w-20 h-24 cursor-pointer">
     <div className="w-14 h-14 rounded-xl hover-lift transition-all duration-300 flex items-center justify-center mb-2">
       <Image
@@ -37,7 +38,9 @@ const TechItemCard = ({ tech }: { tech: TechItem }) => (
       {tech.name}
     </span>
   </div>
-);
+));
+
+TechItemCard.displayName = 'TechItemCard';
 
 export default function TechCarousel({
   title,
@@ -46,7 +49,12 @@ export default function TechCarousel({
   className = ""
 }: TechCarouselProps) {
   return (
-    <div id="tech-carousel" className={`w-full backdrop-blur-sm py-6 relative z-3 ${className}`} style={{ backgroundColor: 'var(--carousel-bg)' }}>
+    <section 
+      id="tech-carousel" 
+      aria-labelledby="tech-carousel-title"
+      className={`w-full backdrop-blur-sm py-6 relative z-3 ${className}`} 
+      style={{ backgroundColor: 'var(--carousel-bg)' }}
+    >
       <div id="tech-carousel-header" className="text-center mb-6">
         <h3 id="tech-carousel-title" className="text-2xl font-bold text-royal-gradient">{title}</h3>
         {subtitle && (
@@ -54,11 +62,13 @@ export default function TechCarousel({
         )}
       </div>
 
-      <div id="tech-carousel-container" className="flex flex-wrap items-center justify-center gap-4 px-4">
+      <div id="tech-carousel-container" role="list" className="flex flex-wrap items-center justify-center gap-4 px-4">
         {techItems.map((tech, index) => (
-          <TechItemCard key={index} tech={tech} />
+          <div key={tech.name} role="listitem">
+            <TechItemCard tech={tech} />
+          </div>
         ))}
       </div>
-    </div>
+    </section>
   );
 }
