@@ -200,7 +200,19 @@ export default function ImpactGrid({ items }: ImpactGridProps) {
   };
 
   const handleMouseLeave = () => {
-    if (!isMobileDevice.current) handleDeselect();
+    if (isMobileDevice.current) return;
+
+    // If animation hasn't fully completed, cancel immediately (snap back)
+    if (phase !== 'details') {
+      clearTimeouts();
+      setSelectedIndex(null);
+      setFlipState(null);
+      setContainerHeight(null);
+      setIsExiting(false);
+      setPhase('idle');
+    } else {
+      handleDeselect();
+    }
   };
 
   useEffect(() => {
