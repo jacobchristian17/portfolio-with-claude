@@ -8,8 +8,7 @@ const TIMING = {
   FRAME_2_DELAY: 420,
   EXIT_DELAY: 50,
   EXIT_HEIGHT_SHRINK: 500,
-  EXIT_FADE_OUT: 950,
-  EXIT_CLEANUP: 1100,
+  EXIT_CLEANUP: 950,
   CLICK_LISTENER_DELAY: 100,
 } as const;
 
@@ -92,7 +91,6 @@ export default function ImpactGrid({ items }: ImpactGridProps) {
     height: number;
     phase: FlipPhase;
     shouldShrinkHeight?: boolean;
-    shouldFadeOut?: boolean;
   } | null>(null);
 
   // Calculate animation styles when card is selected
@@ -173,7 +171,7 @@ export default function ImpactGrid({ items }: ImpactGridProps) {
     // Exit Frame 1: Animate position back to original (height stays expanded on mobile)
     const t0 = setTimeout(() => {
       if (isMounted.current) {
-        setFlipState(prev => prev ? { ...prev, phase: 'exit', shouldShrinkHeight: false, shouldFadeOut: false } : null);
+        setFlipState(prev => prev ? { ...prev, phase: 'exit', shouldShrinkHeight: false } : null);
       }
     }, TIMING.EXIT_DELAY);
 
@@ -184,15 +182,8 @@ export default function ImpactGrid({ items }: ImpactGridProps) {
       }
     }, TIMING.EXIT_HEIGHT_SHRINK);
 
-    // Exit Frame 3: Fade out before cleanup to prevent visible snap
+    // Exit Frame 3: After animations complete, clean up
     const t2 = setTimeout(() => {
-      if (isMounted.current) {
-        setFlipState(prev => prev ? { ...prev, shouldFadeOut: true } : null);
-      }
-    }, TIMING.EXIT_FADE_OUT);
-
-    // Exit Frame 4: After fade completes, clean up and unlock container
-    const t3 = setTimeout(() => {
       if (isMounted.current) {
         setSelectedIndex(null);
         setFlipState(null);
@@ -201,7 +192,7 @@ export default function ImpactGrid({ items }: ImpactGridProps) {
       }
     }, TIMING.EXIT_CLEANUP);
 
-    timeouts.current = [t0, t1, t2, t3];
+    timeouts.current = [t0, t1, t2];
   }, [selectedIndex]);
 
   const handleMouseEnter = (index: number) => {
@@ -285,7 +276,7 @@ export default function ImpactGrid({ items }: ImpactGridProps) {
 
     if (!isSelected || !flipState) return {};
 
-    const { originalTop, originalLeft, targetTop, targetLeft, width, height, phase: flipPhase, shouldFadeOut } = flipState;
+    const { originalTop, originalLeft, targetTop, targetLeft, width, height, phase: flipPhase } = flipState;
 
     // Calculate deltas for transform-based animation (GPU-accelerated)
     const deltaX = targetLeft - originalLeft;
@@ -297,9 +288,7 @@ export default function ImpactGrid({ items }: ImpactGridProps) {
       left: originalLeft,
       width,
       zIndex: 50,
-      willChange: 'transform, height, opacity',
-      opacity: shouldFadeOut ? 0 : 1,
-      transition: shouldFadeOut ? 'opacity 0.15s ease-out' : 'none',
+      willChange: 'transform, height',
     };
 
     if (flipPhase === 'start') {
@@ -318,7 +307,7 @@ export default function ImpactGrid({ items }: ImpactGridProps) {
         ...baseStyle,
         height: shouldExpandHeight ? 'auto' : height,
         transform: `translate3d(${deltaX}px, ${deltaY}px, 0)`, // Move to target position
-        transition: shouldFadeOut ? `${getTransitionStyle()}, opacity 0.15s ease-out` : getTransitionStyle(),
+        transition: getTransitionStyle(),
       };
     }
 
@@ -329,7 +318,7 @@ export default function ImpactGrid({ items }: ImpactGridProps) {
         ...baseStyle,
         height: shouldKeepHeightExpanded ? 'auto' : height,
         transform: 'translate3d(0, 0, 0)', // Return to original position
-        transition: shouldFadeOut ? `${getTransitionStyle()}, opacity 0.15s ease-out` : getTransitionStyle(),
+        transition: getTransitionStyle(),
       };
     }
 
