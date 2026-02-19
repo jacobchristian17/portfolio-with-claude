@@ -111,3 +111,13 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       
+      - name: Delete feature branch after merge
+        if: success() && github.event_name == 'pull_request'
+        run: |
+          BRANCH="${{ github.head_ref }}"
+          if [ ! -z "$BRANCH" ] && [ "$BRANCH" != "main" ] && [ "$BRANCH" != "develop" ]; then
+            gh api repos/${{ github.repository }}/git/refs/heads/$BRANCH -X DELETE || true
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      
