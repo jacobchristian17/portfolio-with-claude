@@ -33,8 +33,30 @@ jobs:
       - name: Build
         run: npm run build
       
+      - name: Install system dependencies for Playwright
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            libxcb-shm0 \
+            libx11-xcb1 \
+            libxrandr2 \
+            libxcomposite1 \
+            libxcursor1 \
+            libxdamage1 \
+            libxfixes3 \
+            libxi6 \
+            libgtk-3-0 \
+            libpangocairo-1.0-0 \
+            libpango-1.0-0 \
+            libatk1.0-0 \
+            libcairo-gobject2 \
+            libcairo2 \
+            libgdk-pixbuf-2.0-0 \
+            libxrender1 \
+            libasound2
+      
       - name: Install Playwright browsers
-        run: npx playwright install --with-deps
+        run: npx playwright install
       
       - name: Run tests
         run: npm run test

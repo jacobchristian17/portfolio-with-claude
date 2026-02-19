@@ -1,0 +1,23 @@
+{
+  "lastPolled": "2026-02-19T06:16:00Z",
+  "prs": {
+    "3": {
+      "number": 3,
+      "title": "chore: setup playwright and github actions ci/cd workflow",
+      "state": "open",
+      "base": "develop",
+      "sha": "5b34f615890fa51c2bd982a1b09ee807088236a1",
+      "testStatus": "failure",
+      "reviewerApproved": false,
+      "merged": false,
+      "createdAt": "2026-02-19T00:00:22Z"
+    },
+    "1": {
+      "number": 1,
+      "title": "Fix React Server Components CVE vulnerabilities",
+      "state": "closed",
+      "merged": true,
+      "mergedAt": "2026-02-11T21:54:41Z"
+    }
+  }
+}
