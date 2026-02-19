@@ -66,7 +66,7 @@ jobs:
         if: success() && github.event_name == 'pull_request'
         run: gh pr review --approve "${{ github.event.pull_request.number }}" || true
         env:
-          GH_TOKEN: ${{ secrets.BOT_GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.BOT_GITHUB_TOKEN }}
       
       - name: Comment PR with test results
         if: github.event_name == 'pull_request' && always()
