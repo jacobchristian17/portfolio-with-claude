@@ -1,0 +1,26 @@
+name: Cleanup Merged Branches
+
+on:
+  schedule:
+    # Run every day at 2 AM UTC
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    name: Delete Merged Feature Branches
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Delete merged feature branches
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Get all branches that are fully merged into main
+          for branch in $(git branch -r --merged origin/main | grep -E 'origin/(feat|fix|chore)/' | sed 's/origin\///'); do
+            echo "Deleting merged branch: $branch"
+            git push origin --delete "$branch" || echo "Failed to delete $branch (may already be deleted)"
+          done

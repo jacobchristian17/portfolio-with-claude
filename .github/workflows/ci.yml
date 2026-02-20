@@ -102,58 +102,6 @@ jobs:
           path: test-results/results.json
           retention-days: 30
 
-      - name: Comment PR with test results
-        if: github.event_name == 'pull_request' && always()
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const fs = require('fs');
-            const testResults = fs.existsSync('test-results/results.json') 
-              ? JSON.parse(fs.readFileSync('test-results/results.json', 'utf8'))
-              : null;
-            
-            let comment = '## ✅ Build & Test Report\n\n';
-            comment += '| Step | Status |\n';
-            comment += '|------|--------|\n';
-            comment += '| Build | ✅ Passed |\n';
-            
-            if (testResults) {
-              const suites = testResults.suites || [];
-              const totalTests = suites.reduce((sum, suite) => sum + (suite.tests ? suite.tests.length : 0), 0);
-              const passedTests = suites.reduce((sum, suite) => {
-                return sum + (suite.tests ? suite.tests.filter(t => t.status === 'passed').length : 0);
-              }, 0);
-              
-              comment += `| Tests | ${passedTests}/${totalTests} passed |\n`;
-            } else {
-              comment += '| Tests | ⏳ In progress or no results |\n';
-            }
-            
-            comment += '\n📊 [View detailed report](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})';
-            
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: comment
-            });
-
-      - name: Enable auto-merge if tests pass
-        if: success() && github.event_name == 'pull_request'
-        run: gh pr merge ${{ github.event.pull_request.number }} --squash --auto || true
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Delete feature branch after merge
-        if: success() && github.event_name == 'pull_request'
-        run: |
-          BRANCH="${{ github.head_ref }}"
-          if [ ! -z "$BRANCH" ] && [ "$BRANCH" != "main" ] && [ "$BRANCH" != "develop" ]; then
-            gh api repos/${{ github.repository }}/git/refs/heads/$BRANCH -X DELETE || true
-          fi
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
   deploy:
     needs: [lint, typecheck, build, test]
     runs-on: ubuntu-latest
