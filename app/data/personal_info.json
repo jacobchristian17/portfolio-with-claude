@@ -1,11 +1,23 @@
 {
   "name": "Jacob Christian G.",
-  "title": "Web App Engineer - Automation Test",
+  "title": "Web App Engineer",
   "tagline": "Building intelligent solutions from startup to Fortune 500",
   "summary": "Developing apps that blend engineering, finance, and art",
   "skills": {
-    "primary": ["React", "Next.js", "TypeScript", "Node.js", "AI Integration"],
-    "secondary": ["Redux", "MongoDB", "Docker", "AWS", "Azure"]
+    "primary": [
+      "React",
+      "Next.js",
+      "TypeScript",
+      "Node.js",
+      "AI Integration"
+    ],
+    "secondary": [
+      "Redux",
+      "MongoDB",
+      "Docker",
+      "AWS",
+      "Azure"
+    ]
   },
   "impact": [
     {
